@@ -2,6 +2,7 @@ import { Input } from "./ui/input";
 import backgroundImage from "../assets/background_login.png";
 import { Button } from "./ui/Button";
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [titulo, setTitulo] = useState("Inicio de sesión Padres/ Tutor");
@@ -116,9 +117,9 @@ const actualizarColor = (nuevoTitulo) => {
         )}
         <p className="mt-4">
           ¿No tienes cuenta?{" "}
-          <a href="/registro" className="text-blue-500">
+          <Link to="/register" className="text-blue-500">
             Crea una aquí
-          </a>
+          </Link>
         </p>
       </div>
     </div>

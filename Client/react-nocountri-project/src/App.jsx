@@ -1,13 +1,15 @@
-import Login from "./components/Login";
+/* import Login from "./components/Login"; */
 import Navbar from "./components/Navbar/Navbar";
-import Register from "./pages/Register";
+import Router from "./router/Router";
+
+
 
 function App() {
   return (
     <>
       <Navbar />
-      <Login />
-      <Register/>
+      <Router />
+      {/* <Login /> */}
     </>
   );
 }
