@@ -108,19 +108,22 @@ const Register = () => {
           )}
 
           {rol === "padre" && (
-            <Input
+            <>
+              <Input
             type = "number"
             placeholder="DNI del padre, madre o tutor"
             className="bg-transparent border border-slate-400"
             ref={DNIPadresRef}
-            />,
-
+            />
             <Input
             type = "number"
             placeholder="DNI del alumno"
             className="bg-transparent border border-slate-400"
             ref={DNIAlumnoRef}
             />
+            
+            </>
+            
           )}
           <label className="flex items-center justify-center">
             <Checkbox
