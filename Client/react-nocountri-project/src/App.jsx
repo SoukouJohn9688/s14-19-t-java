@@ -1,13 +1,13 @@
-
+import Login from "./components/Login";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
-
-
   return (
     <>
-     <h1>Hello!</h1>
+      <Navbar />
+      <Login />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
