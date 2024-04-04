@@ -5,13 +5,29 @@ import { useRef, useState } from "react";
 
 const Login = () => {
   const [titulo, setTitulo] = useState("Inicio de sesión Padres/ Tutor");
+  
 
   const emailRef = useRef(null);
   const contraseñaRef = useRef(null);
 
   const handleClick = (nuevoTitulo) => {
     setTitulo(nuevoTitulo);
+    actualizarColor(nuevoTitulo); 
   };
+
+  const colores = {
+    "Inicio de sesión Padres/ Tutor": "green",
+    "Inicio de sesión Estudiante": "blue",
+    "Inicio de sesión Docente": "orange",
+  };
+
+  const [color, setColor] = useState(colores["Inicio de sesión Padres/ Tutor"]);
+
+const actualizarColor = (nuevoTitulo) => {
+  setTitulo(nuevoTitulo);
+  setColor(colores[nuevoTitulo]);
+};
+
 
   return (
     <div
@@ -23,7 +39,8 @@ const Login = () => {
       }}
     >
       <div className="max-w-md w-full space-y-8 p-8  rounded-lg shadow-lg  text-center bg-transparent">
-        <h1 className="text-3xl font-bold">{titulo}</h1>
+      <h1 className="text-2xl font-bold place" style={{ color: color }}>{titulo}</h1>
+
         <form className="space-y-4 flex flex-col">
           <Input
             placeholder="Username"
@@ -40,7 +57,7 @@ const Login = () => {
             Olvidaste tu contraseña?
           </a>
           <div>
-            <Button className="w-[70%] mx-auto mt-4 bg-black hover:bg-black-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <Button   className={`w-[70%] mx-auto mt-4 bg-${color}-500 hover:bg-${color}-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}>
               Iniciar Sesión
             </Button>
           </div>
@@ -84,13 +101,13 @@ const Login = () => {
         {titulo === "Inicio de sesión Docente" && (
           <>
             <Button
-              onClick={() => handleClick("Inicio de sesión Padres/ Tutor")}
+              onClick={() => actualizarColor("Inicio de sesión Padres/ Tutor")}
               className="w-full mx-auto mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Si eres Padre/Tutor inicia sesión aquí
             </Button>
             <Button
-              onClick={() => handleClick("Inicio de sesión Estudiante")}
+              onClick={() => actualizarColor("Inicio de sesión Estudiante")}
               className="w-full mx-auto mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Si eres Estudiante inicia sesión aquí

@@ -1,16 +1,13 @@
-import Login from "./components/Login"
-import Register from "./pages/Register"
+import Login from "./components/Login";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
-
-
   return (
     <>
-     <h1>Hello!</h1>
-     <Register/>
-     <Login />
+      <Navbar />
+      <Login />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
