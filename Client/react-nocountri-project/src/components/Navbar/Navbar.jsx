@@ -1,12 +1,13 @@
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../../assets/Logo.png";
+import { Link } from "react-router-dom";
 
 const navigation = [
-  { name: "Ayuda", href: "#", current: false },
-  { name: "Conócenos", href: "#", current: false },
-  { name: "Experiencias", href: "#", current: false },
-  { name: "Acceso", href: "#", current: false },
+  { name: "Ayuda", to: "/ayuda", current: false },
+  { name: "Conócenos", to: "/conocenos", current: false },
+  { name: "Experiencias", to: "/experiencias", current: false },
+  { name: "Acceso", to: "/acceso", current: false },
 ];
 
 function classNames(...classes) {
@@ -35,9 +36,9 @@ export default function Navbar() {
               <div className="hidden sm:block">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.to}
                       className={classNames(
                         item.current
                           ? "bg-sky-900 text-white"
@@ -47,7 +48,7 @@ export default function Navbar() {
                       aria-current={item.current ? "page" : undefined}
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -71,8 +72,8 @@ export default function Navbar() {
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as="a"
-                  href={item.href}
+                  as={Link}
+                  to={item.to} 
                   className={classNames(
                     item.current
                       ? "bg-sky-900 text-white"
