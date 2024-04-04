@@ -1,6 +1,6 @@
 package com.nocountry.server_ed_platform.controllers;
 
-import com.nocountry.server_ed_platform.dtos.ResponseGenericDTO;
+import com.nocountry.server_ed_platform.dtos.Response.ResponseGenericDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.services.TeacherService;
 import lombok.RequiredArgsConstructor;
