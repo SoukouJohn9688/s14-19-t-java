@@ -1,4 +1,4 @@
-package com.nocountry.server_ed_platform.utils;
+package com.nocountry.server_ed_platform.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
