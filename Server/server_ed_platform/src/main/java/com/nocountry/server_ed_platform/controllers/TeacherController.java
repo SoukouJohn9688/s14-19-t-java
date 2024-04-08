@@ -1,6 +1,6 @@
 package com.nocountry.server_ed_platform.controllers;
 
-import com.nocountry.server_ed_platform.dtos.ResponseGenericDTO;
+import com.nocountry.server_ed_platform.dtos.Response.ResponseGenericDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.services.TeacherService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class TeacherController {
 
     private final TeacherService teacherService;
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<ResponseGenericDTO<List<TeacherDTO>>> findAll(){
         return ResponseEntity.ok().body(
                 new ResponseGenericDTO<>(
