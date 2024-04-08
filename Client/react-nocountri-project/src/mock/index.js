@@ -4,26 +4,7 @@ export const ColegiosData = [
     escuela_name: "Erv",
     organization: "public",
   },
-  {
-    id: 2,
-    escuela_name: "Damiano",
-    organization: "public",
-  },
-  {
-    id: 3,
-    escuela_name: "Marne",
-    organization: "private",
-  },
-  {
-    id: 4,
-    escuela_name: "Neille",
-    organization: "public",
-  },
-  {
-    id: 5,
-    escuela_name: "Ogdan",
-    organization: "private",
-  },
+ 
 ];
 export const AsignaturasData = [
   {
