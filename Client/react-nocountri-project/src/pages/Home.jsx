@@ -1,15 +1,16 @@
-import Dashboard from "@/components/dashboard/Dashboard";
+import { Calendar } from "@/components";
+import CardProfile from "@/components/CardProfile/CardProfile";
 import React from "react";
 
 
-const Home = () => {
-  
 
-  return (
-    <>
-    <Dashboard/>
-    </>
-  );
+
+
+const Home = () => {
+  return <>
+    <CardProfile />
+    <Calendar />
+  </>;
 };
 
 export default Home;
