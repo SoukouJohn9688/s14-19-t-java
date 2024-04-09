@@ -1,13 +1,14 @@
-import Login from "./components/Login";
+
 import Navbar from "./components/Navbar/Navbar";
-import Register from "./pages/Register";
+import Footer from "./components/ui/Footer";
+
+
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Login />
-      <Register/>
+        <Navbar />
+        <Footer/>
     </>
   );
 }
