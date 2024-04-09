@@ -2,6 +2,7 @@
 import Navbar from "./components/Navbar/Navbar";
 import Asistencias from "./pages/Asistencias/Asistencias";
 import Router from "./router/Router";
+import Footer from "./components/ui/Footer";
 
 
 
@@ -12,6 +13,7 @@ function App() {
       <Router />
       <Asistencias />
       {/* <Login /> */}
+      <Footer/>
     </>
   );
 }
