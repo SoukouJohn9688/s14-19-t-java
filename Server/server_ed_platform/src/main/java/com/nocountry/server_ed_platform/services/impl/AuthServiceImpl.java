@@ -28,6 +28,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponseDTO login(LoginDTO request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         UserDetails user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+        System.out.println(user.toString());
         String token = jwtService.getToken(user);
         return AuthResponseDTO.builder()
                 .accessToken(token)
@@ -44,9 +45,10 @@ public class AuthServiceImpl implements AuthService {
         UserEntity user = UserEntity.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .username(request.getName())
+                .username(request.getUsername())
                 .role(UserRole.valueOf(request.getRol()))
                 .build();
+        userRepository.save(user);
         return AuthResponseDTO.builder()
                 .accessToken(jwtService.getToken(user))
                 .tokenType("Bearer")
