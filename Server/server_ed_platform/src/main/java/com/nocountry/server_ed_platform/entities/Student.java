@@ -23,10 +23,15 @@ public class Student {
     private String name;
     private String surname;
     private LocalDate birthdate;
+    private Long dni;
 
+    private String sex;
     //Representa el grado, curso o nivel en que se encuentra el estudiente
     //Por ejemplo, cuarto de primaria, o segundo de bachillerato
-    private String grade;
+    private String classroom;
+
+    // Provisional, atributo de notas (dependiendo de si almacenamos la nota en la tabla de materias o alumno)
+    private Double grade;
     private String email;
     private String password;
 

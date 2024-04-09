@@ -22,9 +22,10 @@ public class Teacher {
 
     private String name;
     private String surname;
+    private Long dni;
     private String email;
     private LocalDate birthdate;
-    private String course;
+    private String subject;
     private String password;
 
     @Enumerated(EnumType.STRING)
