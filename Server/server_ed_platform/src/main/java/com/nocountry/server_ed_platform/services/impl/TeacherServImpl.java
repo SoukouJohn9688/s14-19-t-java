@@ -6,11 +6,13 @@ import com.nocountry.server_ed_platform.entities.Teacher;
 import com.nocountry.server_ed_platform.enumarations.UserRole;
 import com.nocountry.server_ed_platform.repositories.TeacherRepo;
 import com.nocountry.server_ed_platform.services.TeacherService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -45,5 +47,23 @@ public class TeacherServImpl implements TeacherService {
     @Override
     public TeacherDTO findById(Long id) {
         return null;
+    }
+
+    @Transactional
+    @Override
+    public TeacherDTO updateTeacher(Long id, TeacherRegisterDTO request) {
+        Optional<Teacher> teacherFound=teacherRepo.findById(id);
+
+        if (teacherFound.isPresent()){
+            modelMapper.map(request, teacherFound.get());
+
+            return modelMapper.map(teacherFound.get(), TeacherDTO.class);
+        }
+        else {
+
+            throw new TeacherNotFoundException("Teacher with ID " + id + " not found.");
+        }
+
+
     }
 }
