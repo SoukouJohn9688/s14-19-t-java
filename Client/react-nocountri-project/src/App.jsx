@@ -1,5 +1,6 @@
 /* import Login from "./components/Login"; */
 import Navbar from "./components/Navbar/Navbar";
+import Asistencias from "./pages/Asistencias/Asistencias";
 import Router from "./router/Router";
 
 
@@ -9,6 +10,7 @@ function App() {
     <>
       <Navbar />
       <Router />
+      <Asistencias />
       {/* <Login /> */}
     </>
   );
