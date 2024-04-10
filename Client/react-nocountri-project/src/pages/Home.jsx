@@ -9,7 +9,6 @@ import GradeTable from "./Table/GradeTable";
 const Home = () => {
   return <>
     <CardProfile />
-    <Calendar />
     <GradeTable/>
   </>;
 };
