@@ -35,7 +35,7 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @ManyToOne
-    private Parent parent;
+//    @ManyToOne
+//    private Parent parent;
 
 }
