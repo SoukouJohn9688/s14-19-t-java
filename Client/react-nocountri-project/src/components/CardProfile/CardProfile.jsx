@@ -23,7 +23,7 @@ const CardProfile = () => {
     <>
       {profiles.slice(0, 1).map((profile) => (
         <Card
-          className="mt-5 border-[1px] p-8 shadow-xl"
+          className="mt-5 border-[2px] border-black p-8 shadow-xl"
           key={profile.email}
         >
           <div className="flex items-center justify-center">
