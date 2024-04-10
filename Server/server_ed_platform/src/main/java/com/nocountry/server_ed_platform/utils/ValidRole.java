@@ -7,12 +7,13 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = PasswordValidator.class)
-@Target({ElementType.FIELD})
+@Constraint(validatedBy = RoleValidator.class)
+@Target({ElementType.FIELD,ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidPassword {
-
-    String message() default "La contraseña no cumple con los estandares. Debe contener por lo menos un caracter especial, mayuscual y 8 caracteres como minimo.";
+public @interface ValidRole {
+    String message() default "El rol no es valido, debe ser profesor, estudiante o padre.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
+
+
 }
