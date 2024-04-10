@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card } from "flowbite-react";
-import Logo from "../../assets/Logo.png";
+import Logo from "../../assets/Logo-Card.png";
 import Telephone from "../../assets/telephone.svg";
 import Ubicacion from "../../assets/ubicacion.svg";
 import ProfileIcon from "../../assets/profile-icon.svg";
@@ -22,29 +22,19 @@ const CardProfile = () => {
   return (
     <>
       {profiles.slice(0, 1).map((profile) => (
-        <Card className="max-w-sm mt-5 ml-5" key={profile.email}>
-          <div className="relative flex items-center justify-center">
+        <Card
+          className="mt-5 border-[2px] border-black p-8 shadow-xl"
+          key={profile.email}
+        >
+          <div className="flex items-center justify-center">
             <div className="flex flex-shrink-0 items-center">
-              <img src={Logo} alt="Logo" className="h-14 w-auto mr-2" />
-              <div className="ml-auto">
-                <span className="text-sky-600 text-3xl font-bold block">
-                  EdTech
-                </span>
-                <span className="text-[0.6rem] block">GESTION EDUCATIVA</span>
-                <span className="text-[0.6rem] block">
-                  PADRES | ALUMNOS | DOCENTES
-                </span>
-              </div>
+              <img src={Logo} alt="Logo" className="h-20 w-auto mr-2" />
             </div>
           </div>
 
           <div className="px-8 py-3">
             <div className="flex justify-center items-center mb-4">
-              <img
-                src={fotoUser}
-                alt="img"
-                className="h-40"
-              />{" "}
+              <img src={fotoUser} alt="img" className="h-40" />{" "}
             </div>
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 text-center pb-5">
               {" "}
