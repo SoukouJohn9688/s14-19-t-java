@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -15,15 +16,18 @@ import java.time.LocalDate;
 @Builder
 public class Student {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "student_id")
     private Long id;
-
-    private String name;
-    private String surname;
-    private LocalDate birthdate;
-    private Long dni;
+    protected String email;
+    protected String password;
+    protected String name;
+    protected String surname;
+    protected LocalDate birthdate;
+    protected Long dni;
 
     private String sex;
     //Representa el grado, curso o nivel en que se encuentra el estudiente
@@ -32,8 +36,9 @@ public class Student {
 
     // Provisional, atributo de notas (dependiendo de si almacenamos la nota en la tabla de materias o alumno)
     private Double grade;
-    private String email;
-    private String password;
+
+    @ManyToMany(mappedBy = "studentList")
+    private List<Teacher> teachers;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;

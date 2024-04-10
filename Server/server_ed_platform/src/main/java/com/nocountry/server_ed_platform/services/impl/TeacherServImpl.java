@@ -4,6 +4,7 @@ import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.entities.Teacher;
 import com.nocountry.server_ed_platform.enumarations.UserRole;
+import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
 import com.nocountry.server_ed_platform.repositories.TeacherRepo;
 import com.nocountry.server_ed_platform.services.TeacherService;
 import jakarta.transaction.Transactional;
@@ -51,7 +52,7 @@ public class TeacherServImpl implements TeacherService {
 
     @Transactional
     @Override
-    public TeacherDTO updateTeacher(Long id, TeacherRegisterDTO request) {
+    public TeacherDTO updateTeacher(Long id, TeacherRegisterDTO request) throws TeacherNotFoundException {
         Optional<Teacher> teacherFound=teacherRepo.findById(id);
 
         if (teacherFound.isPresent()){

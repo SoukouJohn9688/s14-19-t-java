@@ -18,7 +18,7 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<ResponseGenericDTO<List<StudentDTO>>> findAll(){
         return ResponseEntity.ok().body(
                 new ResponseGenericDTO<>(
