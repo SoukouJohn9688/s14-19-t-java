@@ -96,9 +96,13 @@ const GradeTable = () => {
                           />
                         </div>
                       ))}
-                      <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, semester)}>+</button>
+                      {semester !== 'Intensificación' && 
+                        <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, semester)}>+</button>
+                      }
                     </div>
-                    <span>Promedio: {calculateSemesterAverage(grades[subject]?.[semester])}</span>
+                    {semester !== 'Intensificación' && 
+                      <span>Promedio: {calculateSemesterAverage(grades[subject]?.[semester])}</span>
+                    }
                   </div>
                 </td>
               ))}
@@ -119,14 +123,16 @@ const GradeTable = () => {
                           min={1}
                           max={10}
                         />
-                        {index === grades[subject]['Intensificación'].length - 1 && <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, 'Intensificación')}>+</button>}
                       </div>
                     ))}
+                    {showIntensification[subject] && grades[subject]?.['Intensificación'].length < 3 && (
+                      <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, 'Intensificación')}>+</button>
+                    )}
                   </div>
                 ) : null}
               </td>
               <td className="border border-black px-4 py-2">
-                {grades[subject]?.['Intensificación'].some(grade => parseFloat(grade) >= 7) ? 'APROBADO' : null}
+                {calculateFinalAverageForSubject(subject) >= 7 || grades[subject]?.['Intensificación'].some(grade => parseFloat(grade) >= 7) ? 'APROBADO' : null}
               </td>
             </tr>
           ))}
@@ -137,4 +143,3 @@ const GradeTable = () => {
 };
 
 export default GradeTable;
-
