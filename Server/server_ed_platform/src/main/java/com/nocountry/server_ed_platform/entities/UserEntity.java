@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,9 +23,13 @@ public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
-    private String email;
-    private String password;
+    protected String username;
+    protected String email;
+    protected String password;
+    protected String name;
+    protected String surname;
+    protected LocalDate birthdate;
+    protected Long dni;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;

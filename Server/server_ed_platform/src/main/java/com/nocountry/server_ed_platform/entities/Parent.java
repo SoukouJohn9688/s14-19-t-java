@@ -20,19 +20,14 @@ public class Parent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "teacher_id")
+    @Column(name = "parent_id")
     private Long id;
-
-    private String name;
-    private String surname;
-    private LocalDate birthdate;
-
-
-    //Representa la materia impartida por el profesor
-    private String subject;
-    private String email;
-    private String password;
-
+    protected String email;
+    protected String password;
+    protected String name;
+    protected String surname;
+    protected LocalDate birthdate;
+    protected Long dni;
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
