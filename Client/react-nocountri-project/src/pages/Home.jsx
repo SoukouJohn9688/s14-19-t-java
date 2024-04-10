@@ -1,7 +1,7 @@
 import { Calendar } from "@/components";
 import CardProfile from "@/components/CardProfile/CardProfile";
 import React from "react";
-import GradeTable from "./Table/GradeTable";
+import GradeTable from "../components/Table/GradeTable";
 
 
 
@@ -10,7 +10,6 @@ import GradeTable from "./Table/GradeTable";
 const Home = () => {
   return <>
     <CardProfile />
-    <Calendar />
     <GradeTable/>
   </>;
 };
