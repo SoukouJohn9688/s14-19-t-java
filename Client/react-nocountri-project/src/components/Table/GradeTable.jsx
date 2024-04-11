@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 const GradeTable = () => {
   const subjects = ["matemáticas", "lengua", "ciencias sociales", "ciencias naturales", "educación física", "arte", "inglés"];
   const [grades, setGrades] = useState({});

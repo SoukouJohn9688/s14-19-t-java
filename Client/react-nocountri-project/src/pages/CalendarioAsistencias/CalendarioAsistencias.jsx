@@ -4,6 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
 
+
 const CalendarioAsistencias = () => {
   const [allEvents, setAllEvents] = useState([]);
   console.log(allEvents)
