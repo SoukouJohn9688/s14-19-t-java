@@ -23,12 +23,12 @@ const CardProfile = () => {
     <>
       {profiles.slice(0, 1).map((profile) => (
         <Card
-          className="mt-5 border-[2px] border-black p-8 shadow-xl"
+          className="border-[2px] shadow-xl mt-5 p-8 border-black"
           key={profile.email}
         >
-          <div className="flex items-center justify-center">
+          <div className="flex justify-center items-center">
             <div className="flex flex-shrink-0 items-center">
-              <img src={Logo} alt="Logo" className="h-20 w-auto mr-2" />
+              <img src={Logo} alt="Logo" className="mr-2 w-auto h-20" />
             </div>
           </div>
 
@@ -36,12 +36,12 @@ const CardProfile = () => {
             <div className="flex justify-center items-center mb-4">
               <img src={fotoUser} alt="img" className="h-40" />{" "}
             </div>
-            <h5 className="text-2xl font-bold tracking-tight text-gray-900 text-center pb-5">
+            <h5 className="pb-5 font-bold text-2xl text-center text-gray-900 tracking-tight">
               {" "}
               {profile.alumno}
             </h5>
             <div>
-              <h6 className="font-bold text-l flex justify-start gap-1">
+              <h6 className="flex justify-start gap-1 font-bold text-l">
                 {" "}
                 <img src={ProfileIcon} className="w-5 h-5" /> Datos Personales
               </h6>
@@ -55,9 +55,9 @@ const CardProfile = () => {
                 Nacionalidad: Argentina
               </p>
             </div>
-            <hr className="my-6 border-gray-200 w-full lg:my-8" />
+            <hr className="border-gray-200 my-6 lg:my-8 w-full" />
             <div>
-              <h6 className="font-bold text-l flex justify-start">
+              <h6 className="flex justify-start font-bold text-l">
                 {" "}
                 <img src={Ubicacion} className="w-6 h-6" /> Datos Domicilio
               </h6>
@@ -67,9 +67,9 @@ const CardProfile = () => {
                 Localidad: Buenos Aires, Argentina.
               </p>
             </div>
-            <hr className="my-6 border-gray-200 w-full lg:my-8" />
+            <hr className="border-gray-200 my-6 lg:my-8 w-full" />
             <div>
-              <h6 className="font-bold text-l flex justify-start gap-1">
+              <h6 className="flex justify-start gap-1 font-bold text-l">
                 {" "}
                 <img src={Telephone} className="w-4 h-5" /> Datos Contacto
               </h6>
