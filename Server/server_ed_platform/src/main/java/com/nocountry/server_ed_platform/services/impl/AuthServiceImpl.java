@@ -46,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .username(request.getUsername())
-                .role(UserRole.valueOf(request.getRol()))
+                .role(UserRole.valueOf(request.getRol().toUpperCase()))
                 .build();
         userRepository.save(user);
         return AuthResponseDTO.builder()
