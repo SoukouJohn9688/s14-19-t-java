@@ -3,7 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
-
+import es from '@fullcalendar/core/locales/es';
 const CalendarioAsistencias = () => {
   const [allEvents, setAllEvents] = useState([]);
   console.log(allEvents)
@@ -14,8 +14,11 @@ const CalendarioAsistencias = () => {
     { id: "4", title: "Tardanza/ Ausente no computable", color: "#3B82F6", backgroundColor: "#3B82F6" }
   ]);
 
+  // const [editable, setEditable] = useState(true);
+
   useEffect(() => {
     let draggableEl = document.getElementById('draggable-el')
+    // if (editable) return
     if (draggableEl) {
       const draggable = new Draggable(draggableEl, {
         itemSelector: ".fc-event",
@@ -33,6 +36,7 @@ const CalendarioAsistencias = () => {
         draggable.destroy();
       };
     }
+
   }, []);
 
   const handleEventClick = (clickInfo) => {
@@ -57,48 +61,52 @@ const CalendarioAsistencias = () => {
   }
 
   return (
-    <div className="flex justify-center pt-8">
-      <div className="w-1/4">
-        <h1 className="text-lg font-bold mb-4">Referencias arrastables</h1>
-        <div id="draggable-el" className="p-2 bg-gray-200 rounded-md">
-          {
-            events.map(event => (
-              <div
-                className="fc-event cursor-pointer mb-2 p-1 bg-white shadow-md rounded-sm text-neutral-50 "
-                title={event.title}
-                data-color={event.color}
-                style={{ backgroundColor: event.backgroundColor, cursor: "pointer" }}
-                key={event.id}
-              >
-                <div >
-                  {event.title}
-                </div>
-              </div>
-            ))
-          }
+    <div className="ml-80 ">
+      <div className="grid grid-cols-3 gap-4 ">
+        <div className="col-span-2" >
+          <FullCalendar
+            plugins={[
+              dayGridPlugin,
+              interactionPlugin,
+              timeGridPlugin
+            ]}
+            headerToolbar={{
+              left: "prev,next today",
+              center: "title",
+              right: ""
+            }}
+            events={allEvents}
+            nowIndicator={true}
+            editable={false}
+            droppable={true}
+            // selectable={true}
+            selectMirror={true}
+            eventClick={(data) => handleEventClick(data)}
+            drop={addEvent}
+            height="auto"
+            locale={es}
+          />
         </div>
-      </div>
-      <div className="w-3/4">
-        <FullCalendar
-          plugins={[
-            dayGridPlugin,
-            interactionPlugin,
-            timeGridPlugin
-          ]}
-          headerToolbar={{
-            left: "prev,next today",
-            center: "title",
-            right: "resourceTimelineWook,dayGridMonth,timeGridWeek"
-          }}
-          events={allEvents}
-          nowIndicator={true}
-          editable={true}
-          droppable={true}
-          selectable={true}
-          selectMirror={true}
-          eventClick={(data) => handleEventClick(data)}
-          drop={addEvent}
-        />
+        <div className="col-span-1 p-4">
+          {/* <h1 className="text-lg font-bold mb-4 ">Referencias arrastables</h1> */}
+          <div id="draggable-el" className="p-2 bg-gray-200 rounded-md w-72 ">
+            {
+              events.map(event => (
+                <div
+                  className="fc-event cursor-pointer mb-2 p-1 bg-white shadow-md rounded-sm text-neutral-50  "
+                  title={event.title}
+                  data-color={event.color}
+                  style={{ backgroundColor: event.backgroundColor, cursor: "pointer" }}
+                  key={event.id}
+                >
+                  <div >
+                    {event.title}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -10,7 +10,8 @@ function App() {
     <>
       <Navbar />
       <Router />
-      <Footer/>
+      <Asistencias />
+      <Footer />
     </>
   );
 }
