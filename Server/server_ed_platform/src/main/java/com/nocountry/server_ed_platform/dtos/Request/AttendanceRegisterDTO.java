@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AttendanceRegister {
+public class AttendanceRegisterDTO {
     @NotNull
     @NotBlank
     private boolean asistio;

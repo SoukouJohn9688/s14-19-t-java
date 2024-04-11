@@ -32,6 +32,11 @@ public class Student {
     private String email;
     private String password;
 
+    private Integer current_year;
+
+    private String classroom;
+
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
