@@ -1,6 +1,6 @@
 package com.nocountry.server_ed_platform.services.impl;
 import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
-import com.nocountry.server_ed_platform.dtos.Request.AttendanceRegister;
+import com.nocountry.server_ed_platform.dtos.Request.AttendanceRegisterDTO;
 import com.nocountry.server_ed_platform.entities.Attendance;
 import com.nocountry.server_ed_platform.repositories.AttendanceRepo;
 import com.nocountry.server_ed_platform.services.AttendanceService;
@@ -28,7 +28,7 @@ public class AttendanceServImpl implements AttendanceService {
 }
 
     @Override
-    public AttendanceDTO createAttendance(AttendanceRegister request) {
+    public AttendanceDTO createAttendance(AttendanceRegisterDTO request) {
         Attendance attendance = Attendance.builder()
                 .fecha(request.getFecha())
                 .asistio(request.isAsistio())
