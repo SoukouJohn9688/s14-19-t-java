@@ -38,4 +38,7 @@ public class Student {
 //    @ManyToOne
 //    private Parent parent;
 
+    @OneToMany(mappedBy = "student")
+    private List<Attendance> attendances;
+
 }
