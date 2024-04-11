@@ -26,13 +26,13 @@ const Home = () => {
   return (
     <div>
       <div className="bg-gray-50 p-10">
-        <div className="grid grid-cols-4 lg:gap-5 gap-5">
-          <div className="col-span-1">
-            <div className="sticky top-10">
+        <div className="gap-5 lg:gap-5 grid lg:grid-cols-4 grid-flow-row md:grid-flow-col">
+          <div className="md:col-span-1 mx-auto">
+            <div className="top-10 sticky">
               <CardProfile />
             </div>
           </div>
-          <div className="col-span-3 grid gap-5">
+          <div className="gap-5 grid col-span-3">
             <CardStudents
               onShowGradeTable={() => setShowGradeTable(true)}
               onShowCalendarAsis={toggleCalendarAsis}
