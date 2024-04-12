@@ -1,11 +1,15 @@
 
+y	java:S116"XRename this field "scholar_grade" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šúÙéùÿÿÿÿ8ààí1
+r	java:S116""WRename this field "current_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ğá¨8ààí1
 F
-java:S1068"+Remove this unused "surname" private field.(—‡¨åûÿÿÿÿ
+java:S1068"+Remove this unused "surname" private field.(—‡¨åûÿÿÿÿ
 C
-java:S1068"-Remove this unused "birthdate" private field.(Ã£ÖÒ
+java:S1068"-Remove this unused "birthdate" private field.(Ã£ÖÒ
+S
+java:S1068"1Remove this unused "scholar_grade" private field.(šúÙéùÿÿÿÿ8åàí1
 D
-java:S1068")Remove this unused "grade" private field.(æÊôˆúÿÿÿÿ
-D
-java:S1068")Remove this unused "email" private field.(ª«Õìùÿÿÿÿ
+java:S1068")Remove this unused "email" private field.(ª«Õìùÿÿÿÿ
 G
-java:S1068",Remove this unused "password" private field.(œãë­úÿÿÿÿ
+java:S1068 ",Remove this unused "password" private field.(œãë­úÿÿÿÿ
+L
+java:S1068""0Remove this unused "current_year" private field.(Ğá¨8æàí1

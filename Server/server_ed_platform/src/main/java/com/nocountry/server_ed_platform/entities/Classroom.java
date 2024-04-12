@@ -1,10 +1,16 @@
 package com.nocountry.server_ed_platform.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,12 +1,5 @@
 
-j	java:S116"URename this field "teacher_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Û’¼Ù
-F
-java:S1068"+Remove this unused "surname" private field.(—‡¨åûÿÿÿÿ
-D
-java:S1068")Remove this unused "email" private field.(ª«Õìùÿÿÿÿ
-C
-java:S1068"-Remove this unused "birthdate" private field.(Ã£ÖÒ
-E
-java:S1068"*Remove this unused "course" private field.(™ž’Èÿÿÿÿÿ
-G
-java:S1068",Remove this unused "password" private field.(œãë­úÿÿÿÿ
+j	java:S116"URename this field "teacher_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Û’¼Ù
+X	java:S125)"<This block of commented-out lines of code should be removed.(ÂðÇà8èáží1
+H
+java:S1068"+Remove this unused "subject" private field.(­¬í8¨œÌ€í1

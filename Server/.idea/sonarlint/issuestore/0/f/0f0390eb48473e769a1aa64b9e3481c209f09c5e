@@ -1,2 +1,4 @@
 
 r	java:S116"XRename this field "attendance_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(À·é½þÿÿÿÿ
+p
+java:S1128"SRemove this unused import 'com.nocountry.server_ed_platform.enumarations.UserRole'.(áŽÆ­8©œÐ€í1
