@@ -10,6 +10,8 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "classroom_id")
     private Long classroom_id;
+
+    private String name;
     @ManyToOne
     private Subject subject;
     @ManyToMany
