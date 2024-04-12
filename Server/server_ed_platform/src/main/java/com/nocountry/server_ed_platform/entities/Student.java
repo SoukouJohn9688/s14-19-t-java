@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -40,7 +39,11 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-//    @ManyToOne
-//    private Parent parent;
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Parent parent;
+
+    @OneToMany(mappedBy = "student")
+    private List<Attendance> attendances;
 
 }
