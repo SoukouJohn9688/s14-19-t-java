@@ -19,6 +19,9 @@ public class Subject {
 
 
     @ManyToMany
+    @JoinTable(name = "teacher_subjecty",
+       joinColumns = @JoinColumn(name = "teacher_id"),
+        inverseJoinColumns = @JoinColumn(name = "subject_id",referencedColumnName = ""))
     private List<Teacher> teacherList; // Profesores que pueden impartir esta asignatura
     @OneToMany(mappedBy = "subject")
     private List<Classroom> cursos;
