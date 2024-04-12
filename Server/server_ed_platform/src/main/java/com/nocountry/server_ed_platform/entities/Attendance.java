@@ -4,6 +4,7 @@ import com.nocountry.server_ed_platform.enumarations.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,7 +20,7 @@ public class Attendance {
     @Column(name = "attendance_id")
     private Long attendance_id;
     private boolean asistio;
-    private Date fecha;
+    private LocalDate fecha;
 
 
 

@@ -31,8 +31,8 @@ public class Parent {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-//    @OneToMany(mappedBy = "Parent")
-//    private final List<Student> students = new ArrayList<>();
+    @OneToMany(mappedBy = "parent")
+    private List<Student> students;
 
 
 }

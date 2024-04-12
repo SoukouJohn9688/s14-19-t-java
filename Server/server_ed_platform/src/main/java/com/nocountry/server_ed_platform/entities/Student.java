@@ -34,13 +34,15 @@ public class Student {
 
     private Integer current_year;
 
-    private String classroom;
 
-
+    @ManyToOne()
+    @JoinColumn(name = "classroom_id")
+    private Classroom classroom;
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-//    @ManyToOne
-//    private Parent parent;
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Parent parent;
 
 }
