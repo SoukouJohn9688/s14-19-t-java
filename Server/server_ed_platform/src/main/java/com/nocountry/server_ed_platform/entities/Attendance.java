@@ -22,6 +22,8 @@ public class Attendance {
     private boolean asistio;
     private LocalDate fecha;
 
-
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
 }
