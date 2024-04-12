@@ -27,7 +27,7 @@ public class Student {
 
     //Representa el grado, curso o nivel en que se encuentra el estudiente
     //Por ejemplo, cuarto de primaria, o segundo de bachillerato
-    private String grade;
+    private String scholar_grade;
     private String email;
     private String password;
 
