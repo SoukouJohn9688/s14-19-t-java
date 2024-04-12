@@ -33,9 +33,10 @@ public class Student {
 
     private Integer current_year;
 
-    private String classroom;
 
-
+    @ManyToOne()
+    @JoinColumn(name = "classroom_id")
+    private Classroom classroom;
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -43,7 +44,9 @@ public class Student {
     @JoinColumn(name = "parent_id")
     private Parent parent;
 
+
     @OneToMany(mappedBy = "student")
     private List<Attendance> attendances;
+
 
 }
