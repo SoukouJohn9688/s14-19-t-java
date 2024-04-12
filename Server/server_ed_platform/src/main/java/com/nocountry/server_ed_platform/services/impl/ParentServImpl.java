@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,6 +50,16 @@ public class ParentServImpl implements ParentService {
         Parent parentDB = parentRepo.save(parent);
         return modelMapper.map(parentDB,ParentDTO.class);
     }
+
+    //getGradeOfSubject(idStudent,idSubject)
+//    @Override
+//    public Optional<Double> getGradeOfSubject(Long idStudent,Long idSubject){
+//
+//       Optional<Double> foundGrade=parentRepo.findGradeBySubject_id(idSubject);
+//
+//       return foundGrade;
+//
+//    }
 
 
 
