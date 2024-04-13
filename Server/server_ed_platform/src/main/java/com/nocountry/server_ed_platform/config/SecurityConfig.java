@@ -30,6 +30,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/v1/teacher/**").hasAuthority("TEACHER")
                                 .requestMatchers("/api/v1/student/**").hasAuthority("STUDENT")
+                                .requestMatchers("/api/v1/attendance/**").hasAuthority("STUDENT")
                                 .requestMatchers("/api/v1/parent/**").hasAuthority("PARENT")
                                 .anyRequest().authenticated()
                 )

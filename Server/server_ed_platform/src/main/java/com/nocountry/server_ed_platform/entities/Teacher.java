@@ -32,13 +32,7 @@ public class Teacher {
 
 
 
-//    @ManyToMany
-//    @JoinTable(
-//         name = "teacher_student",
-//         joinColumns = @JoinColumn(name = "teacher_id"),
-//         inverseJoinColumns = @JoinColumn(name = "student_id")
-// )
-//    private List<Student> studentList;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
 }

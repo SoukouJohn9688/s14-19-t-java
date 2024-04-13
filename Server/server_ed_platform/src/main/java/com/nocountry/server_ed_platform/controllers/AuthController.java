@@ -7,6 +7,7 @@ import com.nocountry.server_ed_platform.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +27,13 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponseDTO> register(@RequestBody @Valid RegisterDTO request) {
         return ResponseEntity.ok(authService.register(request));
+    }
+    @GetMapping("/test")
+    public String test(){
+        return "test from test";
+    }
+    @GetMapping("/test2")
+    public String test2(){
+        return "test from test2";
     }
 }
