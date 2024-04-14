@@ -11,4 +11,5 @@ public interface StudentService {
     List<StudentDTO> findAll();
     StudentDTO findById(Long id) throws StudentNotFoundException;
     StudentDTO createStudent(StudentRegisterDTO request);
+    StudentDTO updateStudent(Long id, StudentRegisterDTO request) throws StudentNotFoundException;
 }

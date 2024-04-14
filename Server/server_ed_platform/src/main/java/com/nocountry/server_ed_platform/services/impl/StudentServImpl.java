@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -52,5 +53,18 @@ public class StudentServImpl implements StudentService {
                 .build();
         Student studentDB = studentRepo.save(student);
         return modelMapper.map(studentDB,StudentDTO.class);
+    }
+
+    @Override
+    public StudentDTO updateStudent(Long id, StudentRegisterDTO request) throws StudentNotFoundException{
+        Optional<Student> student = studentRepo.findById(id);
+
+        if (student.isPresent()){
+            modelMapper.map(request, student.get());
+
+            return modelMapper.map(student.get(), StudentDTO.class);
+        } else {
+            throw new StudentNotFoundException("Student with ID: "+id+" not found.");
+        }
     }
 }
