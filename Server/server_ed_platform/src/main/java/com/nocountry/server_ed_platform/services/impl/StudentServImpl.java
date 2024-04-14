@@ -4,6 +4,7 @@ import com.nocountry.server_ed_platform.dtos.Request.StudentRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.StudentDTO;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.enumarations.UserRole;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
 import com.nocountry.server_ed_platform.services.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +32,13 @@ public class StudentServImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO findById(Long id) {
-        return null;
+    public StudentDTO findById(Long id) throws StudentNotFoundException {
+        Student student = studentRepo.findById(id).orElse(null);
+        if(student != null){
+            return modelMapper.map(student, StudentDTO.class);
+        } else {
+            throw new StudentNotFoundException("Student with ID: " + id + " not found.");
+        }
     }
 
     @Override
