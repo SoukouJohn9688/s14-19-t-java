@@ -9,7 +9,7 @@ public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "classroom_id")
-    private Long classroom_id;
+    private Long classroomId;
 
     private String name;
     @ManyToOne

@@ -20,7 +20,7 @@ public class Parent {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "parent_id")
-    private Long id;
+    private Long parentId;
     protected String email;
     protected String password;
     protected String name;

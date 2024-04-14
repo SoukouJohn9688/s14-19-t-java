@@ -2,9 +2,12 @@ package com.nocountry.server_ed_platform.services.impl;
 
 import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
+import com.nocountry.server_ed_platform.entities.Classroom;
+import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Teacher;
 import com.nocountry.server_ed_platform.enumarations.UserRole;
 import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
+import com.nocountry.server_ed_platform.repositories.StudentRepo;
 import com.nocountry.server_ed_platform.repositories.TeacherRepo;
 import com.nocountry.server_ed_platform.services.TeacherService;
 import jakarta.transaction.Transactional;
@@ -22,6 +25,7 @@ public class TeacherServImpl implements TeacherService {
     private final TeacherRepo teacherRepo;
     private final ModelMapper modelMapper;
 
+    private final StudentRepo studentRepo;
     @Override
     public List<TeacherDTO> findAll() {
         List<Teacher> teachersDB = teacherRepo.findAll();
@@ -66,5 +70,16 @@ public class TeacherServImpl implements TeacherService {
         }
 
 
+    }
+
+    @Override
+    public List<Student> getListStudentOfSubjecByClassroom(Long idClassroom, Long idTeacher) {
+
+        Optional<Classroom> classroomDB= Repo.findById(idTeacher);
+        if(teacherDB.isPresent()){
+
+
+        }
+        return studentRepo.findAllByClassroom(classroom);
     }
 }

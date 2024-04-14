@@ -9,7 +9,7 @@ import java.util.List;
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long subject_id;
+    private Long subjectId;
     private String name;
     @OneToMany(mappedBy = "subject")
     private List<Classroom> classroomList;
@@ -23,6 +23,5 @@ public class Subject {
        joinColumns = @JoinColumn(name = "teacher_id"),
         inverseJoinColumns = @JoinColumn(name = "subject_id",referencedColumnName = ""))
     private List<Teacher> teacherList; // Profesores que pueden impartir esta asignatura
-    @OneToMany(mappedBy = "subject")
-    private List<Classroom> cursos;
+
 }
