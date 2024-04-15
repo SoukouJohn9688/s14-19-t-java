@@ -15,11 +15,12 @@ const Router = () => {
   const userStorage = JSON.parse(localStorage.getItem("alumno"));
 
   useEffect(() => {
-    if (userStorage.useName) {
+    if (userStorage && userStorage.useName) {
       setIsLogin(true);
       navigate("/home");
     }
   }, []);
+  
 
   return (
     <Routes>
