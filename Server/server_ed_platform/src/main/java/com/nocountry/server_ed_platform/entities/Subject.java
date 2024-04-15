@@ -1,10 +1,17 @@
 package com.nocountry.server_ed_platform.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "subject")
+@Builder
 @Entity
 public class Subject {
     @Id
@@ -14,8 +21,9 @@ public class Subject {
     @OneToMany(mappedBy = "subject")
     private List<Classroom> classroomList;
 
+    private Double grade;
     private String description;
-    private String current_year; // Grado en el que se imparte la asignatura
+    private Integer current_year; // Grado en el que se imparte la asignatura
 
 
     @ManyToMany

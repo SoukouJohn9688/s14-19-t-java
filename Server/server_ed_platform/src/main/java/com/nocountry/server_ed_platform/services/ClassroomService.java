@@ -15,5 +15,6 @@ public interface ClassroomService {
 
     ClassroomDTO findById(Long classroom_id);
 
+    ClassroomDTO findBySubjectId(Long subjectId);
 
 }
