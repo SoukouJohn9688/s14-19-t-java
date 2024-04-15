@@ -1,13 +1,13 @@
 package com.nocountry.server_ed_platform.repositories;
 
-import com.nocountry.server_ed_platform.entities.Parent;
+
+
+import com.nocountry.server_ed_platform.entities.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface ParentRepo extends JpaRepository<Parent,Long> {
+public interface SubjectRepo  extends JpaRepository<Subject, Long> {
 
 
 

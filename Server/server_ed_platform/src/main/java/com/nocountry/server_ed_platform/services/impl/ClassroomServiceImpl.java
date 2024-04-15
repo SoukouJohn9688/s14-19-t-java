@@ -9,6 +9,7 @@ import com.nocountry.server_ed_platform.services.ClassroomService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.oauth2.resourceserver.OpaqueTokenDsl;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -54,4 +55,11 @@ public class ClassroomServiceImpl implements ClassroomService {
   }
         return null;
 }
+
+    @Override
+    public ClassroomDTO findBySubjectId(Long subjectId) {
+
+        ClassroomDTO classroom=classroomRepo.findBySubjectId(subjectId);
+        return classroom;
+    }
 }
