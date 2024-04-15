@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -14,4 +15,9 @@
   <component name="ProjectType">
     <option name="id" value="jpab" />
   </component>
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="graalvm-jdk-17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+>>>>>>> 514b692039df61556592f71a12f09b81e9611a84
 </project>

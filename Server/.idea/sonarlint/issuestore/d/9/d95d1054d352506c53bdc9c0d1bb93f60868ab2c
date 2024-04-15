@@ -1,0 +1,19 @@
+
+i
+java:S1128"SRemove this unused import 'com.nocountry.server_ed_platform.enumarations.UserRole'.(áÆ­
+O
+java:S1128"9Remove this unused import 'jakarta.persistence.EnumType'.(…÷Íà
+A
+java:S1068"&Remove this unused "id" private field.(şÓî«şÿÿÿÿ
+>
+java:S1068"(Remove this unused "name" private field.(Ë¥¼
+F
+java:S1068"+Remove this unused "surname" private field.(—‡¨åûÿÿÿÿ
+C
+java:S1068"-Remove this unused "birthdate" private field.(Ã£ÖÒ
+A
+java:S1068"+Remove this unused "subject" private field.(­¬í
+D
+java:S1068")Remove this unused "email" private field.(ª«Õìùÿÿÿÿ
+G
+java:S1068",Remove this unused "password" private field.(œãë­úÿÿÿÿ
