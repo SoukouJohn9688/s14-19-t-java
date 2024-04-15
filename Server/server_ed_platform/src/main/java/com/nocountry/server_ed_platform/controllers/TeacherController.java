@@ -34,7 +34,7 @@ public class TeacherController {
             logger.info("Updated teacher with ID: " + foundTeacher.getTeacher_id());
             return new ResponseEntity<>(foundTeacher, HttpStatus.OK);
         }catch(Exception ex){
-            logger.error("Error creating PET: " + ex.getMessage() + " cause: " + ex.getCause());
+            logger.error("Error creating Teacher: " + ex.getMessage() + " cause: " + ex.getCause());
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
     }

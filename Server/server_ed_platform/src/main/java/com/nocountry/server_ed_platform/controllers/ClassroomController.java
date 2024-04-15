@@ -8,11 +8,16 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping(value = "/api/v1/classroom")
 @RequiredArgsConstructor
 public class ClassroomController {
+
+
+
+    private static final Logger logger = LoggerFactory.getLogger(ClassroomController.class);
 
    final ClassroomService classroomService;
    final ModelMapper modelMapper;
