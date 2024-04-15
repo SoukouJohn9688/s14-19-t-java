@@ -18,7 +18,7 @@ public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "attendance_id")
-    private Long attendance_id;
+    private Long attendanceId;
     private boolean asistio;
     private LocalDate fecha;
 

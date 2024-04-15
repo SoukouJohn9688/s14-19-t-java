@@ -20,7 +20,7 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "teacher_id")
-    private Long teacher_id;
+    private Long teacherId;
     private String subject;
 
     protected String email;

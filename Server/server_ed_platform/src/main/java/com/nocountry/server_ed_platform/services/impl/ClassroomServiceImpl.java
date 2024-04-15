@@ -8,6 +8,7 @@ import com.nocountry.server_ed_platform.repositories.ClassroomRepo;
 import com.nocountry.server_ed_platform.services.ClassroomService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,8 +16,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ClassroomServiceImpl implements ClassroomService {
-
+    @Autowired
     private final ClassroomRepo classroomRepo;
+    @Autowired
     private final ModelMapper modelMapper;
     @Override
     public ClassroomDTO updateClassroom(Long classroom_id, ClassroomRegisterDTO request) throws ClassroomNotFoundException {
@@ -37,7 +39,7 @@ public class ClassroomServiceImpl implements ClassroomService {
     @Override
     public ClassroomDTO saveClassroom(ClassroomRegisterDTO request) {
         Classroom classroom = Classroom.builder()
-                .classroom_id(request.getClassroom_id())
+                .classroomId(request.getClassroom_id())
                 .build();
         Classroom classroomDB = classroomRepo.save(classroom);
         return modelMapper.map(classroomDB, ClassroomDTO.class);

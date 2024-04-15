@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class ClassroomDTO {
 
     private Long classroom_id;
+    private String name;
 }

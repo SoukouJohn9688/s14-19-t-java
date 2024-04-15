@@ -8,6 +8,7 @@ import com.nocountry.server_ed_platform.repositories.StudentRepo;
 import com.nocountry.server_ed_platform.services.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,8 +17,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class StudentServImpl implements StudentService {
-
+    @Autowired
     private final StudentRepo studentRepo;
+    @Autowired
     private final ModelMapper modelMapper;
 
     @Override
