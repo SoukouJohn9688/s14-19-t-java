@@ -18,7 +18,7 @@ import java.util.List;
 @Builder
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "teacher_id")
     private Long teacher_id;
     private String subject;

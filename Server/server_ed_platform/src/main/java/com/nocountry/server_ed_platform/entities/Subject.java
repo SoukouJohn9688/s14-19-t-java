@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Subject {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long subject_id;
     private String name;
     @OneToMany(mappedBy = "subject")

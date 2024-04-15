@@ -1,10 +1,12 @@
 package com.nocountry.server_ed_platform.controllers;
 
+import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
+import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
+import com.nocountry.server_ed_platform.exceptions.DuplicateDateException;
+import com.nocountry.server_ed_platform.exceptions.FutureDateException;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO;
 import com.nocountry.server_ed_platform.dtos.Response.ResponseGenericDTO;
@@ -13,22 +15,41 @@ import com.nocountry.server_ed_platform.services.AttendanceService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/attendance")
+@RequiredArgsConstructor
 public class AttendanceController {
 
-        private AttendanceService attendanceService;
+    private final AttendanceService attendanceService;
 
-        @GetMapping("/{idStudent}")
-        public ResponseEntity<ResponseGenericDTO<AttendanceResponseDTO>> findByIdStudent(
-                        @PathVariable(name = "idStudent") Long idStudent) {
-                System.out.println("iniciando service");
-                System.out.println("Peticion");
-                return ResponseEntity.ok().body(
-                                new ResponseGenericDTO<>(
-                                                true,
-                                                "peticion realizada con exito",
-                                                attendanceService.findByIdStudent(idStudent)));
-        }
+    @GetMapping("/{studentId}")
+    public ResponseEntity<AttendanceResponseDTO> getAttendanceByStudentId(@PathVariable Long studentId) {
+        return ResponseEntity.ok().body(attendanceService.findAttendanceByStudentId(studentId));
+    }
+
+    @PostMapping("/save/{studentId}")
+    public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> saveAttendance(
+            @PathVariable Long studentId,
+            @Valid @RequestBody AttendanceDTO attendanceDTO) throws DuplicateDateException, FutureDateException {
+
+        return ResponseEntity.ok().body(new ResponseGenericDTO<>(
+                true,
+                "Asistencia guardada",
+                attendanceService.saveAttendance(studentId, attendanceDTO)
+        ));
+    }
+
+    @PutMapping("/update/{attendanceId}")
+    public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> updateTypeOfAttendanceById(
+            @PathVariable Long attendanceId,
+            @RequestParam String type) throws AttendanceNotFoundException {
+
+        AttendanceDTO updatedAttendance = attendanceService.updateTypeOfAttendanceById(attendanceId, type);
+        ResponseGenericDTO<AttendanceDTO> responseDTO = new ResponseGenericDTO<>(
+                true,
+                "Asistencia actualizada",
+                updatedAttendance
+        );
+        return ResponseEntity.ok().body(responseDTO);
+    }
 
 }

@@ -3,12 +3,21 @@ package com.nocountry.server_ed_platform.services.impl;
 import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO;
 import com.nocountry.server_ed_platform.entities.Attendance;
+import com.nocountry.server_ed_platform.entities.Student;
+import com.nocountry.server_ed_platform.enumarations.AttendanceTypeEnum;
+import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
+import com.nocountry.server_ed_platform.exceptions.DuplicateDateException;
+import com.nocountry.server_ed_platform.exceptions.FutureDateException;
 import com.nocountry.server_ed_platform.repositories.AttendanceRepo;
+import com.nocountry.server_ed_platform.repositories.StudentRepo;
 import com.nocountry.server_ed_platform.services.AttendanceService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,23 +25,84 @@ import java.util.stream.Collectors;
 public class AttendanceServiceImpl implements AttendanceService {
 
     private final AttendanceRepo attendanceRepo;
-    private final ModelMapper modelMapper;
+    private final StudentRepo studentRepo;
 
     @Override
-    public AttendanceResponseDTO findByIdStudent(Long idStudent) {
-        System.out.println("**************************************************************************************");
-        System.out.println("**************************************************************************************");
-        System.out.println("**************************************************************************************");
-        System.out.println("**************************************************************************************");
-        System.out.println("iniciando service");
-        List<Attendance> attendancesDB = attendanceRepo.findAttendancesByStudentId(idStudent);
-        System.out.println("data -> " + attendancesDB.toString());
-        AttendanceResponseDTO response = AttendanceResponseDTO.builder()
-                .idStudent(idStudent)
-                .attendances(attendancesDB.stream().map(attendance -> modelMapper.map(attendance, AttendanceDTO.class))
-                        .collect(Collectors.toList()))
+    public AttendanceResponseDTO findAttendanceByStudentId(Long studentId) {
+
+        Optional<Student> studentDB = studentRepo.findById(studentId);
+
+        if (studentDB.isEmpty()) {
+            throw new RuntimeException("Estudiante con id " + studentId + "no encontrado");
+        }
+
+        List<Attendance> attendancesDB = attendanceRepo.findAttendanceByStudentId(studentId);
+
+        List<AttendanceDTO> attendanceDTOs = attendancesDB.stream()
+                .map(attendance -> AttendanceDTO.builder()
+                        .id(attendance.getAttendance_id())
+                        .type(attendance.getType().name())
+                        .date(attendance.getDate().toString())
+                        .build()).collect(Collectors.toList());
+
+        return AttendanceResponseDTO.builder()
+                .idStudent(studentId)
+                .attendances(attendanceDTOs)
                 .build();
-                System.out.println(response.toString());
-        return response;
     }
+
+    @Override
+    public AttendanceDTO saveAttendance(Long studentId, AttendanceDTO attendanceDTO)
+            throws DuplicateDateException, FutureDateException {
+
+        Optional<Student> studentDB = studentRepo.findById(studentId);
+
+        if (studentDB.isEmpty()) {
+            throw new RuntimeException("Estudiante no encontrado");
+        }
+
+        if (studentDB.get().getAttendances().stream().anyMatch(
+                attendance -> attendance.getDate().isEqual(LocalDate.parse(attendanceDTO.getDate())))) {
+            throw new DuplicateDateException(String.format("La fecha %s ya existe", attendanceDTO.getDate()));
+        }
+
+        if (!LocalDate.now().isEqual(LocalDate.parse(attendanceDTO.getDate()))) {
+            throw new FutureDateException("No puedes agregar fechas que no sean el actual");
+        }
+
+        Attendance attendanceDB = attendanceRepo.save(
+                Attendance.builder()
+                        .type(AttendanceTypeEnum.valueOf(attendanceDTO.getType().toUpperCase()))
+                        .date(LocalDate.parse(attendanceDTO.getDate()))
+                        .student(studentDB.get())
+                        .build());
+
+        return AttendanceDTO.builder()
+                .id(attendanceDB.getAttendance_id())
+                .type(attendanceDB.getType().name())
+                .date(attendanceDTO.getDate())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public AttendanceDTO updateTypeOfAttendanceById(Long attendanceId, String type)
+            throws AttendanceNotFoundException {
+
+        Optional<Attendance> attendanceDB = attendanceRepo.findById(attendanceId);
+        if (attendanceDB.isEmpty()) {
+            throw new AttendanceNotFoundException(String.format("Asistencia con id %s no encontrada", attendanceId));
+        }
+
+        attendanceDB.get().setType(AttendanceTypeEnum.valueOf(type.toUpperCase()));
+
+        Attendance response = attendanceRepo.save(attendanceDB.get());
+
+        return AttendanceDTO.builder()
+                .id(response.getAttendance_id())
+                .type(response.getType().name())
+                .date(response.getDate().toString())
+                .build();
+    }
+
 }
