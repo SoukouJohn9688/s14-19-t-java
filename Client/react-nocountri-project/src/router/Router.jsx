@@ -7,7 +7,6 @@ import LoginMaster from "@/pages/LoginMaster";
 import HomeMaster from "@/pages/HomeMaster";
 
 const Router = () => {
-  
 
   return (
     <Routes>
