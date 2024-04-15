@@ -1,54 +1,106 @@
-import { Disclosure } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Fragment, useState, useEffect, useRef } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
+import { FiArrowDown, FiArrowUp } from "react-icons/fi";
 
-const navigation = [
-  { name: "Ver Info", to: "/", current: false },
-  { name: "Modificar", to: "/", current: false },
-  { name: "Cerrar sesión", to: "/", current: false },
-];
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
-export default function Navbar() {
+export default function Example() {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <Disclosure as="nav" className="bg-white text-gray-800 shadow-md">
-      {({ open }) => (
-        <>
-          <div className="mx-auto px-2 py-3 sm:px-6 md:px-14">
-            <div className="flex items-center justify-between">
-              <img src={Logo} alt="Logo" className="h-14 w-auto mr-2" />
-              <div className="flex items-center">
-                <div className="text-sky-600 font-semibold px-3 pb-1">
-                  Gonzalez, Jaquelina
-                </div>
-                <Disclosure.Button className="text-gray-400 hover:text-gray-900 focus:outline-none">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-8 w-8" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-8 w-8" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
+    <Disclosure as="nav" className="bg-white shadow-md fixed w-full top-0 z-10">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div className="relative flex h-16 items-center justify-between">
+          <div className="flex items-center">
+            <div className="sm:hidden">
+              <img className="h-12 w-auto" src={Logo} alt="Ed Tech" />
+            </div>
+          </div>
+          <div className="flex flex-1 justify-center sm:justify-start">
+            <div className="hidden sm:flex flex-shrink-0 items-center">
+              <img className="h-12 w-auto" src={Logo} alt="Ed Tech" />
             </div>
           </div>
 
-          <Disclosure.Panel className="absolute top-16 right-0 bg-white shadow-md w-56">
-            <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.to}
-                  className="block px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-200 hover:text-sky-900 rounded-md"
-                  aria-current={item.current ? "page" : undefined}
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <Link to={"/"} className="text-sky-600">
+              Conozcan EdTech
+            </Link>
+            <Menu as="div" className="relative ml-3" ref={menuRef}>
+              <div className="flex">
+                <div className="font-semibold px-1">Gonzalez, Jaqueline</div>
+                <Menu.Button
+                  className="relative flex pt-1"
+                  onClick={() => setIsOpen(!isOpen)}
                 >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </Disclosure.Panel>
-        </>
-      )}
+                  {isOpen ? (
+                    <FiArrowUp className="text-sky-600 text-xl" />
+                  ) : (
+                    <FiArrowDown className="text-sky-600 text-xl" />
+                  )}
+                </Menu.Button>
+              </div>
+              <Transition
+                show={isOpen}
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        to={"/"}
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Ver información
+                      </Link>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        to={"/"}
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Cerrar sesión
+                      </Link>
+                    )}
+                  </Menu.Item>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          </div>
+        </div>
+      </div>
     </Disclosure>
   );
 }
