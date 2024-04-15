@@ -1,32 +1,54 @@
-import React from 'react';
+import { Disclosure } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Logo from "../../assets/Logo.png";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
-    return (
-        <nav className="bg-gray-100 py-4 px-8 flex justify-between items-center">
-            {/* Logo de la empresa a la izquierda */}
-            <div className="flex items-center">
-                <img src="ruta/al/logo.png" alt="Logo" className="h-8 w-auto mr-2" />
-                <span className="text-blue-600 text-lg font-bold">EdTech</span>
-            </div>
-            
-            {/* Botón para el menú en dispositivos móviles */}
-            <div className="block md:hidden">
-                <button className="text-gray-700 focus:outline-none">
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
+const navigation = [
+  { name: "Ver Info", to: "/", current: false },
+  { name: "Modificar", to: "/", current: false },
+  { name: "Cerrar sesión", to: "/", current: false },
+];
 
-            {/* Rutas a la derecha */}
-            <div className="hidden md:flex items-center space-x-6">
-                <a href="#" className="text-gray-700 hover:text-gray-400">Ayuda</a>
-                <a href="#" className="text-gray-700 hover:text-gray-400">Conócenos</a>
-                <a href="#" className="text-gray-700 hover:text-gray-400">Experiencias</a>
-                <a href="#" className="text-gray-700 hover:text-gray-400">Acceso</a>
+export default function Navbar() {
+  return (
+    <Disclosure as="nav" className="bg-white text-gray-800 shadow-md">
+      {({ open }) => (
+        <>
+          <div className="mx-auto px-2 py-3 sm:px-6 md:px-14">
+            <div className="flex items-center justify-between">
+              <img src={Logo} alt="Logo" className="h-14 w-auto mr-2" />
+              <div className="flex items-center">
+                <div className="text-sky-600 font-semibold px-3 pb-1">
+                  Gonzalez, Jaquelina
+                </div>
+                <Disclosure.Button className="text-gray-400 hover:text-gray-900 focus:outline-none">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XMarkIcon className="block h-8 w-8" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-8 w-8" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
+              </div>
             </div>
-        </nav>
-    );
+          </div>
+
+          <Disclosure.Panel className="absolute top-16 right-0 bg-white shadow-md w-56">
+            <div className="space-y-1 px-2 pb-3 pt-2">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.to}
+                  className="block px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-200 hover:text-sky-900 rounded-md"
+                  aria-current={item.current ? "page" : undefined}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
+  );
 }
-
-export default Navbar;
