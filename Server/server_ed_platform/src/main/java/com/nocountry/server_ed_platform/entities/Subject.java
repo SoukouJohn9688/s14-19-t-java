@@ -20,6 +20,8 @@ public class Subject {
     private String name;
     @OneToMany(mappedBy = "subject")
     private List<Classroom> classroomList;
+    @OneToMany(mappedBy = "subject")
+    private List<Grade> gradeList;
 
     private Double grade;
     private String description;
@@ -31,5 +33,7 @@ public class Subject {
        joinColumns = @JoinColumn(name = "teacher_id"),
         inverseJoinColumns = @JoinColumn(name = "subject_id",referencedColumnName = ""))
     private List<Teacher> teacherList; // Profesores que pueden impartir esta asignatura
+
+
 
 }
