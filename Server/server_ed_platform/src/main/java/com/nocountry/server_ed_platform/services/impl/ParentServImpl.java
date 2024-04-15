@@ -9,6 +9,7 @@ import com.nocountry.server_ed_platform.repositories.ParentRepo;
 import com.nocountry.server_ed_platform.services.ParentService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,8 +20,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ParentServImpl implements ParentService {
 
-
+    @Autowired
     private final ParentRepo parentRepo;
+    @Autowired
     private final ModelMapper modelMapper;
 
     @Override

@@ -1,5 +1,6 @@
 package com.nocountry.server_ed_platform.repositories;
 
+import com.nocountry.server_ed_platform.dtos.StudentDTO;
 import com.nocountry.server_ed_platform.entities.Classroom;
 import com.nocountry.server_ed_platform.entities.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +12,7 @@ import java.util.List;
 public interface StudentRepo extends JpaRepository<Student, Long> {
 
 //    List<Student> findAllByClassroom(Classroom classroom);
-    List<Student> findByTeacherIdAndClassroomId(Long teacherId, Long classroomId);
-
+//    List<Student> findByTeacherIdAndClassroomId(Long teacherId, Long classroomId);
+    List<StudentDTO> findAllByClassroomId(Long classroomId);
 
 }

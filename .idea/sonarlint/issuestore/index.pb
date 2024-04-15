@@ -21,3 +21,5 @@ jServer/server_ed_platform/src/main/java/com/nocountry/server_ed_platform/contro
 ]Server/server_ed_platform/src/main/java/com/nocountry/server_ed_platform/entities/Parent.java,3\f\3fcc85b136861e8d3156c844af5f5903d6ce0ee5
 é
 ^Server/server_ed_platform/src/main/java/com/nocountry/server_ed_platform/entities/Student.java,7\a\7a6c89dc6255a96eec6df3dc460549e63b521859
+ù
+mServer/server_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/ClassroomController.java,b\3\b3823b4fbf76485544326e409f434337e0f55637
