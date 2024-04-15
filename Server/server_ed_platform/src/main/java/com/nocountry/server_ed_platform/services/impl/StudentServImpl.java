@@ -4,6 +4,7 @@ import com.nocountry.server_ed_platform.dtos.Request.StudentRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.StudentDTO;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.enumarations.UserRole;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
 import com.nocountry.server_ed_platform.services.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,8 +35,13 @@ public class StudentServImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO findById(Long id) {
-        return null;
+    public StudentDTO findById(Long id) throws StudentNotFoundException {
+        Student student = studentRepo.findById(id).orElse(null);
+        if(student != null){
+            return modelMapper.map(student, StudentDTO.class);
+        } else {
+            throw new StudentNotFoundException("Student with ID: " + id + " not found.");
+        }
     }
 
     @Override
@@ -48,5 +55,18 @@ public class StudentServImpl implements StudentService {
                 .build();
         Student studentDB = studentRepo.save(student);
         return modelMapper.map(studentDB,StudentDTO.class);
+    }
+
+    @Override
+    public StudentDTO updateStudent(Long id, StudentRegisterDTO request) throws StudentNotFoundException{
+        Optional<Student> student = studentRepo.findById(id);
+
+        if (student.isPresent()){
+            modelMapper.map(request, student.get());
+
+            return modelMapper.map(student.get(), StudentDTO.class);
+        } else {
+            throw new StudentNotFoundException("Student with ID: "+id+" not found.");
+        }
     }
 }
