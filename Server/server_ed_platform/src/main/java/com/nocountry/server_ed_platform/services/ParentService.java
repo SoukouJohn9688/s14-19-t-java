@@ -15,5 +15,7 @@ public interface ParentService {
     ParentDTO findById(Long id) throws ParentNotFoundException;
     ParentDTO createParent(ParentRegisterDTO request);
 
+    ParentDTO updateParent(Long id, ParentRegisterDTO request) throws ParentNotFoundException;
+
     Double getGradeOfSubject(Long idSubject, Long idStudent);
 }

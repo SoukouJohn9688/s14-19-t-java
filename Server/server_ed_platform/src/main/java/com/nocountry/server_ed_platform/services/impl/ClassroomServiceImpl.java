@@ -38,7 +38,7 @@ public class ClassroomServiceImpl implements ClassroomService {
     }
 
     @Override
-    public ClassroomDTO saveClassroom(ClassroomRegisterDTO request) {
+    public ClassroomDTO createClassroom(ClassroomRegisterDTO request) {
         Classroom classroom = Classroom.builder()
                 .classroomId(request.getClassroom_id())
                 .build();

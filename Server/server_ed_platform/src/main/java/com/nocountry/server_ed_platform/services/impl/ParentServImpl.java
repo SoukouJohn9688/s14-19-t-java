@@ -7,6 +7,7 @@ import com.nocountry.server_ed_platform.entities.Parent;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Subject;
 import com.nocountry.server_ed_platform.enumarations.UserRole;
+import com.nocountry.server_ed_platform.exceptions.ParentNotFoundException;
 import com.nocountry.server_ed_platform.repositories.ParentRepo;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
 import com.nocountry.server_ed_platform.repositories.SubjectRepo;
@@ -62,6 +63,22 @@ public class ParentServImpl implements ParentService {
                 .build();
         Parent parentDB = parentRepo.save(parent);
         return modelMapper.map(parentDB,ParentDTO.class);
+    }
+
+    @Override
+    public ParentDTO updateParent(Long id, ParentRegisterDTO request) throws ParentNotFoundException {
+        Optional<Parent> parentDB=parentRepo.findById(id);
+        if(parentDB.isPresent()){
+            Parent parent=Parent.builder()
+                    .surname(request.getSurname())
+                    .email(request.getEmail())
+                    .password(request.getPassword())
+                    .role(UserRole.valueOf(request.getRole()))
+                    .build();
+            Parent parentFoun=parentRepo.save(parent);
+            return modelMapper.map(parentDB,ParentDTO.class);
+        }
+        return null;
     }
 
 
