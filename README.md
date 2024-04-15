@@ -30,7 +30,7 @@ Nuestra plataforma EdTech proporciona una solución integral para escuelas, ofre
 - Matías Acevedo [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/matias-nicolas-acevedo/) [![GitHub Badge](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/MatiasNicolasAcevedo)
 
 ### Diseño UX/UI
-- Cristian Vazquez [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)]([https://github.com/CVazquezOpalka](https://www.linkedin.com/in/cristian-miguel-vazquez-opalka/)) [![GitHub Badge](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/CVazquezOpalka)
+- Cristian Vazquez [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cristian-miguel-vazquez-opalka/) [![GitHub Badge](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/CVazquezOpalka)
 
 ### Frontend
 - Camilo Perez [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](URL_del_Perfil_de_LinkedIn) [![GitHub Badge](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/kamilo042)
