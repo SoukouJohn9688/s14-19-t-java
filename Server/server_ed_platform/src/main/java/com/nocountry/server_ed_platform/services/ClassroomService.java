@@ -11,7 +11,7 @@ public interface ClassroomService {
 
     ClassroomDTO updateClassroom(Long classroom_id, ClassroomRegisterDTO request) throws ClassroomNotFoundException;
 
-    ClassroomDTO saveClassroom(ClassroomRegisterDTO request);
+    ClassroomDTO createClassroom(ClassroomRegisterDTO request);
 
     ClassroomDTO findById(Long classroom_id);
 
