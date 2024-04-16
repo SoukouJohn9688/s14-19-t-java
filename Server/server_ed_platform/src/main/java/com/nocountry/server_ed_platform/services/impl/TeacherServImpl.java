@@ -35,8 +35,11 @@ public class TeacherServImpl implements TeacherService {
     private final GradeService gradeService;
 
     @Override
-    public List<TeacherDTO> findAll() {
+    public List<TeacherDTO> findAll()throws TeacherNotFoundException  {
         List<Teacher> teachersDB = teacherRepo.findAll();
+        if(teachersDB.isEmpty()){
+            throw new TeacherNotFoundException("Teacher not found");
+        }
         List<TeacherDTO> teacherDTOS = new ArrayList<>();
         for(Teacher teacher : teachersDB){
             teacherDTOS.add(modelMapper.map(teacher, TeacherDTO.class));

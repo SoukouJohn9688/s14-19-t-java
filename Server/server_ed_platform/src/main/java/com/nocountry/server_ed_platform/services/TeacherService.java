@@ -4,13 +4,14 @@ import com.nocountry.server_ed_platform.dtos.GradeDTO;
 import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignGradeStudentResponseDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
+import com.nocountry.server_ed_platform.exceptions.EmailIncorrectException;
 import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
 
 import java.util.List;
 
 public interface TeacherService {
 
-    List<TeacherDTO> findAll();
+    List<TeacherDTO> findAll()throws TeacherNotFoundException;
     TeacherDTO createTeacher(TeacherRegisterDTO request);
     TeacherDTO findById(Long id);
 
