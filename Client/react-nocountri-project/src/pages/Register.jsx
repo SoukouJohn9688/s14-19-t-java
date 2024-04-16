@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import backgroundImage from "../assets/background_login.png";
 import { Button, Input, Checkbox } from "@/components";
 import {
@@ -10,6 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+
+
 
 const Register = () => {
   const emailRef = useRef(null);
@@ -154,10 +157,10 @@ const Register = () => {
         </form>
 
         <p className="mt-4">
-          ¿Ya tienes cuenta?{" "}
-          <a href="#" className="text-blue-500">
+          ¿Ya tienes cuenta?
+          <Link to={'/'} className="text-blue-500">
             Acceder
-          </a>
+          </Link>
         </p>
       </div>
     </div>
