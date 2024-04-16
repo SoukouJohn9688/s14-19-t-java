@@ -13,19 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/student")
-@RequiredArgsConstructor
 public class StudentController {
 
-    private final StudentService studentService;
 
-    @GetMapping()
-    public ResponseEntity<ResponseGenericDTO<List<StudentDTO>>> findAll(){
-        return ResponseEntity.ok().body(
-                new ResponseGenericDTO<>(
-                        true,
-                        "peticion correcta",
-                        studentService.findAll()
-                )
-        );
-    }
 }

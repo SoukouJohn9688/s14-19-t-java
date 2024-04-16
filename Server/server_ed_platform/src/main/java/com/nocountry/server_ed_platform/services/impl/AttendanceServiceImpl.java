@@ -40,7 +40,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
         List<AttendanceDTO> attendanceDTOs = attendancesDB.stream()
                 .map(attendance -> AttendanceDTO.builder()
-                        .id(attendance.getAttendance_id())
+                        .id(attendance.getId())
                         .type(attendance.getType().name())
                         .date(attendance.getDate().toString())
                         .build()).collect(Collectors.toList());
@@ -78,7 +78,7 @@ public class AttendanceServiceImpl implements AttendanceService {
                         .build());
 
         return AttendanceDTO.builder()
-                .id(attendanceDB.getAttendance_id())
+                .id(attendanceDB.getId())
                 .type(attendanceDB.getType().name())
                 .date(attendanceDTO.getDate())
                 .build();
@@ -99,7 +99,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         Attendance response = attendanceRepo.save(attendanceDB.get());
 
         return AttendanceDTO.builder()
-                .id(response.getAttendance_id())
+                .id(response.getId())
                 .type(response.getType().name())
                 .date(response.getDate().toString())
                 .build();

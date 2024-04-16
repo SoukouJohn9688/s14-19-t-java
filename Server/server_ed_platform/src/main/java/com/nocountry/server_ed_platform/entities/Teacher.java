@@ -7,6 +7,7 @@ import lombok.*;
 import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,20 +20,18 @@ import java.util.List;
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "teacher_id")
-    private Long teacher_id;
-    private String subject;
+    private Long id;
 
-    protected String email;
-    protected String password;
-    protected String name;
-    protected String surname;
-    protected LocalDate birthdate;
-    protected Long dni;
+    private String name;
+    private String surname;
+    private Long dni;
 
+    @ManyToMany
+    @JoinTable(
+            name = "teacher_subject",
+            joinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    )
+    private List<Subject> subjects = new ArrayList<>();
 
-
-
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
 }

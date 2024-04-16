@@ -1,50 +1,46 @@
 package com.nocountry.server_ed_platform.services.impl;
 
-import com.nocountry.server_ed_platform.dtos.Request.StudentRegisterDTO;
-import com.nocountry.server_ed_platform.dtos.StudentDTO;
 import com.nocountry.server_ed_platform.entities.Student;
-import com.nocountry.server_ed_platform.enumarations.UserRole;
+import com.nocountry.server_ed_platform.entities.Subject;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
+import com.nocountry.server_ed_platform.repositories.SubjectRepo;
 import com.nocountry.server_ed_platform.services.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class StudentServImpl implements StudentService {
 
     private final StudentRepo studentRepo;
-    private final ModelMapper modelMapper;
+    private final SubjectRepo subjectRepo;
 
     @Override
-    public List<StudentDTO> findAll() {
-        List<Student> studentsDB = studentRepo.findAll();
-        List<StudentDTO> studentDTOS = new ArrayList<>();
-        for (Student student : studentsDB){
-            studentDTOS.add(modelMapper.map(student, StudentDTO.class));
+    public void AssignSubjectByCurrentYear(Long studentId, String currentYear) {
+        // Por ahora solo agregamos una materia al estudiante en cualquier anio
+        Optional<Student> studentDB = studentRepo.findById(studentId);
+        if (studentDB.isEmpty()) {
+            throw new RuntimeException("estudiante no encontrado");
         }
-        return studentDTOS;
-    }
+        Optional<Subject> subject1 = subjectRepo.findById(1L);
+        if (subject1.isEmpty()) {
+            throw new RuntimeException("Materia no existe");
+        }
 
-    @Override
-    public StudentDTO findById(Long id) {
-        return null;
-    }
 
-    @Override
-    public StudentDTO createStudent(StudentRegisterDTO request) {
-        Student student = Student.builder()
-                .name(request.getName())
-                .surname(request.getSurname())
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .role(UserRole.valueOf(request.getRole()))
-                .build();
-        Student studentDB = studentRepo.save(student);
-        return modelMapper.map(studentDB,StudentDTO.class);
+        List<Subject> subjects = new ArrayList<>();
+        subjects.add(subject1.get());
+        studentDB.get().setSubjects(subjects);
+        studentRepo.save(studentDB.get());
+
+        List<Student> students = new ArrayList<>();
+        students.add(studentDB.get());
+        subject1.get().setStudents(students);
+        subjectRepo.save(subject1.get());
+
     }
 }

@@ -26,10 +26,6 @@ public class UserEntity implements UserDetails {
     protected String username;
     protected String email;
     protected String password;
-    protected String name;
-    protected String surname;
-    protected LocalDate birthdate;
-    protected Long dni;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;

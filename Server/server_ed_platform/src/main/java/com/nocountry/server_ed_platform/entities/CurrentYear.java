@@ -1,6 +1,5 @@
 package com.nocountry.server_ed_platform.entities;
 
-import com.nocountry.server_ed_platform.enumarations.SubjectEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,22 +7,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
+import java.util.Set;
 
 @Entity
-@Table(name = "subject")
+@Table(name = "current_year")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Subject {
+public class CurrentYear {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private SubjectEnum name;
+    private int year;
 
-    @ManyToMany(mappedBy = "subjects")
-    private List<Student> students;
+    @OneToMany(mappedBy = "currentYear")
+    List<Student> students;
 }

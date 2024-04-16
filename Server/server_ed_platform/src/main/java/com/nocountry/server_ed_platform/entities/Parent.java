@@ -19,19 +19,13 @@ public class Parent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "parent_id")
     private Long id;
-    protected String email;
-    protected String password;
-    protected String name;
-    protected String surname;
-    protected LocalDate birthdate;
-    protected Long dni;
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+
+    private String name;
+    private String surname;
+    private Long dni;
 
     @OneToMany(mappedBy = "parent")
     private List<Student> students;
-
 
 }

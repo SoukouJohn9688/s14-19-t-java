@@ -1,18 +1,19 @@
 package com.nocountry.server_ed_platform.dtos;
 
+import com.nocountry.server_ed_platform.enumarations.PeriodEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubjectDTO {
+@Builder
+public class GradeDTO {
 
-    private Long subject_id;
-    private String name;
-    private Double grade;
-    private Integer current_year;
-
+    private Long grade_id;
+    private String periodType;
+    private Double score;
 }

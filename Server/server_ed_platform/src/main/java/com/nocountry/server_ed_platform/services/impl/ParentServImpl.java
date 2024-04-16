@@ -43,25 +43,9 @@ public class ParentServImpl implements ParentService {
         Parent parent = Parent.builder()
                 .name(request.getName())
                 .surname(request.getSurname())
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .role(UserRole.valueOf(request.getRole()))
                 .build();
         Parent parentDB = parentRepo.save(parent);
         return modelMapper.map(parentDB,ParentDTO.class);
     }
-
-    //getGradeOfSubject(idStudent,idSubject)
-//    @Override
-//    public Optional<Double> getGradeOfSubject(Long idStudent,Long idSubject){
-//
-//       Optional<Double> foundGrade=parentRepo.findGradeBySubject_id(idSubject);
-//
-//       return foundGrade;
-//
-//    }
-
-
-
 
 }

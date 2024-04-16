@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface StudentService {
 
-    List<StudentDTO> findAll();
-    StudentDTO findById(Long id);
-    StudentDTO createStudent(StudentRegisterDTO request);
+    void AssignSubjectByCurrentYear(Long studentId, String currentYear);
+
 }
