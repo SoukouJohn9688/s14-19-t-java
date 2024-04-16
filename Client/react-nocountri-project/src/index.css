@@ -75,3 +75,24 @@
   }
 }
 
+.container-icon{
+  position: relative;
+}
+
+.count-products{
+  position: absolute;
+  top: 40%;
+  right: -10%;
+  background-color: #005bed;
+  color: #fff;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+#contador-productos{
+  font-size: 10px;
+}

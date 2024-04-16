@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
 import { FiArrowDown, FiArrowUp } from "react-icons/fi";
+import { Bell } from "lucide-react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -46,7 +47,13 @@ export default function Example() {
             </Link>
             <Menu as="div" className="relative ml-3" ref={menuRef}>
               <div className="flex">
-                <div className="font-semibold px-1">Gonzalez, Jaqueline</div>
+              <Disclosure.Button className="container-icon text-gray-400 hover:text-[#005bed] focus:outline-none">
+                    <Bell className="block h-6 w-6"/>
+                    <div className="count-products">
+                      <span id="contador-productos">0</span>
+                    </div>
+                </Disclosure.Button>
+                <div className="font-semibold px-3">Gonzalez, Jaqueline</div>
                 <Menu.Button
                   className="relative flex pt-1"
                   onClick={() => setIsOpen(!isOpen)}
