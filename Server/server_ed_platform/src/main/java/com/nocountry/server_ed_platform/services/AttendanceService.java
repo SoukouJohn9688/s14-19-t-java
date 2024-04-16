@@ -1,16 +1,20 @@
 package com.nocountry.server_ed_platform.services;
 
 import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
-import com.nocountry.server_ed_platform.dtos.Request.AttendanceRegisterDTO;
+import com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO;
+import com.nocountry.server_ed_platform.entities.Attendance;
+import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
+import com.nocountry.server_ed_platform.exceptions.DuplicateDateException;
+import com.nocountry.server_ed_platform.exceptions.FutureDateException;
 
 import java.util.List;
 
 public interface AttendanceService {
 
-    List<AttendanceDTO> findAll();
-    AttendanceDTO createAttendance(AttendanceRegisterDTO request);
-    AttendanceDTO findById(Long id);
-    AttendanceDTO deleteById(Long id);
+    AttendanceResponseDTO findAttendanceByStudentId(Long studentId);
 
+    AttendanceDTO saveAttendance(Long studentId, AttendanceDTO attendanceDTO) throws DuplicateDateException, FutureDateException;
+
+    AttendanceDTO updateTypeOfAttendanceById(Long attendanceId, String type) throws AttendanceNotFoundException;
 
 }

@@ -17,17 +17,20 @@ import java.util.List;
 public class Grade {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "grade_id")
-    private Long gradeId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private PeriodEnum periodType;
+
     private Double score;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    private Student student;
 
 }

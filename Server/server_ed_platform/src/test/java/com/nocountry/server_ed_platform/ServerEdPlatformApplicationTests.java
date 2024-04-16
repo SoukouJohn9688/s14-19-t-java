@@ -8,6 +8,7 @@ class ServerEdPlatformApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

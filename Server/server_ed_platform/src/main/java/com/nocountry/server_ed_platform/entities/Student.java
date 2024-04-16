@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "student")
@@ -17,36 +19,30 @@ import java.util.List;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "student_id")
-    private Long studentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
-    private String surname;
-    private LocalDate birthdate;
 
-    //Representa el grado, curso o nivel en que se encuentra el estudiente
-    //Por ejemplo, cuarto de primaria, o segundo de bachillerato
-    private String scholar_grade;
-    private String email;
-    private String password;
-
-    private Integer current_year;
-
-
-    @ManyToOne()
-    @JoinColumn(name = "classroom_id")
-    private Classroom classroom;
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private Long dni;
 
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Parent parent;
 
-
     @OneToMany(mappedBy = "student")
     private List<Attendance> attendances;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "current_year_id")
+    private CurrentYear currentYear;
+
+    @ManyToMany
+    @JoinTable(
+            name = "student_subject",
+            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    )
+    private List<Subject> subjects;
 
 }

@@ -26,30 +26,30 @@ public class SubjectController {
     @Autowired
     private final SubjectService subjectService;
 
-    @PostMapping("/updateSubject/{id}")
-    public ResponseEntity<SubjectDTO> updateSubject(@PathVariable Long id){
+//    @PostMapping("/updateSubject/{id}")
+//    public ResponseEntity<SubjectDTO> updateSubject(@PathVariable Long id){
+//
+//        try {
+//            SubjectDTO foundSubject=subjectService.findById(id);
+//            logger.info("Updated subject with ID: " + foundSubject.getSubject_id());
+//            return new ResponseEntity<>(foundSubject, HttpStatus.OK);
+//        }catch(Exception ex){
+//            logger.error("Error creating Subject: " + ex.getMessage() + " cause: " + ex.getCause());
+//            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+//        }
+//    }
 
-        try {
-            SubjectDTO foundSubject=subjectService.findById(id);
-            logger.info("Updated subject with ID: " + foundSubject.getSubject_id());
-            return new ResponseEntity<>(foundSubject, HttpStatus.OK);
-        }catch(Exception ex){
-            logger.error("Error creating Subject: " + ex.getMessage() + " cause: " + ex.getCause());
-            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
-        }
-    }
 
-
-    @GetMapping("/")
-    public ResponseEntity<ResponseGenericDTO<List<SubjectDTO>>> findAll(){
-
-        return ResponseEntity.ok().body(
-                new ResponseGenericDTO<>(
-                        true,
-                        "peticion correcta",
-                        subjectService.findAll()
-                )
-        );
-    }
+//    @GetMapping("/")
+//    public ResponseEntity<ResponseGenericDTO<List<SubjectDTO>>> findAll(){
+//
+//        return ResponseEntity.ok().body(
+//                new ResponseGenericDTO<>(
+//                        true,
+//                        "peticion correcta",
+//                        subjectService.findAll()
+//                )
+//        );
+//    }
 
 }

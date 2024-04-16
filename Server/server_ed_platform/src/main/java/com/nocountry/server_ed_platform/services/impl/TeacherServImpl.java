@@ -1,38 +1,39 @@
 package com.nocountry.server_ed_platform.services.impl;
 
+import com.nocountry.server_ed_platform.dtos.GradeDTO;
 import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
-import com.nocountry.server_ed_platform.dtos.StudentDTO;
+import com.nocountry.server_ed_platform.dtos.Response.AssignGradeStudentResponseDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
-import com.nocountry.server_ed_platform.entities.Classroom;
+import com.nocountry.server_ed_platform.entities.Grade;
 import com.nocountry.server_ed_platform.entities.Student;
+import com.nocountry.server_ed_platform.entities.Subject;
 import com.nocountry.server_ed_platform.entities.Teacher;
 import com.nocountry.server_ed_platform.enumarations.UserRole;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
-import com.nocountry.server_ed_platform.repositories.ClassroomRepo;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
+import com.nocountry.server_ed_platform.repositories.SubjectRepo;
 import com.nocountry.server_ed_platform.repositories.TeacherRepo;
+import com.nocountry.server_ed_platform.services.GradeService;
 import com.nocountry.server_ed_platform.services.TeacherService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class TeacherServImpl implements TeacherService {
 
-    @Autowired
     private final TeacherRepo teacherRepo;
-    @Autowired
     private final ModelMapper modelMapper;
-    @Autowired
-
-    private final ClassroomRepo classroomRepo;
-    @Autowired
     private final StudentRepo studentRepo;
+    private final SubjectRepo subjectRepo;
+    private final GradeService gradeService;
+
     @Override
     public List<TeacherDTO> findAll() {
         List<Teacher> teachersDB = teacherRepo.findAll();
@@ -48,9 +49,6 @@ public class TeacherServImpl implements TeacherService {
         Teacher teacher = Teacher.builder()
                 .name(request.getName())
                 .surname(request.getSurname())
-                .email(request.getEmail())
-                .password("123456")
-                .role(UserRole.valueOf(request.getRole()))
                 .build();
         Teacher teacherDB = teacherRepo.save(teacher);
         return modelMapper.map(teacherDB, TeacherDTO.class);
@@ -80,16 +78,27 @@ public class TeacherServImpl implements TeacherService {
     }
 
     @Override
-    public List<StudentDTO> getListStudentByClassroom(Long idClassroom ) {
+    @Transactional
+    public AssignGradeStudentResponseDTO AssignGradeByStudentIdSubjectId(Long studentId, Long subjectId, GradeDTO request) {
+        Optional<Student> studentDB = studentRepo.findById(studentId);
 
-        Optional<Classroom> classroomDB= classroomRepo.findById(idClassroom);
-
-        if(classroomDB.isPresent()){
-//            Classroom thisClassroom=classroomDB.get();
-            // Obtener lista de profesores en la clase
-
-            return studentRepo.findAllByClassroomId(idClassroom);
+        if (studentDB.isEmpty()){
+            throw new RuntimeException("estudiante no encontrado");
         }
-        return Collections.EMPTY_LIST;
+
+        Optional<Subject> subjectDB = subjectRepo.findById(subjectId);
+
+        if(subjectDB.isEmpty()){
+            throw new RuntimeException("materia no encontrada");
+        }
+
+        GradeDTO response = gradeService.AssignByStudentIdAndSubjectId(studentId, subjectId, request);
+
+        return AssignGradeStudentResponseDTO.builder()
+                .studentId(studentId)
+                .gradeDTO(response)
+                .build();
     }
+
+
 }

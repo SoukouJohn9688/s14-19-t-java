@@ -1,29 +1,30 @@
 package com.nocountry.server_ed_platform.entities;
 
-import com.nocountry.server_ed_platform.enumarations.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
+
+import com.nocountry.server_ed_platform.enumarations.AttendanceTypeEnum;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "attendance")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "attendance")
 @Builder
 public class Attendance {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "attendance_id")
-    private Long attendanceId;
-    private boolean asistio;
-    private LocalDate fecha;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id")
+    @Enumerated(EnumType.STRING)
+    private AttendanceTypeEnum type;
+
+    private LocalDate date;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
 }

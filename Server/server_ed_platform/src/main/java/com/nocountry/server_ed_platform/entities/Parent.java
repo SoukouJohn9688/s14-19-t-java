@@ -18,20 +18,14 @@ import java.util.List;
 public class Parent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "parent_id")
-    private Long parentId;
-    protected String email;
-    protected String password;
-    protected String name;
-    protected String surname;
-    protected LocalDate birthdate;
-    protected Long dni;
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String surname;
+    private Long dni;
 
     @OneToMany(mappedBy = "parent")
     private List<Student> students;
-
 
 }

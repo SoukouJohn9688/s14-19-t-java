@@ -9,23 +9,28 @@ import com.nocountry.server_ed_platform.services.SubjectService;
 import java.util.List;
 
 public class SubjectServImpl implements SubjectService {
-    @Override
-    public List<SubjectDTO> findAll() {
-        return null;
-    }
+//    @Override
+//    public List<SubjectDTO> findAll() {
+//        return null;
+//    }
+//
+//    @Override
+//    public SubjectDTO findById(Long id) throws SubjectNotFoundException {
+//        return null;
+//    }
+//
+//    @Override
+//    public SubjectDTO createStudent(StudentRegisterDTO request) {
+//        return null;
+//    }
+//
+//    @Override
+//    public SubjectDTO updateStudent(Long id, StudentRegisterDTO request) throws StudentNotFoundException {
+//        return null;
+//    }
 
     @Override
-    public SubjectDTO findById(Long id) throws SubjectNotFoundException {
-        return null;
-    }
+    public void AssignSubjectsByCurrentYear(Long studentId, int currentYear) {
 
-    @Override
-    public SubjectDTO createStudent(StudentRegisterDTO request) {
-        return null;
-    }
-
-    @Override
-    public SubjectDTO updateStudent(Long id, StudentRegisterDTO request) throws StudentNotFoundException {
-        return null;
     }
 }
