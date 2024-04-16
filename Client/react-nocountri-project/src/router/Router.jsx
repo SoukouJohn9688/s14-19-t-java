@@ -6,7 +6,6 @@ import Home from "@/pages/Home";
 import { useNavigate } from "react-router-dom";
 
 const Router = () => {
-  
 
   return (
     <Routes>
