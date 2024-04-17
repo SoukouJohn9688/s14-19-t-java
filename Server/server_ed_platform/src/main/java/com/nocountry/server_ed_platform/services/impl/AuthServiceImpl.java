@@ -51,6 +51,8 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Ya existe un usuario con ese email");
         }
 
+
+
         UserEntity user = UserEntity.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))

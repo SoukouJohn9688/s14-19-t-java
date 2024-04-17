@@ -20,6 +20,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +39,7 @@ public class TeacherServImpl implements TeacherService {
     public List<TeacherDTO> findAll() {
         List<Teacher> teachersDB = teacherRepo.findAll();
         List<TeacherDTO> teacherDTOS = new ArrayList<>();
-        for(Teacher teacher : teachersDB){
+        for (Teacher teacher : teachersDB) {
             teacherDTOS.add(modelMapper.map(teacher, TeacherDTO.class));
         }
         return teacherDTOS;
@@ -46,10 +47,7 @@ public class TeacherServImpl implements TeacherService {
 
     @Override
     public TeacherDTO createTeacher(TeacherRegisterDTO request) {
-        Teacher teacher = Teacher.builder()
-                .name(request.getName())
-                .surname(request.getSurname())
-                .build();
+        Teacher teacher = Teacher.builder().name(request.getName()).surname(request.getSurname()).build();
         Teacher teacherDB = teacherRepo.save(teacher);
         return modelMapper.map(teacherDB, TeacherDTO.class);
     }
@@ -62,14 +60,13 @@ public class TeacherServImpl implements TeacherService {
     @Transactional
     @Override
     public TeacherDTO updateTeacher(Long id, TeacherRegisterDTO request) throws TeacherNotFoundException {
-        Optional<Teacher> teacherFound=teacherRepo.findById(id);
+        Optional<Teacher> teacherFound = teacherRepo.findById(id);
 
-        if (teacherFound.isPresent()){
+        if (teacherFound.isPresent()) {
             modelMapper.map(request, teacherFound.get());
 
             return modelMapper.map(teacherFound.get(), TeacherDTO.class);
-        }
-        else {
+        } else {
 
             throw new TeacherNotFoundException("Teacher with ID " + id + " not found.");
         }
@@ -79,24 +76,49 @@ public class TeacherServImpl implements TeacherService {
 
     @Override
     @Transactional
-    public AssignGradeStudentResponseDTO AssignGradeByStudentIdSubjectId(Long studentId, Long subjectId, GradeDTO request) {
+    public AssignGradeStudentResponseDTO assignGradeByStudentIdSubjectId(Long studentId, Long subjectId, GradeDTO request) {
         Optional<Student> studentDB = studentRepo.findById(studentId);
 
-        if (studentDB.isEmpty()){
+        if (studentDB.isEmpty()) {
             throw new RuntimeException("estudiante no encontrado");
         }
 
         Optional<Subject> subjectDB = subjectRepo.findById(subjectId);
 
-        if(subjectDB.isEmpty()){
+        if (subjectDB.isEmpty()) {
             throw new RuntimeException("materia no encontrada");
         }
 
         GradeDTO response = gradeService.AssignByStudentIdAndSubjectId(studentId, subjectId, request);
 
-        return AssignGradeStudentResponseDTO.builder()
-                .studentId(studentId)
-                .gradeDTO(response)
-                .build();
+        return AssignGradeStudentResponseDTO.builder().studentId(studentId).gradeDTO(response).build();
     }
+
+    @Override
+    public void assignSubject(Long subjectId, Long teacherId, String currentYear, TeacherDTO request) {
+
+        Optional<Subject> subjectDB = subjectRepo.findById(subjectId);
+
+        if (subjectDB.isEmpty()) {
+            throw new RuntimeException("materia no encontrada");
+        }
+
+        Optional<Teacher> teacherDB = teacherRepo.findById(teacherId);
+
+        if (teacherDB.isEmpty()) {
+            throw new RuntimeException("profesor no encontrado");
+        }
+
+        List<Teacher> teachers = subjectDB.get().getTeachers();
+        teachers.add(teacherDB.get());
+        subjectDB.get().setTeachers(teachers);
+        subjectRepo.save(subjectDB.get());
+
+        List<Subject> subjects = teacherDB.get().getSubjects();
+        subjects.add(subjectDB.get());
+        teacherDB.get().setSubjects(subjects);
+        teacherRepo.save(teacherDB.get());
+
+    }
+
 }

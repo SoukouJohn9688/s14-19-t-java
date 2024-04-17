@@ -25,5 +25,14 @@ public class Subject {
     private SubjectEnum name;
 
     @ManyToMany(mappedBy = "subjects")
+    private List<CurrentYear> years;
+
+    @ManyToMany(mappedBy = "subjects")
     private List<Student> students;
+
+    @ManyToMany(mappedBy = "subjects")
+    private List<Teacher> teachers;
+
+    @OneToMany(mappedBy = "subject")
+    private List<Grade> grades;
 }

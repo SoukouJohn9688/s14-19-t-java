@@ -9,4 +9,6 @@ public interface StudentService {
 
     void AssignSubjectByCurrentYear(Long studentId, String currentYear);
 
+    StudentDTO findByStudentId(Long studentId);
+
 }

@@ -11,13 +11,15 @@ import java.util.List;
 public interface TeacherService {
 
     List<TeacherDTO> findAll();
+
     TeacherDTO createTeacher(TeacherRegisterDTO request);
+
     TeacherDTO findById(Long id);
 
     TeacherDTO updateTeacher(Long id, TeacherRegisterDTO request) throws TeacherNotFoundException;
 
-    AssignGradeStudentResponseDTO AssignGradeByStudentIdSubjectId(Long studentId, Long subjectId, GradeDTO request);
+    AssignGradeStudentResponseDTO assignGradeByStudentIdSubjectId(Long studentId, Long subjectId, GradeDTO request);
 
-    
+    void assignSubject(Long studentId, Long teacherId, String currentYear, TeacherDTO request);
 
 }
