@@ -28,17 +28,12 @@
     > **IMPORTANTE:** Asegúrate de tener los puertos `5432`, `8080` libres.
 
     ```
-    docker build -t server .
-    ```
-5. Si no salieron mensajes de error puedes correr el siguiente comando
-
-    ```
     docker compose up
     ```
 
 ### Ingreso de datos (solo debera hacerlo una vez)
 
-1. Conectarse al contenedor de `postgres`.
+1. Conectarse al contenedor con nombre `postgres_db`.
 
     ```
     docker exec -it <ID_DEL_CONTENEDOR> psql -U postgres -d server_ed_platform_db
@@ -50,7 +45,7 @@
     docker ps
     ```
 
-2. Introduce los datos del siguiente [script](https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/asdf/asdf.plugin.zsh).
+2. Introduce los datos del siguiente [script](https://github.com/No-Country/s14-19-t-java/tree/dev-backend-attendance/Server/server_ed_platform/data.sql).
 
 ### En caso de haber cambios en el server debes eliminar los contenedores e imaneges creadas.
 
@@ -60,7 +55,7 @@
     docker compose down
     ```
 
-2. Eliminar la imagen creada con nombre `backend`
+2. Eliminar la imagen creada con nombre `server`
 
     ```
     docker rmi <ID_DE_LA_IMAGEN> 
