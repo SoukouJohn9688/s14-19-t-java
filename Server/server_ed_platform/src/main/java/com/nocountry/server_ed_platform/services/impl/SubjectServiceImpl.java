@@ -25,6 +25,25 @@ public class SubjectServiceImpl implements SubjectService {
     private final SubjectRepo subjectRepo;
 
     @Override
+    public Subject findById(Long id) throws SubjectNotFoundException {
+
+        Optional<Subject> subjectDB=subjectRepo.findById(id);
+
+        return subjectDB.orElse(null);
+
+    }
+
+    @Override
+    public SubjectDTO createStudent(StudentRegisterDTO request) {
+        return null;
+    }
+
+    @Override
+    public SubjectDTO updateStudent(Long id, StudentRegisterDTO request) {
+        return null;
+    }
+
+    @Override
     public void AssignSubjectsByCurrentYear(Long studentId, int currentYear) {
 
         Optional<Student> studentDB = studentRepo.findById(studentId);

@@ -27,7 +27,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/api/v1/auth/**").permitAll()
+//                                .requestMatchers("/api/v1/auth/**", "/v2/api-docs/**", "/").permitAll()
+                                .requestMatchers("/api/v1/auth/**","/v3/api-docs/**", "/swagger-ui/**","/swagger-ui.html").permitAll()
                                 .requestMatchers("/api/v1/teacher/**").hasAuthority("TEACHER")
                                 .requestMatchers("/api/v1/student/**").hasAuthority("STUDENT")
                                 .requestMatchers("/api/v1/attendance/**").hasAuthority("STUDENT")

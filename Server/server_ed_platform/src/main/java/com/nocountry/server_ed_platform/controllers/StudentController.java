@@ -16,4 +16,8 @@ import java.util.List;
 public class StudentController {
 
 
+
+    private final
+@GetMapping('/')
+
 }
