@@ -66,3 +66,11 @@
     ```
     docker images
     ```
+### Usuarios
+1. Estudiante
+    ```json
+    {
+        "email": "student1@email.com",
+        "password": "Student#123"
+    }
+    ```
