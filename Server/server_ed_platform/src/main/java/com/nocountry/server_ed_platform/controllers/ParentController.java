@@ -18,7 +18,7 @@ import java.util.List;
 public class ParentController {
 
     private final ParentService parentService;
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<ResponseGenericDTO<List<ParentDTO>>> findAll(){
         return ResponseEntity.ok().body(
                 new ResponseGenericDTO<>(

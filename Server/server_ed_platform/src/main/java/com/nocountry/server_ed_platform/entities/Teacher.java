@@ -4,8 +4,11 @@ package com.nocountry.server_ed_platform.entities;
 import com.nocountry.server_ed_platform.enumarations.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,18 +19,19 @@ import java.time.LocalDate;
 @Builder
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "teacher_id")
-    private Long teacher_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private String surname;
     private Long dni;
-    private String email;
-    private LocalDate birthdate;
-    private String subject;
-    private String password;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    @ManyToMany
+    @JoinTable(
+            name = "teacher_subject",
+            joinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    )
+    private List<Subject> subjects = new ArrayList<>();
+
 }

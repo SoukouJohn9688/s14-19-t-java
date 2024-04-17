@@ -1,11 +1,10 @@
 package com.nocountry.server_ed_platform.entities;
 
 
-import com.nocountry.server_ed_platform.enumarations.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "parent")
@@ -17,21 +16,14 @@ import java.time.LocalDate;
 public class Parent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "teacher_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private String surname;
-    private LocalDate birthdate;
+    private Long dni;
 
-
-    //Representa la materia impartida por el profesor
-    private String subject;
-    private String email;
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    @OneToMany(mappedBy = "parent")
+    private List<Student> students;
 
 }

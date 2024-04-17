@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -42,15 +43,9 @@ public class ParentServImpl implements ParentService {
         Parent parent = Parent.builder()
                 .name(request.getName())
                 .surname(request.getSurname())
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .role(UserRole.valueOf(request.getRole()))
                 .build();
         Parent parentDB = parentRepo.save(parent);
         return modelMapper.map(parentDB,ParentDTO.class);
     }
-
-
-
 
 }
