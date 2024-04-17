@@ -74,3 +74,7 @@
         "password": "Student#123"
     }
     ```
+### Importacion de collecciones de postman
+> **NOTA** Descargue e importe los archivos `json`
+1. `environment` [json](https://github.com/No-Country/s14-19-t-java/blob/dev-backend-xonlinex/Server/Server_Ed_platform.postman_environment.json)
+2. `collection` [json](https://github.com/No-Country/s14-19-t-java/blob/dev-backend-xonlinex/Server/Server_Ed_Requests.postman_collection.json)
