@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Register from "@/pages/Register";
 import Login from "@/components/Login";
 import Home from "@/pages/Home";
+import About from "@/pages/About";
 import LoginMaster from "@/pages/LoginMaster";
 import HomeMaster from "@/pages/HomeMaster";
 
@@ -15,6 +16,7 @@ const Router = () => {
       <Route path="/admin/home" element={<HomeMaster />}/>
       <Route path="/register" element={<Register />} />
       <Route path="/home" element={<Home />} /> : null
+      <Route path="/about" element={<About />} />
     </Routes>
   );
 };
