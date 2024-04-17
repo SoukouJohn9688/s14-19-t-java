@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class GradeDTO {
 
-    private Long grade_id;
+    private Long id;
     private String periodType;
     private Double score;
 }

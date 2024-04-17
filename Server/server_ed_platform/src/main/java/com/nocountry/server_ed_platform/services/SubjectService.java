@@ -1,17 +1,14 @@
 package com.nocountry.server_ed_platform.services;
 
-import com.nocountry.server_ed_platform.dtos.Request.StudentRegisterDTO;
-import com.nocountry.server_ed_platform.dtos.SubjectDTO;
-import com.nocountry.server_ed_platform.entities.Subject;
+import com.nocountry.server_ed_platform.dtos.Response.SubjectListResponseDTO;
+import com.nocountry.server_ed_platform.dtos.Response.SubjectsByStudentResponseDTO;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.SubjectNotFoundException;
 
 public interface SubjectService {
 
-    Subject findById(Long id) throws SubjectNotFoundException;
-    SubjectDTO createStudent(StudentRegisterDTO request);
+    void AssignSubjectsByCurrentYear(Long studentId, int currentYear) throws SubjectNotFoundException;
 
-    SubjectDTO updateStudent(Long id, StudentRegisterDTO request);
+    SubjectListResponseDTO findSubjectsByStudentId(Long studentId) throws StudentNotFoundException;
 
-
-    void AssignSubjectsByCurrentYear(Long studentId, int currentYear);
 }

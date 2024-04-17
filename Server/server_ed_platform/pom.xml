@@ -13,7 +13,7 @@
 
 	<groupId>com.nocountry</groupId>
 	<artifactId>server_ed_platform</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<name>server_ed_platform</name>
 	<description>NoCountry Education Platform Project</description>
 
@@ -88,7 +88,6 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.5.0</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>

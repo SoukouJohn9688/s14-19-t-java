@@ -1,13 +1,11 @@
 package com.nocountry.server_ed_platform.entities;
 
-import com.nocountry.server_ed_platform.enumarations.UserRole;
+import com.nocountry.server_ed_platform.enumarations.SexEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "student")
@@ -25,6 +23,13 @@ public class Student {
     private String name;
     private String surname;
     private Long dni;
+    private LocalDate birthdate;
+
+    @Enumerated(EnumType.STRING)
+    private SexEnum sex;
+
+    private String address;
+    private String cellphone;
 
     @ManyToOne
     @JoinColumn(name = "parent_id")
@@ -33,7 +38,7 @@ public class Student {
     @OneToMany(mappedBy = "student")
     private List<Attendance> attendances;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "current_year_id")
     private CurrentYear currentYear;
 

@@ -4,8 +4,10 @@ import com.nocountry.server_ed_platform.config.jwt.filter.JwtAuthenticationFilte
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -26,14 +28,17 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authRequest ->
-                        authRequest
-//                                .requestMatchers("/api/v1/auth/**", "/v2/api-docs/**", "/").permitAll()
-                                .requestMatchers("/api/v1/auth/**","/v3/api-docs/**", "/swagger-ui/**","/swagger-ui.html").permitAll()
-                                .requestMatchers("/api/v1/teacher/**").hasAuthority("TEACHER")
-                                .requestMatchers("/api/v1/student/**").hasAuthority("STUDENT")
-                                .requestMatchers("/api/v1/attendance/**").hasAuthority("STUDENT")
-                                .requestMatchers("/api/v1/parent/**").hasAuthority("PARENT")
-                                .anyRequest().authenticated()
+                                authRequest
+                                        .requestMatchers("/api/v1/auth/**", "/v1/authenticate", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+//                                        .requestMatchers("/api/v1/teacher/**").hasAuthority("TEACHER")
+//                                        .requestMatchers("/api/v1/student/**").hasAuthority("STUDENT")
+//                                        .requestMatchers("/api/v1/grade/**").hasAuthority("STUDENT")
+//                                        .requestMatchers("/api/v1/subject/**").hasAuthority("STUDENT")
+//                                        .requestMatchers("/api/v1/attendance/**").hasAuthority("STUDENT")
+//                                        .requestMatchers("/api/v1/parent/**").hasAuthority("PARENT")
+//                                // student
+//                                .requestMatchers(HttpMethod.GET, "/api/v1/student/find/**").hasAuthority("STUDENT")
+                                        .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager ->
                         sessionManager

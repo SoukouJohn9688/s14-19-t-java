@@ -6,6 +6,7 @@ import com.nocountry.server_ed_platform.exceptions.DuplicateDateException;
 import com.nocountry.server_ed_platform.exceptions.FutureDateException;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO;
@@ -21,6 +22,7 @@ public class AttendanceController {
 
     private final AttendanceService attendanceService;
 
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
     @GetMapping("/{studentId}")
     public ResponseEntity<AttendanceResponseDTO> getAttendanceByStudentId(@PathVariable Long studentId) {
         return ResponseEntity.ok().body(attendanceService.findAttendanceByStudentId(studentId));

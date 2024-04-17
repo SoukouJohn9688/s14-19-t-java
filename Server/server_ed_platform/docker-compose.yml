@@ -1,7 +1,7 @@
 services:
   app:
     container_name: app
-    image: backend:1.0
+    image: server:1.0
     build: .
     ports:
       - "8080:8080"

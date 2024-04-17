@@ -1,7 +1,12 @@
 package com.nocountry.server_ed_platform.services.impl;
 
+import com.nocountry.server_ed_platform.dtos.GradeDTO;
 import com.nocountry.server_ed_platform.dtos.Request.StudentRegisterDTO;
+import com.nocountry.server_ed_platform.dtos.Response.SubjectListResponseDTO;
+import com.nocountry.server_ed_platform.dtos.Response.SubjectsByStudentResponseDTO;
 import com.nocountry.server_ed_platform.dtos.SubjectDTO;
+import com.nocountry.server_ed_platform.dtos.SubjectGradeDTO;
+import com.nocountry.server_ed_platform.dtos.SubjectNameDTO;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Subject;
 import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
@@ -10,12 +15,11 @@ import com.nocountry.server_ed_platform.repositories.StudentRepo;
 import com.nocountry.server_ed_platform.repositories.SubjectRepo;
 import com.nocountry.server_ed_platform.services.SubjectService;
 import com.nocountry.server_ed_platform.utils.ListSubject;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -25,31 +29,12 @@ public class SubjectServiceImpl implements SubjectService {
     private final SubjectRepo subjectRepo;
 
     @Override
-    public Subject findById(Long id) throws SubjectNotFoundException {
-
-        Optional<Subject> subjectDB=subjectRepo.findById(id);
-
-        return subjectDB.orElse(null);
-
-    }
-
-    @Override
-    public SubjectDTO createStudent(StudentRegisterDTO request) {
-        return null;
-    }
-
-    @Override
-    public SubjectDTO updateStudent(Long id, StudentRegisterDTO request) {
-        return null;
-    }
-
-    @Override
-    public void AssignSubjectsByCurrentYear(Long studentId, int currentYear) {
+    public void AssignSubjectsByCurrentYear(Long studentId, int currentYear) throws SubjectNotFoundException {
 
         Optional<Student> studentDB = studentRepo.findById(studentId);
 
-        if(studentDB.isEmpty()){
-            throw new RuntimeException("Estudiante no encontrado");
+        if (studentDB.isEmpty()) {
+            throw new SubjectNotFoundException("Estudiante no encontrado");
         }
 
         ListSubject listSubject = new ListSubject();
@@ -57,6 +42,39 @@ public class SubjectServiceImpl implements SubjectService {
 
         System.out.println("Materia del estudiante con id " + studentId);
         System.out.println(studentDB.get().toString());
+
+    }
+
+    @Override
+    @Transactional //tener cuidado con esta anotacion?
+    public SubjectListResponseDTO findSubjectsByStudentId(Long studentId) throws StudentNotFoundException {
+
+        Optional<Student> studentDB = studentRepo.findById(studentId);
+
+        if (studentDB.isEmpty()) {
+            throw new StudentNotFoundException("Estudiante con id " + studentId + "no encontrado");
+        }
+        List<Subject> subjects = studentDB.get().getSubjects();
+//        for (Subject subject : subjects){
+//            System.out.println(subject.getName());
+//        }
+//
+
+        for (Subject subject : studentDB.get().getSubjects()){
+            System.out.println(subject.getName());
+        }
+
+        List<SubjectNameDTO> response = subjects.stream().map(subject -> {
+            return SubjectNameDTO.builder()
+                    .subjectId(subject.getId())
+                    .name(subject.getName().name())
+                    .build();
+        }).toList();
+
+        return SubjectListResponseDTO.builder()
+                .studentId(studentId)
+                .subjects(response)
+                .build();
 
     }
 }

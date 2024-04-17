@@ -1,11 +1,9 @@
 package com.nocountry.server_ed_platform.entities;
 
 
-import com.nocountry.server_ed_platform.enumarations.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
