@@ -29,12 +29,12 @@ public class SubjectServiceImpl implements SubjectService {
     private final SubjectRepo subjectRepo;
 
     @Override
-    public void AssignSubjectsByCurrentYear(Long studentId, int currentYear) {
+    public void AssignSubjectsByCurrentYear(Long studentId, int currentYear) throws SubjectNotFoundException {
 
         Optional<Student> studentDB = studentRepo.findById(studentId);
 
         if (studentDB.isEmpty()) {
-            throw new RuntimeException("Estudiante no encontrado");
+            throw new SubjectNotFoundException("Estudiante no encontrado");
         }
 
         ListSubject listSubject = new ListSubject();
@@ -47,12 +47,12 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     @Transactional //tener cuidado con esta anotacion?
-    public SubjectListResponseDTO findSubjectsByStudentId(Long studentId) {
+    public SubjectListResponseDTO findSubjectsByStudentId(Long studentId) throws StudentNotFoundException {
 
         Optional<Student> studentDB = studentRepo.findById(studentId);
 
         if (studentDB.isEmpty()) {
-            throw new RuntimeException("Estudiante con id " + studentId + "no encontrado");
+            throw new StudentNotFoundException("Estudiante con id " + studentId + "no encontrado");
         }
         List<Subject> subjects = studentDB.get().getSubjects();
 //        for (Subject subject : subjects){

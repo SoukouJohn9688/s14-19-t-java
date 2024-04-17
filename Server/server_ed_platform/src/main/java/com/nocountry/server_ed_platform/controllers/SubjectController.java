@@ -1,6 +1,7 @@
 package com.nocountry.server_ed_platform.controllers;
 
 import com.nocountry.server_ed_platform.dtos.Response.SubjectListResponseDTO;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.services.SubjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ public class SubjectController {
     private final SubjectService subjectService;
 
     @GetMapping("/{studentId}")
-    public SubjectListResponseDTO findSubjectsByStudentId(@PathVariable Long studentId) {
+    public SubjectListResponseDTO findSubjectsByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
         return subjectService.findSubjectsByStudentId(studentId);
     }
 
