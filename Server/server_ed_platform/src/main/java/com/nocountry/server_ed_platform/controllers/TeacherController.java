@@ -3,6 +3,7 @@ package com.nocountry.server_ed_platform.controllers;
 import com.nocountry.server_ed_platform.dtos.Response.ResponseGenericDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.entities.Teacher;
+import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
 import com.nocountry.server_ed_platform.services.TeacherService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -44,7 +45,7 @@ public class TeacherController {
 
 
     @GetMapping("/")
-    public ResponseEntity<ResponseGenericDTO<List<TeacherDTO>>> findAll(){
+    public ResponseEntity<ResponseGenericDTO<List<TeacherDTO>>> findAll() throws TeacherNotFoundException {
 
         return ResponseEntity.ok().body(
                 new ResponseGenericDTO<>(

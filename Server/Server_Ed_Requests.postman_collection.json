@@ -82,6 +82,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdWxhNTdAZ21haWwuY29tIiwiaWF0IjoxNzEzMzczMDE5LCJleHAiOjE3MTMzNzMzMTl9.TIkEajXbbxEbzNDusz9vqAFHkl5hA_356KgovJRPFe8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -94,12 +104,12 @@
 							}
 						},
 						"url": {
-							"raw": "${{path}}}student/{StudentId}",
+							"raw": "{{path}}student/2",
 							"host": [
-								"${{path}}}student"
+								"{{path}}student"
 							],
 							"path": [
-								"{StudentId}"
+								"2"
 							]
 						}
 					},
@@ -116,9 +126,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "${{path}}}attendance/{studentId}",
+							"raw": "{{path}}attendance/{studentId}",
 							"host": [
-								"${{path}}}attendance"
+								"{{path}}attendance"
 							],
 							"path": [
 								"{studentId}"
@@ -142,9 +152,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{path}}}grade/{studentId}/subject/{subjectId}",
+							"raw": "{{path}}grade/{studentId}/subject/{subjectId}",
 							"host": [
-								"{{path}}}grade"
+								"{{path}}grade"
 							],
 							"path": [
 								"{studentId}",
@@ -166,9 +176,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{path}}}subject/{subjectId}/student/{studentId}",
+							"raw": "{{path}}subject/{subjectId}/student/{studentId}",
 							"host": [
-								"{{path}}}subject"
+								"{{path}}subject"
 							],
 							"path": [
 								"{subjectId}",
