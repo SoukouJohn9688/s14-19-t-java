@@ -4,6 +4,9 @@ import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
 import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.DuplicateDateException;
 import com.nocountry.server_ed_platform.exceptions.FutureDateException;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -18,7 +21,10 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/attendance")
+@Tag(name = "Attendance")
+@SecurityRequirement(name = "bearerAuth")
 @RequiredArgsConstructor
+
 public class AttendanceController {
 
     private final AttendanceService attendanceService;
@@ -29,6 +35,7 @@ public class AttendanceController {
         return ResponseEntity.ok().body(attendanceService.findAttendanceByStudentId(studentId));
     }
 
+    @Hidden
     @PostMapping("/save/{studentId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> saveAttendance(
             @PathVariable Long studentId,

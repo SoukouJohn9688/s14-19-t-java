@@ -6,6 +6,8 @@ import com.nocountry.server_ed_platform.dtos.Response.ResponseGenericDTO;
 import com.nocountry.server_ed_platform.dtos.StudentDTO;
 import com.nocountry.server_ed_platform.exceptions.ParentNotFoundException;
 import com.nocountry.server_ed_platform.services.ParentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -16,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/parent")
 @RequiredArgsConstructor
+@Tag(name = "Parent")
 public class ParentController {
 
     private final ParentService parentService;
