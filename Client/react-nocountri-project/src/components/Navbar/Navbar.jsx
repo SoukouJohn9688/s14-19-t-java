@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
 import { FiArrowDown, FiArrowUp } from "react-icons/fi";
+import { Bell } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../redux/Auth/auth";
 
@@ -53,6 +54,7 @@ export default function Example() {
           </div>
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
             <Fragment>
               <Link to={"/about"} className="text-sky-600">
                 Conozcan EdTech
