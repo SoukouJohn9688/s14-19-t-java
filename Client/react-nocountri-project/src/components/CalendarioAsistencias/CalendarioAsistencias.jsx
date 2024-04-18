@@ -14,9 +14,9 @@ const CalendarioAsistencias = () => {
   const dispatch = useDispatch()
   const asistencia = useSelector(state => state.attendance.attendanceById)
 
-  console.log(asistencia, "asistencia")
+  // console.log(asistencia, "asistencia")
   useEffect(() => {
-    dispatch(getAttendanceById(2))
+    dispatch(getAttendanceById(1))
     
   }, [])
   // const selector = useSelector()
@@ -127,10 +127,10 @@ const CalendarioAsistencias = () => {
       [...prevEvents, eventupdated]);
   }
 
-  const handlequeondate = () => {
-    dispatch(getAttendanceById(2))
+  // const handlequeondate = () => {
+  //   dispatch(getAttendanceById(2))
 
-  }
+  // }
 
   return (
     <div className="flex justify-center pt-8 ">
@@ -179,7 +179,7 @@ const CalendarioAsistencias = () => {
           }
         </div>
       </div>
-      <button onClick={handlequeondate}>getAttendanceById</button>
+      {/* <button onClick={handlequeondate}>getAttendanceById</button> */}
     </div>
 
   );

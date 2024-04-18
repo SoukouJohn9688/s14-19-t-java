@@ -6,14 +6,20 @@ const initialState = {
   attendanceById: {} // Objeto para filtrar las asistencias por el id del estudiante
 };
 
-const authToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50MUBlbWFpbC5jb20iLCJpYXQiOjE3MTM0MTE1OTQsImV4cCI6MTcxMzQxMTg5NH0.kf67q71yo9kXp7o6OK0nf4f5wOAoh1p9fr71Ne5GDtA"
+// const authToken = localStorage.getItem('alumno');
+
+let token = localStorage.getItem("token");
+console.log(token)
 
 export const getAttendanceById = createAsyncThunk('attendance/getAttendanceById', async (idStudent) => {
+  // console.log(idStudent, "idStudent")
   try {
+   
     const response = await axios(`http://localhost:8080/api/v1/attendance/${idStudent}`, {
       headers: {
-        'Authorization': `Bearer ${authToken}`,
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${token}`,
+        // 'Content-Type': 'application/json'
+        // console.log(first),
       }
     });
     return response.data
@@ -63,7 +69,7 @@ const attendanceSlice = createSlice({
     builder.addCase(getAttendanceById.fulfilled, (state, action) => {
       state.attendanceById = action.payload
       // console.log("action.payload", action.payload)
-      // console.log('attendanceById:', state.attendanceById);
+      console.log('attendanceById:', state.attendanceById);
     })
   }
 });
