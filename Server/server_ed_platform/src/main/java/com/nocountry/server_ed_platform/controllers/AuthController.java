@@ -3,6 +3,7 @@ package com.nocountry.server_ed_platform.controllers;
 import com.nocountry.server_ed_platform.dtos.LoginDTO;
 import com.nocountry.server_ed_platform.dtos.RegisterDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AuthResponseDTO;
+import com.nocountry.server_ed_platform.exceptions.EmailExistsException;
 import com.nocountry.server_ed_platform.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponseDTO> register(@RequestBody @Valid RegisterDTO request) {
+    public ResponseEntity<AuthResponseDTO> register(@RequestBody @Valid RegisterDTO request) throws EmailExistsException {
         return ResponseEntity.ok(authService.register(request));
     }
 

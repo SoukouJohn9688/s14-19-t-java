@@ -4,7 +4,6 @@ package com.nocountry.server_ed_platform.services.impl;
 import com.nocountry.server_ed_platform.dtos.ParentDTO;
 import com.nocountry.server_ed_platform.dtos.Request.ParentRegisterDTO;
 import com.nocountry.server_ed_platform.entities.Parent;
-import com.nocountry.server_ed_platform.enumarations.UserRole;
 import com.nocountry.server_ed_platform.repositories.ParentRepo;
 import com.nocountry.server_ed_platform.services.ParentService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

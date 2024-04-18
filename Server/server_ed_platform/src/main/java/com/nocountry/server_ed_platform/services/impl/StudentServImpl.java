@@ -34,7 +34,6 @@ public class StudentServImpl implements StudentService {
             throw new SubjectNotFoundException("Materia no existe");
         }
 
-
         List<Subject> subjects = new ArrayList<>();
         subjects.add(subject1.get());
         studentDB.get().setSubjects(subjects);
