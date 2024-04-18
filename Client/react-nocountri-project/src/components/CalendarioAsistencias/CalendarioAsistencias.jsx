@@ -7,6 +7,7 @@ import es from '@fullcalendar/core/locales/es';
 import Swal from 'sweetalert2'
 import "./CalendarioAsistencias.css"
 
+
 const CalendarioAsistencias = () => {
   const [allEvents, setAllEvents] = useState([]);
   const [events, setEvents] = useState([
