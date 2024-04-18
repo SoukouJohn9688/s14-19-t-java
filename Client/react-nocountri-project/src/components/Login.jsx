@@ -5,10 +5,12 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AlumnosData } from "@/mock";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { login } from "../redux/Auth/auth"
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [DBAlumnos] = useState(AlumnosData);
   const [titulo, setTitulo] = useState("Inicio de sesión Padres/ Tutor");
   const [alumno, setAlumno] = useState({
@@ -51,8 +53,17 @@ const Login = () => {
     const password = DBAlumnos.some((e) => e.password === Number(alumno.password));
     console.log(user, password, "se esta viendo");
 
-    if (user & password) {
+    if (user && password) {
       localStorage.setItem("alumno", JSON.stringify(alumno));
+      let userType = '';
+      if (titulo === "Inicio de sesión Padres/ Tutor") {
+        userType = "padre";
+      } else if (titulo === "Inicio de sesión Estudiante") {
+        userType = "alumno";
+      } else if (titulo === "Inicio de sesión Docente") {
+        userType = "docente";
+      }
+      dispatch(login(userType)); // Despachamos la acción de login con el tipo de usuario como payload
       navigate("/home");
     }
   };
