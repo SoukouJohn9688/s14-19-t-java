@@ -5,6 +5,7 @@ import Telephone from "../../assets/telephone.svg";
 import Ubicacion from "../../assets/ubicacion.svg";
 import ProfileIcon from "../../assets/profile-icon.svg";
 import fotoUser from "../../assets/photoUser.svg";
+import { useSelector } from "react-redux";
 
 const profiles = [
   {
@@ -19,6 +20,7 @@ const profiles = [
 ];
 
 const CardProfile = () => {
+  const userName = useSelector((state) => state.auth.userName); 
   return (
     <>
       {profiles.slice(0, 1).map((profile) => (
@@ -38,7 +40,7 @@ const CardProfile = () => {
             </div>
             <h5 className="pb-5 font-bold text-2xl text-center text-gray-900 tracking-tight">
               {" "}
-              {profile.alumno}
+              {userName}
             </h5>
             <div>
               <h6 className="flex justify-start gap-1 font-bold text-l">

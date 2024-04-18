@@ -49,21 +49,20 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = DBAlumnos.some((e) => e.userName === alumno.userName);
-    const password = DBAlumnos.some((e) => e.password === Number(alumno.password));
-    console.log(user, password, "se esta viendo");
+    const user = DBAlumnos.find((e) => e.userName === alumno.userName);
+    const password = user && user.password === Number(alumno.password); // Verificamos si existe el usuario y si la contraseña es correcta
 
     if (user && password) {
       localStorage.setItem("alumno", JSON.stringify(alumno));
-      let userType = '';
+      let userRol = '';
       if (titulo === "Inicio de sesión Padres/ Tutor") {
-        userType = "padre";
+        userRol = "padre";
       } else if (titulo === "Inicio de sesión Estudiante") {
-        userType = "alumno";
+        userRol = "alumno";
       } else if (titulo === "Inicio de sesión Docente") {
-        userType = "docente";
+        userRol = "docente";
       }
-      dispatch(login(userType)); // Despachamos la acción de login con el tipo de usuario como payload
+      dispatch(login({ userRol, userName: alumno.userName })); // Despachamos la acción de login con el rol y el nombre de usuario como payload
       navigate("/home");
     }
   };

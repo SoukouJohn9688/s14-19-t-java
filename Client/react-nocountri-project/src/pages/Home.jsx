@@ -4,10 +4,12 @@ import CalendarioGeneral from "@/components/CalendarioGeneral/CalendarioGeneral"
 import { CardStudents } from "@/components/CardStudents/CardStudents";
 import GradeTable from "@/components/Table/GradeTable";
 import CalendarioAsistencias from "@/components/CalendarioAsistencias/CalendarioAsistencias";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const [showGradeTable, setShowGradeTable] = useState(false);
   const [showCalendarAsis, setShowCalendarAsis] = useState(false);
+  const userRol = useSelector((state) => state.auth.userRol); 
 
   const toggleGradeTable = () => {
     setShowGradeTable(true);
@@ -33,6 +35,8 @@ const Home = () => {
             </div>
           </div>
           <div className="gap-5 grid col-span-3">
+           
+           {}
             <CardStudents
               onShowGradeTable={() => setShowGradeTable(true)}
               onShowCalendarAsis={toggleCalendarAsis}
