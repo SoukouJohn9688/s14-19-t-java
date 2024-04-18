@@ -1,0 +1,20 @@
+
+	java:S116
+"URename this field "student_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ê£×®J$1da91aba-7aec-40d4-a002-930c885202fe
+j
+java:S1068
+".Remove this unused "student_id" private field.(ê£×®J$4dc303b0-2267-4bd8-8153-037af5a8644e
+d
+java:S1068"(Remove this unused "name" private field.(Ë¥¼J$3d817962-943e-4916-a639-eb761d0a803b
+l
+java:S1068"+Remove this unused "surname" private field.(—‡¨åûÿÿÿÿJ$77f26584-bbfc-4632-a275-743cfb8cf7ca
+i
+java:S1068"-Remove this unused "birthdate" private field.(Ã£ÖÒJ$c89f3782-0426-4311-a4a4-fca523ac803c
+c
+java:S1068"'Remove this unused "sex" private field.(ª†« J$84f2caeb-e9fc-4aa2-afb3-d9e6d25d76cc
+i
+java:S1068"-Remove this unused "classroom" private field.(óï€İJ$9d557179-6692-4bcf-9567-c51ab3a311cd
+j
+java:S1068")Remove this unused "grade" private field.(æÊôˆúÿÿÿÿJ$edb151bd-8adb-41c0-9176-4ee24f0de7af
+j
+java:S1068")Remove this unused "email" private field.(ª«ÕìùÿÿÿÿJ$0c3c01f3-0df4-4cb3-b415-906abb3a6846

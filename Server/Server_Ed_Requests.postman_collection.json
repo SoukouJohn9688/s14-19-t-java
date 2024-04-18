@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "9bacaa11-9ca3-4d45-9d44-a2b4502ca0d6",
+		"name": "Server_Ed_Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28684698"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"student1@email.com\",\r\n    \"password\": \"Student#123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"student1@email.com\",\r\n    \"password\": \"Student#123\",\r\n    \"username\": \"pedro_student\",\r\n    \"rol\": \"STUDENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "findByStudentId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdWxhNTdAZ21haWwuY29tIiwiaWF0IjoxNzEzMzczMDE5LCJleHAiOjE3MTMzNzMzMTl9.TIkEajXbbxEbzNDusz9vqAFHkl5hA_356KgovJRPFe8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{path}}student/2",
+							"host": [
+								"{{path}}student"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attendance",
+			"item": [
+				{
+					"name": "findAttendanceByStudentId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{path}}attendance/{studentId}",
+							"host": [
+								"{{path}}attendance"
+							],
+							"path": [
+								"{studentId}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teacher",
+			"item": []
+		},
+		{
+			"name": "Grade",
+			"item": [
+				{
+					"name": "findGradesByStudentIdAndSubjectId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{path}}grade/{studentId}/subject/{subjectId}",
+							"host": [
+								"{{path}}grade"
+							],
+							"path": [
+								"{studentId}",
+								"subject",
+								"{subjectId}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subject",
+			"item": [
+				{
+					"name": "findSubjectsByStudentId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{path}}subject/{subjectId}/student/{studentId}",
+							"host": [
+								"{{path}}subject"
+							],
+							"path": [
+								"{subjectId}",
+								"student",
+								"{studentId}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
