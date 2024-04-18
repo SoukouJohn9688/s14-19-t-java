@@ -10,11 +10,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const user = useSelector((state) => state.auth.user);
+  const userName = useSelector((state) => state.auth.userName); 
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,14 +53,14 @@ export default function Example() {
           </div>
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <Fragment>
-              <Link to={"/about"} className="text-sky-600">
-                Conozcan EdTech
-              </Link>
-              {isAuthenticated && (
+            {isAuthenticated ? ( 
+              <Fragment>
+                <Link to={"/about"} className="text-sky-600">
+                  Conozcan EdTech
+                </Link>
                 <Menu as="div" className="relative ml-3" ref={menuRef}>
                   <div className="flex">
-                    <div className="font-semibold px-1">{user}</div>
+                    <div className="font-semibold px-1">{userName}</div>
                     <Menu.Button
                       className="relative flex pt-1"
                       onClick={() => setIsOpen(!isOpen)}
@@ -113,8 +113,12 @@ export default function Example() {
                     </Menu.Items>
                   </Transition>
                 </Menu>
-              )}
-            </Fragment>
+              </Fragment>
+            ) : (
+              <Link to="/" className="text-sky-600">
+                Iniciar sesión
+              </Link>
+            )}
           </div>
         </div>
       </div>

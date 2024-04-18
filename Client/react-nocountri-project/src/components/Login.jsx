@@ -5,10 +5,12 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AlumnosData } from "@/mock";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { login } from "../redux/Auth/auth"
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [DBAlumnos] = useState(AlumnosData);
   const [titulo, setTitulo] = useState("Inicio de sesión Padres/ Tutor");
   const [alumno, setAlumno] = useState({
@@ -47,12 +49,20 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = DBAlumnos.some((e) => e.userName === alumno.userName);
-    const password = DBAlumnos.some((e) => e.password === Number(alumno.password));
-    console.log(user, password, "se esta viendo");
+    const user = DBAlumnos.find((e) => e.userName === alumno.userName);
+    const password = user && user.password === Number(alumno.password); // Verificamos si existe el usuario y si la contraseña es correcta
 
-    if (user & password) {
+    if (user && password) {
       localStorage.setItem("alumno", JSON.stringify(alumno));
+      let userRol = '';
+      if (titulo === "Inicio de sesión Padres/ Tutor") {
+        userRol = "padre";
+      } else if (titulo === "Inicio de sesión Estudiante") {
+        userRol = "alumno";
+      } else if (titulo === "Inicio de sesión Docente") {
+        userRol = "docente";
+      }
+      dispatch(login({ userRol, userName: alumno.userName })); // Despachamos la acción de login con el rol y el nombre de usuario como payload
       navigate("/home");
     }
   };

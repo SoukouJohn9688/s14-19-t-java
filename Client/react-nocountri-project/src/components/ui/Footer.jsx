@@ -12,18 +12,18 @@ const Footer = () => {
         <div>
             <img src={logo} className='w-36 md:w-44' alt="" />
         </div>
-        <div className='flex w-36 gap-2 lg:order-2'>
+        <div className='flex w-48 gap-5 lg:order-2'>
           <a href="#">
-            <img src={instagram} alt="" />
+            <img src={instagram} className='hover:scale-125 hover:transition hover:duration-500' alt="" />
           </a>
           <a href="#">
-            <img src={facebook} alt="" />
+            <img src={facebook} className='hover:scale-125 hover:transition hover:duration-500' alt="" />
           </a>
           <a href="#">
-            <img src={youtube} alt="" />
+            <img src={youtube} className='hover:scale-125 hover:transition hover:duration-500' alt="" />
           </a>
           <a href="#">
-            <img src={twitter} alt="" />
+            <img src={twitter} className='hover:scale-125 hover:transition hover:duration-500' alt="" />
           </a>
         </div>
         <div className='text-center text-lg font-medium'>
