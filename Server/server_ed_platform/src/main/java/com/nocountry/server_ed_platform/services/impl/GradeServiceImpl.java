@@ -2,7 +2,6 @@ package com.nocountry.server_ed_platform.services.impl;
 
 import com.nocountry.server_ed_platform.dtos.GradeDTO;
 import com.nocountry.server_ed_platform.dtos.Response.GradesResponseDTO;
-import com.nocountry.server_ed_platform.dtos.Response.SubjectsByStudentResponseDTO;
 import com.nocountry.server_ed_platform.dtos.SubjectGradeDTO;
 import com.nocountry.server_ed_platform.entities.CurrentYear;
 import com.nocountry.server_ed_platform.entities.Grade;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -74,13 +72,11 @@ public class GradeServiceImpl implements GradeService {
 
         List<Grade> grades = gradeRepo.findGradesByStudentIdAndSubjectId(studentId, subjectId);
 
-        List<GradeDTO> gradeDTOS = grades.stream().map(grade -> {
-            return GradeDTO.builder()
-                    .id(grade.getId())
-                    .periodType(grade.getPeriodType().name())
-                    .score(grade.getScore())
-                    .build();
-        }).toList();
+        List<GradeDTO> gradeDTOS = grades.stream().map(grade -> GradeDTO.builder()
+                .id(grade.getId())
+                .periodType(grade.getPeriodType().name())
+                .score(grade.getScore())
+                .build()).toList();
 
         SubjectGradeDTO subjectGradeDTO = SubjectGradeDTO.builder()
                 .subjectId(subjectId)

@@ -8,6 +8,7 @@ import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Teacher;
 import com.nocountry.server_ed_platform.entities.UserEntity;
 import com.nocountry.server_ed_platform.enumarations.UserRole;
+import com.nocountry.server_ed_platform.exceptions.EmailExistsException;
 import com.nocountry.server_ed_platform.repositories.ParentRepo;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
 import com.nocountry.server_ed_platform.repositories.TeacherRepo;
@@ -37,7 +38,6 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponseDTO login(LoginDTO request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         UserDetails user = userRepository.findByEmail(request.getEmail()).orElseThrow();
-        System.out.println(user.toString());
         String token = jwtService.getToken(user);
         return AuthResponseDTO.builder()
                 .accessToken(token)
@@ -45,13 +45,12 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
-    public AuthResponseDTO register(RegisterDTO request) {
+    public AuthResponseDTO register(RegisterDTO request) throws EmailExistsException {
         Optional<UserEntity> userOptional = userRepository.findByEmail(request.getEmail());
+
         if (userOptional.isPresent()) {
-            throw new RuntimeException("Ya existe un usuario con ese email");
+            throw new EmailExistsException("Ya existe un usuario con ese email");
         }
-
-
 
         UserEntity user = UserEntity.builder()
                 .email(request.getEmail())

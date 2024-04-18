@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authProvider;
@@ -28,17 +29,15 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authRequest ->
-                                authRequest
-                                        .requestMatchers("/api/v1/auth/**", "/v1/authenticate", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-//                                        .requestMatchers("/api/v1/teacher/**").hasAuthority("TEACHER")
-//                                        .requestMatchers("/api/v1/student/**").hasAuthority("STUDENT")
-//                                        .requestMatchers("/api/v1/grade/**").hasAuthority("STUDENT")
-//                                        .requestMatchers("/api/v1/subject/**").hasAuthority("STUDENT")
-//                                        .requestMatchers("/api/v1/attendance/**").hasAuthority("STUDENT")
-//                                        .requestMatchers("/api/v1/parent/**").hasAuthority("PARENT")
-//                                // student
-//                                .requestMatchers(HttpMethod.GET, "/api/v1/student/find/**").hasAuthority("STUDENT")
-                                        .anyRequest().authenticated()
+                        authRequest
+                                .requestMatchers(
+                                        "/api/v1/auth/**",
+                                        "/v1/authenticate",
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html"
+                                ).permitAll()
+                                .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager ->
                         sessionManager
