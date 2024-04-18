@@ -5,7 +5,6 @@ import com.nocountry.server_ed_platform.enumarations.PeriodEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 
 @Entity
 @AllArgsConstructor

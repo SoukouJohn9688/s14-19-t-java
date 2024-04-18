@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class SubjectDTO {
 
-    private Long subject_id;
+    private Long id;
     private String name;
     private Double grade;
     private Integer current_year;
