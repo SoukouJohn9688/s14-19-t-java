@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseGenericDTO<T> {
-    private boolean state;
+    private boolean success;
     private String message;
     private T data;
 }
