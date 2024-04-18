@@ -6,6 +6,7 @@ import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.services.SubjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ public class SubjectController {
 
     private final SubjectService subjectService;
 
-    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    @Secured({"STUDENT", "PARENT"})
     @GetMapping("/{studentId}")
     public ResponseEntity<ResponseGenericDTO<SubjectListResponseDTO>> findSubjectsByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(
