@@ -4,6 +4,8 @@ import com.nocountry.server_ed_platform.dtos.Response.ResponseGenericDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.entities.Teacher;
 import com.nocountry.server_ed_platform.services.TeacherService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/teacher")
 @RequiredArgsConstructor
+@Tag(name = "Teacher")
 public class TeacherController {
 
 
