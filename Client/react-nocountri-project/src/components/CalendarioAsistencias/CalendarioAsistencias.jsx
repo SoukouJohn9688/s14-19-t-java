@@ -6,41 +6,56 @@ import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
 import es from '@fullcalendar/core/locales/es';
 import Swal from 'sweetalert2'
 import "./CalendarioAsistencias.css"
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getAttendanceById } from "../../redux/Attendance/attendance"
 const CalendarioAsistencias = () => {
+
+
+  const dispatch = useDispatch()
+  const asistencia = useSelector(state => state.attendance.attendanceById)
+
+  console.log(asistencia, "asistencia")
+  useEffect(() => {
+    dispatch(getAttendanceById(2))
+    
+  }, [])
+  // const selector = useSelector()
+
 
   const [allEvents, setAllEvents] = useState([]);
 
   // const updatedEvents = [...allEvents];
-  
-  const asistencias = [
-    { alumnoId: 1, fecha: '2024-04-16', title: 'Presente' },
-    { alumnoId: 2, fecha: '2024-04-16', title: "Tardanza/ Ausente justificado" },
-    { alumnoId: 3, fecha: '2024-04-17', title: "Tardanza/ Ausente injustificado" },
-    { alumnoId: 4, fecha: '2024-04-18', title: "Tardanza/ Ausente no computable" },
-  ];
 
-  useEffect(() => {
 
-    const colorMapping = {
-      'Presente': '#22C55E',
-      'Tardanza/ Ausente justificado': '#F97316',
-      'Tardanza/ Ausente injustificado': '#FF0000',
-      "Tardanza/ Ausente no computable": '#3B82F6'
-    };
-    
-    const updatedEvents = asistencias.map(asistencia => ({
-      id: asistencia.alumnoId,
-      title: `${asistencia.title}`,
-      start: asistencia.fecha,
-      color: colorMapping[asistencia.title]
-    }));
 
-    setAllEvents(updatedEvents);
-  }, []); // 
 
-  console.log(allEvents, "allEvents");
+  // const asistencias = [
+  //   { alumnoId: 1, fecha: '2024-04-16', title: 'Presente' },
+  //   { alumnoId: 2, fecha: '2024-04-16', title: "Tardanza/ Ausente justificado" },
+  //   { alumnoId: 3, fecha: '2024-04-17', title: "Tardanza/ Ausente injustificado" },
+  //   { alumnoId: 4, fecha: '2024-04-18', title: "Tardanza/ Ausente no computable" },
+  // ];
+
+  // useEffect(() => {
+
+  //   const colorMapping = {
+  //     'Presente': '#22C55E',
+  //     'Tardanza/ Ausente justificado': '#F97316',
+  //     'Tardanza/ Ausente injustificado': '#FF0000',
+  //     "Tardanza/ Ausente no computable": '#3B82F6'
+  //   };
+
+  //   const updatedEvents = asistencias.map(asistencia => ({
+  //     id: asistencia.alumnoId,
+  //     title: `${asistencia.title}`,
+  //     start: asistencia.fecha,
+  //     color: colorMapping[asistencia.title]
+  //   }));
+
+  //   setAllEvents(updatedEvents);
+  // }, []); // 
+
+  // console.log(allEvents, "allEvents");
 
   const [events, setEvents] = useState([
     { id: "1", title: "Presente", color: "#22C55E", backgroundColor: "#22C55E" },
@@ -112,6 +127,11 @@ const CalendarioAsistencias = () => {
       [...prevEvents, eventupdated]);
   }
 
+  const handlequeondate = () => {
+    dispatch(getAttendanceById(2))
+
+  }
+
   return (
     <div className="flex justify-center pt-8 ">
       <div className="col-span-2 " >
@@ -159,6 +179,7 @@ const CalendarioAsistencias = () => {
           }
         </div>
       </div>
+      <button onClick={handlequeondate}>getAttendanceById</button>
     </div>
 
   );
