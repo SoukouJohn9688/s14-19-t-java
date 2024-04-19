@@ -1,5 +1,6 @@
 package com.nocountry.server_ed_platform.config;
 
+import com.nocountry.server_ed_platform.config.jwt.filter.JwtAuthenticationEntryPoint;
 import com.nocountry.server_ed_platform.config.jwt.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authProvider;
+    private final JwtAuthenticationEntryPoint entryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -42,6 +44,9 @@ public class SecurityConfig {
                 .sessionManagement(sessionManager ->
                         sessionManager
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling( exception -> exception
+                        .authenticationEntryPoint(entryPoint)
+                )
                 .authenticationProvider(authProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

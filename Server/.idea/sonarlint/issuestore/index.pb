@@ -38,8 +38,6 @@ Wserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/entities/Teac
 ä
 Zserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/entities/UserEntity.java,7\f\7fb535bdc88688b92c9f8c25618ea27724ef0289
 ë
-aserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/HomeController.java,d\b\db804df41b0de7204fd81588d18863d740e59b61
-ë
 aserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/AuthController.java,d\b\dbfc772b89b3ba6e18718ba4ee941f09e46c8732
 é
 ^server_ed_platform/src/main/java/com/nocountry/server_ed_platform/repositories/ParentRepo.java,4\2\4292cdc1dd339c354f9f64dd5b7b518ff46e0a49
@@ -99,9 +97,13 @@ gserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/services/impl
 dserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/SubjectController.java,2\c\2cca96c418345500c184e0442addc16b8a097d9f
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-ê
-`server_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/OpenApiConfig.java,6\9\69320e6820a976e1e67f8efcc78406d57c043aec
 í
 bserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/GradeController.java,6\3\63b30dcae11d1a4e104842cad42b4a93f9f5ce3d
 ã
 [server_ed_platform/src/main/java/com/nocountry/server_ed_platform/config/OpenApiConfig.java,4\c\4c37a34ca24d7bd3ea7f8bf68e8f9fa4f868adf4
+§
+tserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/config/jwt/filter/JwtAuthenticationEntryPoint.java,f\7\f75805f6381566f71d090cb48297bbd54d34061d
+å
+\server_ed_platform/src/main/java/com/nocountry/server_ed_platform/config/SecurityConfig.java,4\0\409573344b6408770b3d10d8b7b45523955fcb38
+†
+pserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/config/jwt/filter/JwtAuthenticationFilter.java,6\8\68b961b307c6c3fe9002e612be29e0387876a8b5
