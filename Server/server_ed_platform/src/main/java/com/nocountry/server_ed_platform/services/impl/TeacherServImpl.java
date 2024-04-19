@@ -3,7 +3,9 @@ package com.nocountry.server_ed_platform.services.impl;
 import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.GradeDTO;
 import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
+import com.nocountry.server_ed_platform.dtos.Response.AssignAttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignGradeStudentResponseDTO;
+import com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Subject;
@@ -126,25 +128,26 @@ public class TeacherServImpl implements TeacherService {
 
     @Override
     @Transactional
-    public void AssignAttendanceByStudentIdAndSubjectId(Long StudentId, Long SubjectId, AttendanceDTO request) {
-        Optional<Student> studentDB = studentRepo.findById(StudentId);
-
-        if (studentDB.isEmpty()) {
-            throw new RuntimeException("estudiante no encontrado");
-        }
-
-        Optional<Subject> subjectDB = subjectRepo.findById(SubjectId);
-
-        if (subjectDB.isEmpty()) {
-            throw new RuntimeException("materia no encontrada");
-        }
-
-
+    public AssignAttendanceDTO AssignAttendanceByStudentIdAndSubjectId(Long StudentId, Long SubjectId, AttendanceDTO request) {
+//        Optional<Student> studentDB = studentRepo.findById(StudentId);
 //
-//        AttendanceDTO response = attendanceRepo.save(AttendanceDTO.builder()
-//                        .date(request.getDate())
-//                        .type(request.getType())
-//                        .build());
+//        if (studentDB.isEmpty()) {
+//            throw new RuntimeException("estudiante no encontrado");
+//        }
+//
+//        Optional<Subject> subjectDB = subjectRepo.findById(SubjectId);
+//
+//        if (subjectDB.isEmpty()) {
+//            throw new RuntimeException("materia no encontrada");
+//        }
+
+
+            AttendanceDTO response = attendanceService.AssignByStudentIdAndSubjectId(StudentId,SubjectId,request);
+//
+            return AssignAttendanceDTO.builder()
+                    .StudentId(StudentId)
+                    .attendanceDTO(response)
+                    .build();
 
 
     }
