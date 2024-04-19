@@ -105,4 +105,27 @@ public class AttendanceServiceImpl implements AttendanceService {
                 .build();
     }
 
+    @Override
+    public AttendanceResponseDTO findByStudentAndDate(Long studentId, LocalDate starDate, LocalDate endDate) {
+        Optional<Student> studentDB = studentRepo.findById(studentId);
+
+        if (studentDB.isEmpty()) {
+            throw new RuntimeException("Estudiante con id " + studentId + "no encontrado");
+        }
+
+        List<Attendance> attendancesDB = attendanceRepo.findByStudentIdAndDateBetween(studentId, starDate, endDate);
+
+        List<AttendanceDTO> attendanceDTOs = attendancesDB.stream()
+                .map(attendance -> AttendanceDTO.builder()
+                        .id(attendance.getId())
+                        .type(attendance.getType().name())
+                        .date(attendance.getDate().toString())
+                        .build()).collect(Collectors.toList());
+
+        return AttendanceResponseDTO.builder()
+                .idStudent(studentId)
+                .attendances(attendanceDTOs)
+                .build();
+    }
+
 }

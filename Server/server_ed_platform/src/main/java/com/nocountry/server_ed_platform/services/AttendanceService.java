@@ -6,6 +6,8 @@ import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.DuplicateDateException;
 import com.nocountry.server_ed_platform.exceptions.FutureDateException;
 
+import java.time.LocalDate;
+
 public interface AttendanceService {
 
     AttendanceResponseDTO findAttendanceByStudentId(Long studentId);
@@ -14,4 +16,5 @@ public interface AttendanceService {
 
     AttendanceDTO updateTypeOfAttendanceById(Long attendanceId, String type) throws AttendanceNotFoundException;
 
+    AttendanceResponseDTO findByStudentAndDate(Long studentId, LocalDate starDate, LocalDate endDate);
 }
