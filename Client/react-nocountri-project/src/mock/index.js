@@ -6,7 +6,7 @@ export const ColegiosData = [
     userName: "public_erv",
     password: "123456"
   },
- 
+
 ];
 /* export const AsignaturasData = [
   {
@@ -70,6 +70,28 @@ export const AlumnosData = [
     password: 123456,
     gender: "Female",
     asignatures: [1, 2, 3, 4, 5],
+    attendances: [
+      {
+        "id": 1,
+        "type": "PRESENTE",
+        "date": "2024-04-01"
+      },
+      {
+        "id": 2,
+        "type": "JUSTIFICADO",
+        "date": "2024-04-02"
+      },
+      {
+        "id": 3,
+        "type": "INJUSTIFICADO",
+        "date": "2024-04-03"
+      },
+      {
+        "id": 4,
+        "type": "NO_COMPUTABLE",
+        "date": "2024-04-03"
+      },
+    ]
   },
   {
     id: 2,
@@ -78,12 +100,34 @@ export const AlumnosData = [
     dni: 45881805,
     edad: 16,
     email: "jmalinowski1@unblog.fr",
-    userName:"jocelyn_malinowki",
+    userName: "jocelyn_malinowki",
     password: 123456,
     gender: "Female",
     asignatures: [1, 2, 3, 4, 5, 8],
+    attendances: [
+      {
+        "id": 1,
+        "type": "PRESENTE",
+        "date": "2024-04-01"
+      },
+      {
+        "id": 2,
+        "type": "JUSTIFICADO",
+        "date": "2024-04-02"
+      },
+      {
+        "id": 3,
+        "type": "NO_COMPUTABLE",
+        "date": "2024-04-03"
+      },
+      {
+        "id": 4,
+        "type": "INJUSTIFICADO",
+        "date": "2024-04-04"
+      },
+    ]
   },
-  
+
 ];
 export const PadresData = [
   {
@@ -93,9 +137,9 @@ export const PadresData = [
     dni: 35287645,
     hijos: [1, 2],
     email: "mcortin0@elegantthemes.com",
-    userName:"marcia_cortin",
+    userName: "marcia_cortin",
     password: 123456,
     phone: "748-375-9731",
   },
-  
+
 ];

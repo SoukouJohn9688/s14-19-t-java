@@ -8,54 +8,43 @@ import Swal from 'sweetalert2'
 import "./CalendarioAsistencias.css"
 import { useDispatch, useSelector } from "react-redux";
 import { getAttendanceById } from "../../redux/Attendance/attendance"
+import { AlumnosData } from "@/mock";
 const CalendarioAsistencias = () => {
+  const [asist] = useState(AlumnosData)
 
-
-  const dispatch = useDispatch()
-  const asistencia = useSelector(state => state.attendance.attendanceById)
+  // const dispatch = useDispatch()
+  // const asistencia = useSelector(state => state.attendance.attendanceById)
 
   // console.log(asistencia, "asistencia")
-  useEffect(() => {
-    dispatch(getAttendanceById(1))
-    
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getAttendanceById(2))
+
+  // }, [])
   // const selector = useSelector()
 
-
   const [allEvents, setAllEvents] = useState([]);
+  useEffect(() => {
 
-  // const updatedEvents = [...allEvents];
+    const colorMapping = {
+      'PRESENTE': '#22C55E',
+      'JUSTIFICADO': '#F97316',
+      'INJUSTIFICADO': '#FF0000',
+      "NO_COMPUTABLE": '#3B82F6'
+    };
+    asist.map(asisto => {
+      const updatedEvents = asisto.attendances.map(asistencia => ({
+        id: asistencia.id,
+        title: asistencia.type,
+        start: asistencia.date,
+        color: colorMapping[asistencia.type]
+      }));
+      setAllEvents(updatedEvents);
+    })
 
 
+  }, []); // 
 
-
-  // const asistencias = [
-  //   { alumnoId: 1, fecha: '2024-04-16', title: 'Presente' },
-  //   { alumnoId: 2, fecha: '2024-04-16', title: "Tardanza/ Ausente justificado" },
-  //   { alumnoId: 3, fecha: '2024-04-17', title: "Tardanza/ Ausente injustificado" },
-  //   { alumnoId: 4, fecha: '2024-04-18', title: "Tardanza/ Ausente no computable" },
-  // ];
-
-  // useEffect(() => {
-
-  //   const colorMapping = {
-  //     'Presente': '#22C55E',
-  //     'Tardanza/ Ausente justificado': '#F97316',
-  //     'Tardanza/ Ausente injustificado': '#FF0000',
-  //     "Tardanza/ Ausente no computable": '#3B82F6'
-  //   };
-
-  //   const updatedEvents = asistencias.map(asistencia => ({
-  //     id: asistencia.alumnoId,
-  //     title: `${asistencia.title}`,
-  //     start: asistencia.fecha,
-  //     color: colorMapping[asistencia.title]
-  //   }));
-
-  //   setAllEvents(updatedEvents);
-  // }, []); // 
-
-  // console.log(allEvents, "allEvents");
+  console.log(allEvents, "allEvents");
 
   const [events, setEvents] = useState([
     { id: "1", title: "Presente", color: "#22C55E", backgroundColor: "#22C55E" },
@@ -127,10 +116,7 @@ const CalendarioAsistencias = () => {
       [...prevEvents, eventupdated]);
   }
 
-  // const handlequeondate = () => {
-  //   dispatch(getAttendanceById(2))
 
-  // }
 
   return (
     <div className="flex justify-center pt-8 ">
@@ -179,7 +165,6 @@ const CalendarioAsistencias = () => {
           }
         </div>
       </div>
-      {/* <button onClick={handlequeondate}>getAttendanceById</button> */}
     </div>
 
   );

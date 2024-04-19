@@ -6,20 +6,15 @@ const initialState = {
   attendanceById: {} // Objeto para filtrar las asistencias por el id del estudiante
 };
 
-// const authToken = localStorage.getItem('alumno');
-
-let token = localStorage.getItem("token");
-console.log(token)
+const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJjODFmOTRhOS1jMmNmLTQ0NTItYmFmMi1mYWYyZTNlN2MyMjYiLCJlbWFpbCI6ImFndXN0aW5AZW1haWwuY29tIiwicm9sZSI6IkNsaWVudGUiLCJDbGllbnRVc2VySWQiOiIyIiwibmJmIjoxNzEwMzcxMTgzLCJleHAiOjE3MTA0NTc1ODMsImlhdCI6MTcxMDM3MTE4M30.RgU3Q1bjuWcp8NFc4YZ-p0fZGJPtT5cJSnQUie9DAnw"
 
 export const getAttendanceById = createAsyncThunk('attendance/getAttendanceById', async (idStudent) => {
-  // console.log(idStudent, "idStudent")
   try {
-   
     const response = await axios(`http://localhost:8080/api/v1/attendance/${idStudent}`, {
       headers: {
-        'Authorization': `Bearer ${token}`,
-        // 'Content-Type': 'application/json'
-        // console.log(first),
+        'Authorization': `Bearer ${authToken}`,
+       
+        'Content-Type': 'application/json'
       }
     });
     return response.data
@@ -69,7 +64,7 @@ const attendanceSlice = createSlice({
     builder.addCase(getAttendanceById.fulfilled, (state, action) => {
       state.attendanceById = action.payload
       // console.log("action.payload", action.payload)
-      console.log('attendanceById:', state.attendanceById);
+      // console.log('attendanceById:', state.attendanceById);
     })
   }
 });
