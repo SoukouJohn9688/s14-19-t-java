@@ -86,7 +86,7 @@ const About = () => {
 
         <div className="text-center my-10">
           <h2 className="text-3xl font-semibold sm:my-12">Útil para todos</h2>
-          <ul className="flex flex-col sm:flex-row sm:space-x-8">
+          <ul className="flex flex-col sm:flex-row sm:space-x-8 place-content-evenly">
             <li className="m-8 sm:m-2">
               <FaSchoolFlag className="text-6xl my-3 mx-auto" />
               <h3 className="font-bold">Colegios</h3>
@@ -105,7 +105,7 @@ const About = () => {
             <li className="m-8 sm:m-2">
               <MdFamilyRestroom className="text-6xl my-3 mx-auto" />
               <h3 className="font-bold">Familias</h3>
-              <p></p>Más transparencia para mayor tranquilidad
+              <p>Más transparencia para mayor tranquilidad</p>
             </li>
           </ul>
         </div>
