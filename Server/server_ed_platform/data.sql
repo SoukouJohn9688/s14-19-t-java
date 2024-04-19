@@ -1,4 +1,6 @@
 -- Agregar las cuentas de usuario
+-- Padre
+INSERT INTO user_entity (email, password, role, username) VALUES ('parent1@email.com', '$2a$10$Toz0oLY68WhRTvu94cbcs.qZE5.z5Y0BLtH3uEKXzbtvRCk.OWy5y', 'PARENT','john_doe');
 -- Estudiante
 INSERT INTO user_entity (email, password, role, username) VALUES ('student1@email.com', '$2a$10$0TI9Lx.S0737Fqvs/DbtbODt9wYbmyKd1fpNULGWYq8tJOzkVeh0S', 'STUDENT','pedro_student');
 
