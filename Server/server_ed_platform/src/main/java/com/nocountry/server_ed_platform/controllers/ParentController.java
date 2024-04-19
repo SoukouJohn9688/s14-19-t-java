@@ -19,6 +19,7 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/parent")
 @RequiredArgsConstructor
 @Tag(name = "Parent")
+@SecurityRequirement(name = "bearerAuth")
 public class ParentController {
 
     private final ParentService parentService;

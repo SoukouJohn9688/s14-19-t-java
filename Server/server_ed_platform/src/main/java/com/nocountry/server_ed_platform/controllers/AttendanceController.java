@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO;
@@ -24,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "Attendance")
 @SecurityRequirement(name = "bearerAuth")
 @RequiredArgsConstructor
-
 public class AttendanceController {
 
     private final AttendanceService attendanceService;
