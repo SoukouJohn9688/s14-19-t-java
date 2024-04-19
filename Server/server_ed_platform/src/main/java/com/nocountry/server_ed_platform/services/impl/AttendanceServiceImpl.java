@@ -1,15 +1,20 @@
 package com.nocountry.server_ed_platform.services.impl;
 
 import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
+import com.nocountry.server_ed_platform.dtos.GradeDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO;
 import com.nocountry.server_ed_platform.entities.Attendance;
+import com.nocountry.server_ed_platform.entities.Grade;
 import com.nocountry.server_ed_platform.entities.Student;
+import com.nocountry.server_ed_platform.entities.Subject;
 import com.nocountry.server_ed_platform.enumarations.AttendanceTypeEnum;
+import com.nocountry.server_ed_platform.enumarations.PeriodEnum;
 import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.DuplicateDateException;
 import com.nocountry.server_ed_platform.exceptions.FutureDateException;
 import com.nocountry.server_ed_platform.repositories.AttendanceRepo;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
+import com.nocountry.server_ed_platform.repositories.SubjectRepo;
 import com.nocountry.server_ed_platform.services.AttendanceService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +31,9 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     private final AttendanceRepo attendanceRepo;
     private final StudentRepo studentRepo;
+    private final SubjectRepo subjectRepo;
+
+
 
     @Override
     public AttendanceResponseDTO findAttendanceByStudentId(Long studentId) {
@@ -127,5 +135,30 @@ public class AttendanceServiceImpl implements AttendanceService {
                 .attendances(attendanceDTOs)
                 .build();
     }
+
+    @Transactional
+    public AttendanceDTO AssignByStudentIdAndSubjectId(Long studentId, Long subjectId, AttendanceDTO request) {
+        Optional<Student> studentDB = studentRepo.findById(studentId);
+        if (studentDB.isEmpty()) {
+            throw new RuntimeException("estudiante no encontrado");
+        }
+        Optional<Subject> subjectDB = subjectRepo.findById(subjectId);
+        if (subjectDB.isEmpty()) {
+            throw new RuntimeException("materia no encontrada");
+        }
+
+        Attendance response = attendanceRepo.save(Attendance.builder()
+                .type(AttendanceTypeEnum.valueOf(request.getType().toUpperCase()))
+                .date(LocalDate.parse(request.getDate()))
+                .student(studentDB.get())
+                .build());
+
+        return AttendanceDTO.builder()
+                .id(response.getId())
+                .type(response.getType().name())
+                .date(response.getDate().toString())
+                .build();
+    }
+
 
 }

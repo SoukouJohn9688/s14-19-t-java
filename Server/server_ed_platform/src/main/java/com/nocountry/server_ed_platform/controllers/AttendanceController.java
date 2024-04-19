@@ -65,6 +65,7 @@ public class AttendanceController {
         return ResponseEntity.ok().body(responseDTO);
     }
 
+
     @GetMapping("/{studentId}/{startDate}/{endDate}")
     public ResponseEntity<AttendanceResponseDTO> getAttendanceByStudentAndDate(@PathVariable Long studentId,
                                                                                @PathVariable LocalDate startDate,
@@ -72,5 +73,6 @@ public class AttendanceController {
         return ResponseEntity.ok().body(attendanceService.findByStudentAndDate(studentId,
                 startDate, endDate));
     }
+
 
 }
