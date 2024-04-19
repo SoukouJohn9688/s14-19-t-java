@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,6 +19,8 @@ import com.nocountry.server_ed_platform.dtos.Response.ResponseGenericDTO;
 import com.nocountry.server_ed_platform.services.AttendanceService;
 
 import lombok.RequiredArgsConstructor;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/v1/attendance")
@@ -60,6 +63,14 @@ public class AttendanceController {
                 updatedAttendance
         );
         return ResponseEntity.ok().body(responseDTO);
+    }
+
+    @GetMapping("/{studentId}/{startDate}/{endDate}")
+    public ResponseEntity<AttendanceResponseDTO> getAttendanceByStudentAndDate(@PathVariable Long studentId,
+                                                                               @PathVariable LocalDate startDate,
+                                                                               @PathVariable LocalDate endDate){
+        return ResponseEntity.ok().body(attendanceService.findByStudentAndDate(studentId,
+                startDate, endDate));
     }
 
 }
