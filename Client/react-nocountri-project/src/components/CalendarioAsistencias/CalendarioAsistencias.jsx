@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -46,13 +47,15 @@ const CalendarioAsistencias = () => {
 
   console.log(allEvents, "allEvents");
 
+  const userRol = useSelector((state) => state.auth.userRol);
+
   const [events, setEvents] = useState([
     { id: "1", title: "Presente", color: "#22C55E", backgroundColor: "#22C55E" },
     { id: "2", title: "Tardanza/ Ausente justificado", color: "#F97316", backgroundColor: "#F97316" },
     { id: "3", title: "Tardanza/ Ausente injustificado", color: "#FF0000", backgroundColor: "#FF0000" },
     { id: "4", title: "Tardanza/ Ausente no computable", color: "#3B82F6", backgroundColor: "#3B82F6" }
   ]);
-
+  
   // const [editable, setEditable] = useState(true);
 
   useEffect(() => {
@@ -145,7 +148,7 @@ const CalendarioAsistencias = () => {
           eventClassNames="fc-pointer"
         />
       </div>
-      <div className="col-span-1 p-4 mt-12">
+      { userRol === 'docente' &&(<div className="col-span-1 p-4 mt-12">
         {/* <h1 className="text-lg font-bold mb-4 ">Referencias arrastables</h1> */}
         <div id="draggable-el" className="p-2 bg-gray-200 rounded-md w-72 ">
           {
@@ -164,7 +167,7 @@ const CalendarioAsistencias = () => {
             ))
           }
         </div>
-      </div>
+      </div>)}
     </div>
 
   );
