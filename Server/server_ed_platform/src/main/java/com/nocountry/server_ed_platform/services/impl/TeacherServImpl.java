@@ -140,13 +140,13 @@ public class TeacherServImpl implements TeacherService {
         }
 
 
+//
+//        AttendanceDTO response = attendanceRepo.save(AttendanceDTO.builder()
+//                        .date(request.getDate())
+//                        .type(request.getType())
+//                        .build());
 
-        AttendanceDTO response = attendanceRepo.save(AttendanceDTO.builder()
-                        .date(request.getDate())
-                        .type(request.getType())
-                        .build());
 
-        return AssignGradeStudentResponseDTO.builder().studentId(studentId).gradeDTO(response).build();
     }
 
 
