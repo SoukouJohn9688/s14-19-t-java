@@ -107,3 +107,11 @@ tserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/config/jwt/fi
 \server_ed_platform/src/main/java/com/nocountry/server_ed_platform/config/SecurityConfig.java,4\0\409573344b6408770b3d10d8b7b45523955fcb38
  
 pserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/config/jwt/filter/JwtAuthenticationFilter.java,6\8\68b961b307c6c3fe9002e612be29e0387876a8b5
+‡
+Wserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/config/AppConfig.java,d\c\dc34b474dcfa307f86ce8d764f6c25dd58276eac
+[
++Server_Ed_platform.postman_environment.json,2\a\2ad3906698d41707d2666bfddec483a830bba7b5
+Z
+*Server_Ed_Requests.postman_collection.json,0\a\0a1f1bd6887e4fcde970de584819aa27f3b5160d
+J
+server_ed_platform/pom.xml,6\a\6a765cb899b4e945c2c18475a5e945b09dc26143
