@@ -14,7 +14,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const userName = useSelector((state) => state.auth.userName); 
+  const userName = useSelector((state) => state.auth.userName);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,6 +30,10 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [isAuthenticated]);
+
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -38,26 +42,21 @@ export default function Navbar() {
     <Disclosure as="nav" className="bg-white shadow-md fixed w-full top-0 z-10">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
-          <div className="flex items-center">
-            <div className="sm:hidden">
-              <img className="h-12 w-auto" src={Logo} alt="Ed Tech" />
-            </div>
-          </div>
-          <div className="flex flex-1 justify-center sm:justify-start">
+          <div className="flex flex-1">
             <Link
-              to={"/"}
-              className="hidden sm:flex flex-shrink-0 items-center"
+              to={isAuthenticated ? "/home" : "/"}
+              className="flex flex-shrink-0 items-center"
             >
               <img className="h-12 w-auto" src={Logo} alt="Ed Tech" />
             </Link>
           </div>
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {isAuthenticated ? ( 
+            <Link to={"/about"} className="text-sky-600">
+              Conozcan EdTech
+            </Link>
+            {isAuthenticated && (
               <Fragment>
-                <Link to={"/about"} className="text-sky-600">
-                  Conozcan EdTech
-                </Link>
                 <Menu as="div" className="relative ml-3" ref={menuRef}>
                   <div className="flex">
                     <div className="font-semibold px-1">{userName}</div>
@@ -83,7 +82,7 @@ export default function Navbar() {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
+                      {/* <Menu.Item>
                         {({ active }) => (
                           <Link
                             to={"/"}
@@ -95,7 +94,7 @@ export default function Navbar() {
                             Ver información
                           </Link>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> */}
                       <Menu.Item>
                         {({ active }) => (
                           <Link
@@ -114,10 +113,6 @@ export default function Navbar() {
                   </Transition>
                 </Menu>
               </Fragment>
-            ) : (
-              <Link to="/" className="text-sky-600">
-                Iniciar sesión
-              </Link>
             )}
           </div>
         </div>
