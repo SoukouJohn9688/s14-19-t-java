@@ -12,6 +12,7 @@ import com.nocountry.server_ed_platform.enumarations.PeriodEnum;
 import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.DuplicateDateException;
 import com.nocountry.server_ed_platform.exceptions.FutureDateException;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.repositories.AttendanceRepo;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
 import com.nocountry.server_ed_platform.repositories.SubjectRepo;
@@ -32,7 +33,6 @@ public class AttendanceServiceImpl implements AttendanceService {
     private final AttendanceRepo attendanceRepo;
     private final StudentRepo studentRepo;
     private final SubjectRepo subjectRepo;
-
 
 
     @Override
@@ -138,9 +138,28 @@ public class AttendanceServiceImpl implements AttendanceService {
                 .build();
     }
 
+    @Override
+    public AttendanceResponseDTO findByStudentAndDate(Long studentId, LocalDate starDate, LocalDate endDate) throws StudentNotFoundException {
+        Optional<Student> studentDB = studentRepo.findById(studentId);
 
+        if (studentDB.isEmpty()) {
+            throw new StudentNotFoundException("Estudiante con id " + studentId + "no encontrado");
+        }
 
+        List<Attendance> attendancesDB = attendanceRepo.findByStudentIdAndDateBetween(studentId, starDate, endDate);
 
+        List<AttendanceDTO> attendanceDTOs = attendancesDB.stream()
+                .map(attendance -> AttendanceDTO.builder()
+                        .id(attendance.getId())
+                        .type(attendance.getType().name())
+                        .date(attendance.getDate().toString())
+                        .build()).collect(Collectors.toList());
+
+        return AttendanceResponseDTO.builder()
+                .idStudent(studentId)
+                .attendances(attendanceDTOs)
+                .build();
+    }
 
 
 }
