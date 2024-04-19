@@ -21,6 +21,7 @@ public class Attendance {
     @Enumerated(EnumType.STRING)
     private AttendanceTypeEnum type;
 
+    @Column(unique = true)
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
