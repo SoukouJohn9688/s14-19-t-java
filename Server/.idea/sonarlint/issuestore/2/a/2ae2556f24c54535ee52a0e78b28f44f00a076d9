@@ -1,0 +1,7 @@
+
+k	java:S106+"+Replace this use of System.out by a logger.(ŽÊ°’üÿÿÿÿJ$3b929f6f-d218-4b02-9010-370fd702d5ba
+k	java:S106,"+Replace this use of System.out by a logger.(¢ÉÕÛüÿÿÿÿJ$ca5c5bcb-6982-48a9-8218-98987a8ae7cc
+w	java:S125:"<This block of commented-out lines of code should be removed.(Áæ”ÝJ$a47c26fd-2dc7-441b-9afe-0f5f2270efc3
+k	java:S106@"+Replace this use of System.out by a logger.(’ïÏ¾ýÿÿÿÿJ$a1512f3a-4700-4d88-a2d2-63f1be7c8f65
+
+java:S1602C"SRemove useless curly braces around statement and then remove useless return keyword(žð…J$525ad68f-7622-448c-bfc9-857385411ea9

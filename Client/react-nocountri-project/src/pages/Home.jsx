@@ -24,7 +24,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="mt-12">
       <div className="bg-gray-50 p-10">
         <div className="gap-5 lg:gap-5 grid lg:grid-cols-4 grid-flow-row md:grid-flow-col">
           <div className="md:col-span-1 mx-auto">
