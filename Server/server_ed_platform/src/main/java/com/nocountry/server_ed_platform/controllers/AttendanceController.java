@@ -41,6 +41,7 @@ public class AttendanceController {
     }
 
     @Hidden
+    @Secured("TEACHER")
     @PostMapping("/save/{studentId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> saveAttendance(
             @PathVariable Long studentId,
@@ -56,6 +57,8 @@ public class AttendanceController {
         ));
     }
 
+    @Hidden
+    @Secured("TEACHER")
     @PutMapping("/update/{attendanceId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> updateTypeOfAttendanceById(
             @PathVariable Long attendanceId,
@@ -70,6 +73,7 @@ public class AttendanceController {
         return ResponseEntity.ok().body(responseDTO);
     }
 
+    @Secured({"STUDENT", "PARENT", "TEACHER"})
     @GetMapping("/{studentId}/{startDate}/{endDate}")
     public ResponseEntity<ResponseGenericDTO<AttendanceResponseDTO>> getAttendanceByStudentAndDate(
             @PathVariable Long studentId,
