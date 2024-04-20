@@ -11,9 +11,9 @@ import java.time.LocalDate;
 
 public interface AttendanceService {
 
-    AttendanceResponseDTO findAttendanceByStudentId(Long studentId);
+    AttendanceResponseDTO findAttendanceByStudentId(Long studentId) throws StudentNotFoundException;
 
-    AttendanceDTO saveAttendance(Long studentId, AttendanceDTO attendanceDTO) throws DuplicateDateException, FutureDateException;
+    AttendanceDTO saveAttendance(Long studentId, AttendanceDTO attendanceDTO) throws DuplicateDateException, FutureDateException, StudentNotFoundException;
 
     AttendanceDTO updateTypeOfAttendanceById(Long attendanceId, String type) throws AttendanceNotFoundException;
 

@@ -32,15 +32,22 @@ public class AttendanceController {
 
     @Secured({"STUDENT", "PARENT"})
     @GetMapping("/{studentId}")
-    public ResponseEntity<AttendanceResponseDTO> getAttendanceByStudentId(@PathVariable Long studentId) {
-        return ResponseEntity.ok().body(attendanceService.findAttendanceByStudentId(studentId));
+    public ResponseEntity<ResponseGenericDTO<AttendanceResponseDTO>> getAttendanceByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
+        return ResponseEntity.ok().body(new ResponseGenericDTO<>(
+                true,
+                "Peticion exitosa",
+                attendanceService.findAttendanceByStudentId(studentId))
+        );
     }
 
     @Hidden
     @PostMapping("/save/{studentId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> saveAttendance(
             @PathVariable Long studentId,
-            @Valid @RequestBody AttendanceDTO attendanceDTO) throws DuplicateDateException, FutureDateException {
+            @Valid @RequestBody AttendanceDTO attendanceDTO)
+            throws DuplicateDateException,
+            FutureDateException,
+            StudentNotFoundException {
 
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(
                 true,

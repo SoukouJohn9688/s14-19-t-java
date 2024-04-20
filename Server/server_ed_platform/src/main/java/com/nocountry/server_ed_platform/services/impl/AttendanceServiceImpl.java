@@ -36,12 +36,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 
 
     @Override
-    public AttendanceResponseDTO findAttendanceByStudentId(Long studentId) {
+    public AttendanceResponseDTO findAttendanceByStudentId(Long studentId) throws StudentNotFoundException {
 
         Optional<Student> studentDB = studentRepo.findById(studentId);
 
         if (studentDB.isEmpty()) {
-            throw new RuntimeException("Estudiante con id " + studentId + "no encontrado");
+            throw new StudentNotFoundException("Estudiante con id " + studentId + "no encontrado");
         }
 
         List<Attendance> attendancesDB = attendanceRepo.findAttendanceByStudentId(studentId);
@@ -61,12 +61,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public AttendanceDTO saveAttendance(Long studentId, AttendanceDTO attendanceDTO)
-            throws DuplicateDateException, FutureDateException {
+            throws DuplicateDateException, FutureDateException, StudentNotFoundException {
 
         Optional<Student> studentDB = studentRepo.findById(studentId);
 
         if (studentDB.isEmpty()) {
-            throw new RuntimeException("Estudiante no encontrado");
+            throw new StudentNotFoundException("Estudiante no encontrado");
         }
 
         if (studentDB.get().getAttendances().stream().anyMatch(
