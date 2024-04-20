@@ -7,6 +7,7 @@ import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
 import com.nocountry.server_ed_platform.services.TeacherService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,8 @@ public class TeacherController {
 
 
 
+    @Hidden
+    @Secured("TEACHER")
     @PostMapping("/updateTeacher/{id}")
     public ResponseEntity<TeacherDTO> updateTeacher(@PathVariable Long id){
 
@@ -48,6 +51,8 @@ public class TeacherController {
     }
 
 
+    @Hidden
+    @Secured("TEACHER")
     @GetMapping("/")
     public ResponseEntity<ResponseGenericDTO<List<TeacherDTO>>> findAll() throws TeacherNotFoundException {
 
@@ -61,6 +66,7 @@ public class TeacherController {
     }
 
     @Secured("TEACHER")
+    @Hidden
     @PutMapping("/assign/{StudentId}/subject/{SubjectId}")
     public ResponseEntity<ResponseGenericDTO<AssignAttendanceDTO>> assignAttendanceByStudentIdAndSubjectId(
             @PathVariable Long studentId,

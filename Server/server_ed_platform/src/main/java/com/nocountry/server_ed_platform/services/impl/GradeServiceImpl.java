@@ -8,6 +8,8 @@ import com.nocountry.server_ed_platform.entities.Grade;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Subject;
 import com.nocountry.server_ed_platform.enumarations.PeriodEnum;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
+import com.nocountry.server_ed_platform.exceptions.SubjectNotFoundException;
 import com.nocountry.server_ed_platform.repositories.CurrentYearRepo;
 import com.nocountry.server_ed_platform.repositories.GradeRepo;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
@@ -30,14 +32,14 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     @Transactional
-    public GradeDTO AssignByStudentIdAndSubjectId(Long studentId, Long subjectId, GradeDTO request) {
+    public GradeDTO AssignByStudentIdAndSubjectId(Long studentId, Long subjectId, GradeDTO request) throws StudentNotFoundException, SubjectNotFoundException {
         Optional<Student> studentDB = studentRepo.findById(studentId);
         if (studentDB.isEmpty()) {
-            throw new RuntimeException("estudiante no encontrado");
+            throw new StudentNotFoundException("estudiante no encontrado");
         }
         Optional<Subject> subjectDB = subjectRepo.findById(subjectId);
         if (subjectDB.isEmpty()) {
-            throw new RuntimeException("materia no encontrada");
+            throw new SubjectNotFoundException("materia no encontrada");
         }
 
         Grade response = gradeRepo.save(Grade.builder()

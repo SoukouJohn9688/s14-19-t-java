@@ -23,7 +23,7 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    @Secured("STUDENT")
+    @Secured({"STUDENT", "PARENT"})
     @GetMapping("/{studentId}")
     public ResponseEntity<ResponseGenericDTO<StudentDTO>> findByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(
@@ -32,8 +32,6 @@ public class StudentController {
                 studentService.findByStudentId(studentId)
         ));
     }
-
-
 
 
 }
