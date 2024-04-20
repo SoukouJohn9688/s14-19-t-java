@@ -4,9 +4,13 @@ import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
 import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.DuplicateDateException;
 import com.nocountry.server_ed_platform.exceptions.FutureDateException;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO;
@@ -15,23 +19,35 @@ import com.nocountry.server_ed_platform.services.AttendanceService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/api/v1/attendance")
+@Tag(name = "Attendance")
+@SecurityRequirement(name = "bearerAuth")
 @RequiredArgsConstructor
 public class AttendanceController {
 
     private final AttendanceService attendanceService;
 
-    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    @Secured({"STUDENT", "PARENT"})
     @GetMapping("/{studentId}")
-    public ResponseEntity<AttendanceResponseDTO> getAttendanceByStudentId(@PathVariable Long studentId) {
-        return ResponseEntity.ok().body(attendanceService.findAttendanceByStudentId(studentId));
+    public ResponseEntity<ResponseGenericDTO<AttendanceResponseDTO>> getAttendanceByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
+        return ResponseEntity.ok().body(new ResponseGenericDTO<>(
+                true,
+                "Peticion exitosa",
+                attendanceService.findAttendanceByStudentId(studentId))
+        );
     }
 
+    @Hidden
     @PostMapping("/save/{studentId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> saveAttendance(
             @PathVariable Long studentId,
-            @Valid @RequestBody AttendanceDTO attendanceDTO) throws DuplicateDateException, FutureDateException {
+            @Valid @RequestBody AttendanceDTO attendanceDTO)
+            throws DuplicateDateException,
+            FutureDateException,
+            StudentNotFoundException {
 
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(
                 true,
@@ -53,5 +69,18 @@ public class AttendanceController {
         );
         return ResponseEntity.ok().body(responseDTO);
     }
+
+    @GetMapping("/{studentId}/{startDate}/{endDate}")
+    public ResponseEntity<ResponseGenericDTO<AttendanceResponseDTO>> getAttendanceByStudentAndDate(
+            @PathVariable Long studentId,
+            @PathVariable LocalDate startDate,
+            @PathVariable LocalDate endDate) throws StudentNotFoundException {
+        return ResponseEntity.ok().body(new ResponseGenericDTO<>(
+                true,
+                "Peticion exitosa",
+                attendanceService.findByStudentAndDate(studentId, startDate, endDate)
+        ));
+    }
+
 
 }

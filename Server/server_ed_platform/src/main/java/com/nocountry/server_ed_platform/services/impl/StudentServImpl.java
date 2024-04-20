@@ -25,26 +25,92 @@ public class StudentServImpl implements StudentService {
     @Override
     public void AssignSubjectByCurrentYear(Long studentId, String currentYear) throws StudentNotFoundException, SubjectNotFoundException {
         // Por ahora solo agregamos una materia al estudiante en cualquier anio
+
         Optional<Student> studentDB = studentRepo.findById(studentId);
         if (studentDB.isEmpty()) {
-            throw new StudentNotFoundException("estudiante no encontrado");
+
+            throw new RuntimeException("estudiante no encontrado");
         }
+
         Optional<Subject> subject1 = subjectRepo.findById(1L);
         if (subject1.isEmpty()) {
-            throw new SubjectNotFoundException("Materia no existe");
+            throw new RuntimeException("Materia no existe");
         }
+
+        Optional<Subject> subject2 = subjectRepo.findById(2L);
+        if (subject2.isEmpty()) {
+            throw new RuntimeException("Materia no existe");
+        }
+
+        Optional<Subject> subject3 = subjectRepo.findById(3L);
+        if (subject3.isEmpty()) {
+            throw new RuntimeException("Materia no existe");
+        }
+
+        Optional<Subject> subject4 = subjectRepo.findById(4L);
+        if (subject4.isEmpty()) {
+            throw new RuntimeException("Materia no existe");
+        }
+
+        Optional<Subject> subject5 = subjectRepo.findById(5L);
+        if (subject5.isEmpty()) {
+            throw new RuntimeException("Materia no existe");
+        }
+
+        Optional<Subject> subject6 = subjectRepo.findById(6L);
+        if (subject6.isEmpty()) {
+            throw new RuntimeException("Materia no existe");
+        }
+
+
+        List<Student> listStudents=subject1.get().getStudents();
+        List<Student> listStudents2=subject2.get().getStudents();
+        List<Student> listStudents3=subject3.get().getStudents();
+        List<Student> listStudents4=subject4.get().getStudents();
+        List<Student> listStudents5=subject5.get().getStudents();
+        List<Student> listStudents6=subject6.get().getStudents();
 
 
         List<Subject> subjects = new ArrayList<>();
         subjects.add(subject1.get());
+        subjects.add(subject2.get());
+        subjects.add(subject3.get());
+        subjects.add(subject4.get());
+        subjects.add(subject5.get());
+        subjects.add(subject6.get());
+
         studentDB.get().setSubjects(subjects);
         studentRepo.save(studentDB.get());
 
-        List<Student> students = new ArrayList<>();
-        students.add(studentDB.get());
-        subject1.get().setStudents(students);
-        subjectRepo.save(subject1.get());
+//
 
+        listStudents=subject1.get().getStudents();
+        listStudents.add(studentDB.get());
+
+        listStudents2=subject2.get().getStudents();
+        listStudents2.add(studentDB.get());
+
+        listStudents3=subject3.get().getStudents();
+        listStudents3.add(studentDB.get());
+
+        listStudents4=subject4.get().getStudents();
+        listStudents4.add(studentDB.get());
+
+        listStudents5=subject5.get().getStudents();
+        listStudents5.add(studentDB.get());
+
+        listStudents6=subject6.get().getStudents();
+        listStudents6.add(studentDB.get());
+
+
+
+        subject1.get().setStudents(listStudents);
+        subject2.get().setStudents(listStudents2);
+        subject3.get().setStudents(listStudents3);
+        subject4.get().setStudents(listStudents4);
+        subject5.get().setStudents(listStudents5);
+        subject6.get().setStudents(listStudents6);
+        subjectRepo.save(subject1.get());
     }
 
     @Override

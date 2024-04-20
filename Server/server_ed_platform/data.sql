@@ -1,4 +1,6 @@
 -- Agregar las cuentas de usuario
+-- Padre
+INSERT INTO user_entity (email, password, role, username) VALUES ('parent1@email.com', '$2a$10$Toz0oLY68WhRTvu94cbcs.qZE5.z5Y0BLtH3uEKXzbtvRCk.OWy5y', 'PARENT','john_doe');
 -- Estudiante
 INSERT INTO user_entity (email, password, role, username) VALUES ('student1@email.com', '$2a$10$0TI9Lx.S0737Fqvs/DbtbODt9wYbmyKd1fpNULGWYq8tJOzkVeh0S', 'STUDENT','pedro_student');
 
@@ -25,18 +27,115 @@ INSERT INTO student (name, surname, dni, current_year_id, parent_id, address, bi
 INSERT INTO student (name, surname, dni, current_year_id, parent_id, address, birthdate, cellphone, sex) VALUES ('Miguel', 'Doe', 839457894, 3, 1, 'Dirección de Miguel', '2000-10-20', '0987654321', 'MASCULINO');
 
 -- Insertar asistencias para el estudiante con ID 1
-INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-16', 1);
-INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-15', 1);
-INSERT INTO attendance (type, date, student_id) VALUES ('INJUSTIFICADO', '2024-04-14', 1);
-INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-13', 1);
+
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-02', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-03', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-04', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-05', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-06', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-07', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-08', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-09', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-10', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-11', 1);
 INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-12', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-13', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-14', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-15', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-16', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-17', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-18', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-19', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-20', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-21', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-22', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-23', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-24', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-25', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-26', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-27', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-28', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-29', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-30', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-03-31', 1);
+
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-01', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-02', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-03', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-04', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-05', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-06', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-07', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-08', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-09', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-10', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-11', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-12', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-13', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('INJUSTIFICADO', '2024-04-14', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-15', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-16', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-17', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-18', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-19', 1);
+INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-20', 1);
 
 -- Insertar asistencias para el estudiante con ID 2
-INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-16', 2);
-INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-15', 2);
-INSERT INTO attendance (type, date, student_id) VALUES ('INJUSTIFICADO', '2024-04-14', 2);
-INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-13', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-02', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-03', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-04', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-05', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-06', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-07', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-08', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-09', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-10', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-11', 2);
 INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-12', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-13', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-14', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-15', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-16', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-17', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-18', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-19', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-20', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-21', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-22', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-23', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-24', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-25', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-26', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-27', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-28', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-29', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-30', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-03-31', 2);
+
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-01', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-02', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-03', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-04', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-05', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-06', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-07', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-08', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-09', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-10', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-11', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-12', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-13', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('INJUSTIFICADO', '2024-04-14', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('JUSTIFICADO', '2024-04-15', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-16', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-17', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('PRESENTE', '2024-04-18', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-19', 2);
+INSERT INTO attendance (type, date, student_id) VALUES ('NO_COMPUTABLE', '2024-04-20', 2);
+
+
+
+
 
 -- Insertar las 6 materias a los estudiantes
 INSERT INTO student_subject (student_id, subject_id) VALUES (1, 1);
