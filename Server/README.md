@@ -73,9 +73,18 @@
 
 ### Usuarios
 1. Estudiante
+   
     ```json
     {
         "email": "student1@email.com",
         "password": "Student#123"
+    }
+    ```
+2. Padre
+
+   ```json
+    {
+        "email": "parent1@email.com",
+        "password": "Parent#123"
     }
     ```
