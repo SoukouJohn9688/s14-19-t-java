@@ -40,7 +40,6 @@ public class AttendanceController {
         );
     }
 
-    @Hidden
     @PostMapping("/save/{studentId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> saveAttendance(
             @PathVariable Long studentId,

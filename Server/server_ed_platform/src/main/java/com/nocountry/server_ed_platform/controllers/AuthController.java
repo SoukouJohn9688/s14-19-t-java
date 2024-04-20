@@ -5,7 +5,6 @@ import com.nocountry.server_ed_platform.dtos.RegisterDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AuthResponseDTO;
 import com.nocountry.server_ed_platform.exceptions.EmailExistsException;
 import com.nocountry.server_ed_platform.services.AuthService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 @Tag(name = "Auth")
-@SecurityRequirement(name = "bearerAuth")
 public class AuthController {
 
     private final AuthService authService;
