@@ -6,6 +6,7 @@ import authReducer from './Auth/auth'
 import notificationsReducer from "./Notifications/notifications";
 import gradesReducer from "./Grades/grades"
 import attendanceReducer from "./Attendance/attendance"
+ 
 const reducers = combineReducers({
     auth: authReducer,
     notifications: notificationsReducer,
@@ -16,7 +17,7 @@ const reducers = combineReducers({
 const persistConfig ={
     key: 'root',
     storage,
-    whitelist: ['auth']
+    whitelist: []
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers)
@@ -27,3 +28,5 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+
