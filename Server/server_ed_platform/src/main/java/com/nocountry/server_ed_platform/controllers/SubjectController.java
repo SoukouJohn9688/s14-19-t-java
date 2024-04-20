@@ -23,7 +23,7 @@ public class SubjectController {
 
     private final SubjectService subjectService;
 
-    @Secured({"STUDENT", "PARENT"})
+    @Secured({"STUDENT", "PARENT","TEACHER"})
     @GetMapping("/{studentId}")
     public ResponseEntity<ResponseGenericDTO<SubjectListResponseDTO>> findSubjectsByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(

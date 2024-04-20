@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,6 +49,8 @@ public class TeacherController {
     }
 
 
+
+    @Secured("TEACHER")
     @GetMapping("/")
     public ResponseEntity<ResponseGenericDTO<List<TeacherDTO>>> findAll() throws TeacherNotFoundException {
 
@@ -61,10 +64,10 @@ public class TeacherController {
     }
 
     @Secured("TEACHER")
-    @PutMapping("/assign/{StudentId}/subject/{SubjectId}")
+    @PostMapping("/assign/{StudentId}/subject/{SubjectId}")
     public ResponseEntity<ResponseGenericDTO<AssignAttendanceDTO>> assignAttendanceByStudentIdAndSubjectId(
-            @PathVariable Long studentId,
-            @PathVariable Long subjectId,
+            @PathVariable("StudentId") Long studentId,
+            @PathVariable("SubjectId") Long subjectId,
             @RequestBody AttendanceDTO attendanceRequest) throws AttendanceNotFoundException {
 
         AssignAttendanceDTO assignedAttendance = teacherService.AssignAttendanceByStudentIdAndSubjectId(studentId,subjectId,attendanceRequest);
