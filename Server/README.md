@@ -45,7 +45,7 @@
     docker ps
     ```
 
-2. Introduce los datos del siguiente [script](https://github.com/No-Country/s14-19-t-java/tree/dev-backend-attendance/Server/server_ed_platform/data.sql).
+2. Introduce los datos del siguiente [script](https://github.com/No-Country/s14-19-t-java/blob/dev/Server/server_ed_platform/data.sql).
 
 ### En caso de haber cambios en el server debes eliminar los contenedores e imaneges creadas.
 
