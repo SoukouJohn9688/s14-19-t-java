@@ -2,12 +2,16 @@ import CardProfile from "@/components/CardProfile/CardProfile";
 import React, { useState } from "react";
 import CalendarioGeneral from "@/components/CalendarioGeneral/CalendarioGeneral";
 import { CardStudents } from "@/components/CardStudents/CardStudents";
+import { CardTeachers } from "@/components/CardTeachers/CardTeachers";
+import { CardParents } from "@/components/CardParents/CardParents";
 import GradeTable from "@/components/Table/GradeTable";
 import CalendarioAsistencias from "@/components/CalendarioAsistencias/CalendarioAsistencias";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const [showGradeTable, setShowGradeTable] = useState(false);
   const [showCalendarAsis, setShowCalendarAsis] = useState(false);
+  const userRol = useSelector((state) => state.auth.userRol);
 
   const toggleGradeTable = () => {
     setShowGradeTable(true);
@@ -23,6 +27,28 @@ const Home = () => {
     setShowCalendarAsis(false);
   };
 
+  let mainComponent;
+
+  if (userRol === "alumno") {
+    mainComponent = (
+      <CardStudents
+        onShowGradeTable={() => setShowGradeTable(true)}
+        onShowCalendarAsis={toggleCalendarAsis}
+      />
+    );
+  } else if (userRol === "docente") {
+    mainComponent = <CardTeachers 
+    
+    />;
+  } else if (userRol === "padre") {
+    mainComponent = (
+      <CardParents
+        onShowGradeTable={() => setShowGradeTable(true)}
+        onShowCalendarAsis={toggleCalendarAsis}
+      />
+    );
+  }
+
   return (
     <div className="mt-12">
       <div className="bg-gray-50 p-10">
@@ -33,10 +59,7 @@ const Home = () => {
             </div>
           </div>
           <div className="gap-5 grid col-span-3">
-            <CardStudents
-              onShowGradeTable={() => setShowGradeTable(true)}
-              onShowCalendarAsis={toggleCalendarAsis}
-            />
+            {mainComponent}
             {showGradeTable && <GradeTable />}
             {!showCalendarAsis && <CalendarioGeneral />}
             {showCalendarAsis && <CalendarioAsistencias />}

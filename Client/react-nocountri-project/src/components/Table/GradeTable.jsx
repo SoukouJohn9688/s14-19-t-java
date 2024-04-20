@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
+
 
 const GradeTable = () => {
   const subjects = ["matemáticas", "lengua", "ciencias sociales", "ciencias naturales", "educación física", "arte", "inglés"];
   const [grades, setGrades] = useState({});
   const [showIntensification, setShowIntensification] = useState({});
+  const userRol = useSelector((state) => state.auth.userRol);
 
   // Inicializar las calificaciones para cada materia
   useEffect(() => {
@@ -97,7 +100,7 @@ const GradeTable = () => {
                         </div>
                       ))}
                       {semester !== 'Intensificación' && 
-                        <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, semester)}>+</button>
+                        userRol === 'docente' && <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, semester)}>+</button>
                       }
                     </div>
                     {semester !== 'Intensificación' && 
@@ -125,7 +128,7 @@ const GradeTable = () => {
                         />
                       </div>
                     ))}
-                    {showIntensification[subject] && grades[subject]?.['Intensificación'].length < 3 && (
+                    {showIntensification[subject] && grades[subject]?.['Intensificación'].length < 3 && userRol === 'docente' && (
                       <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, 'Intensificación')}>+</button>
                     )}
                   </div>
