@@ -66,11 +66,6 @@
     ```
     docker images
     ```
-### Importacion de colecciones de postman
-> **NOTA** Descargue e importe los archivos `json`
-1. `environment` [json](https://github.com/No-Country/s14-19-t-java/blob/dev-backend-xonlinex/Server/Server_Ed_platform.postman_environment.json)
-2. `collection` [json](https://github.com/No-Country/s14-19-t-java/blob/dev-backend-xonlinex/Server/Server_Ed_Requests.postman_collection.json)
-
 ### Usuarios
 1. Estudiante
    
@@ -88,3 +83,4 @@
         "password": "Parent#123"
     }
     ```
+> url de [swagger](http://localhost:8080/swagger-ui.html).
