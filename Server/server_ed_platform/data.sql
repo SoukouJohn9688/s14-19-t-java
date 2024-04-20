@@ -15,6 +15,7 @@ INSERT INTO subject (name) VALUES ('FISICA');
 -- Insertar padres adicionales
 INSERT INTO parent (name, surname, dni, address, birthdate, cellphone, sex) VALUES ('John', 'Doe', 123456789, 'Calle Falsa 123', '1958-10-23', '84893799', 'MASCULINO');
 
+
 -- Insertar
 INSERT INTO current_year (year) VALUES ('PRIMER_AÑO');
 INSERT INTO current_year (year) VALUES ('SEGUNDO_AÑO');
@@ -23,8 +24,8 @@ INSERT INTO current_year (year) VALUES ('TERCER_AÑO');
 -- Insertar estudiantes asociados a los padres con IDs del 1 al 5
 -- Dos estudiantes para John Doe (ID de padre: 1)
 INSERT INTO student (name, surname, dni, current_year_id, parent_id, address, birthdate, cellphone, sex) VALUES ('Pedro', 'Doe', 893478578, 1, 1, 'Calle falsa 123', '1998-05-15', '1234567890', 'MASCULINO');
-
 INSERT INTO student (name, surname, dni, current_year_id, parent_id, address, birthdate, cellphone, sex) VALUES ('Miguel', 'Doe', 839457894, 3, 1, 'Calle falsa 123', '2000-10-20', '0987654321', 'MASCULINO');
+
 
 -- Insertar asistencias para el estudiante con ID 1
 
