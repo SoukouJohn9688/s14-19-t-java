@@ -6,12 +6,14 @@ import authReducer from './Auth/auth'
 import notificationsReducer from "./Notifications/notifications";
 import gradesReducer from "./Grades/grades"
 import attendanceReducer from "./Attendance/attendance"
+import calendarReducer from "./Calendar/calendar"
  
 const reducers = combineReducers({
     auth: authReducer,
     notifications: notificationsReducer,
     grades: gradesReducer,
     attendance: attendanceReducer,
+    calendar: calendarReducer  
 });
 
 const persistConfig ={
