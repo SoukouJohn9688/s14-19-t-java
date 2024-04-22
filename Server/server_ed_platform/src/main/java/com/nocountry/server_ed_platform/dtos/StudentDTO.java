@@ -25,5 +25,6 @@ public class StudentDTO {
     private SexEnum sex;
     private String address;
     private String cellphone;
+    private ParentDTO parent;
 
 }
