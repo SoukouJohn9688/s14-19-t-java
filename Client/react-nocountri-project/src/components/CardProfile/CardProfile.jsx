@@ -1,5 +1,4 @@
-import React from "react";
-import { Button, Card } from "flowbite-react";
+
 import Logo from "../../assets/Logo-Card.png";
 import Telephone from "../../assets/telephone.svg";
 import Ubicacion from "../../assets/ubicacion.svg";
@@ -25,7 +24,7 @@ const CardProfile = () => {
     <>
       {profiles.slice(0, 1).map((profile) => (
         <div
-          className="border-[2px] shadow-xl p-8 border-black rounded-2xl max-w-[500px] mx-auto"
+          className="border-[2px] shadow-xl p-8 rounded-2xl max-w-[500px] mx-auto"
           key={profile.email}
         >
           <div className="flex justify-center items-center">
