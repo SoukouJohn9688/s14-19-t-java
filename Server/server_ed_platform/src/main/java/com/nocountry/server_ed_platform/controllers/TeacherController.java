@@ -1,13 +1,12 @@
 package com.nocountry.server_ed_platform.controllers;
 
 import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
+import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignAttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.Response.ResponseGenericDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
-import com.nocountry.server_ed_platform.entities.Teacher;
 import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
-import com.nocountry.server_ed_platform.services.AttendanceService;
 import com.nocountry.server_ed_platform.services.TeacherService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +26,7 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/teacher")
 @RequiredArgsConstructor
 @Tag(name = "Teacher")
+@SecurityRequirement(name = "bearerAuth")
 public class TeacherController {
 
 
@@ -36,19 +37,24 @@ public class TeacherController {
 
 
     @PostMapping("/updateTeacher/{id}")
-    public ResponseEntity<TeacherDTO> updateTeacher(@PathVariable Long id){
+    public ResponseEntity<TeacherDTO> updateTeacher(@PathVariable Long id, @RequestBody TeacherRegisterDTO teacherDTO) throws TeacherNotFoundException, Exception {
 
         try {
-            TeacherDTO foundTeacher=teacherService.findById(id);
-            logger.info("Updated teacher with ID: " + foundTeacher.getTeacher_id());
-            return new ResponseEntity<>(foundTeacher, HttpStatus.OK);
-        }catch(Exception ex){
-            logger.error("Error creating PET: " + ex.getMessage() + " cause: " + ex.getCause());
-            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+            TeacherDTO updatedTeacher = teacherService.updateTeacher(id, teacherDTO);
+            logger.info("El profesor fue actualizado con el id: " + updatedTeacher.getTeacher_id());
+            return new ResponseEntity<>(updatedTeacher, HttpStatus.OK);
+        } catch (TeacherNotFoundException excep) {
+            logger.error("El Teacher con el ID " + id + " no fue encontrado", excep);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception excep) {
+            logger.error("Error al editar el teacher: " + excep.getMessage(), excep);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
 
+
+    @Secured("TEACHER")
     @GetMapping("/")
     public ResponseEntity<ResponseGenericDTO<List<TeacherDTO>>> findAll() throws TeacherNotFoundException {
 
@@ -62,10 +68,10 @@ public class TeacherController {
     }
 
     @Secured("TEACHER")
-    @PutMapping("/assign/{StudentId}/subject/{SubjectId}")
+    @PostMapping("/assign/{StudentId}/subject/{SubjectId}")
     public ResponseEntity<ResponseGenericDTO<AssignAttendanceDTO>> assignAttendanceByStudentIdAndSubjectId(
-            @PathVariable Long studentId,
-            @PathVariable Long subjectId,
+            @PathVariable("StudentId") Long studentId,
+            @PathVariable("SubjectId") Long subjectId,
             @RequestBody AttendanceDTO attendanceRequest) throws AttendanceNotFoundException {
 
         AssignAttendanceDTO assignedAttendance = teacherService.AssignAttendanceByStudentIdAndSubjectId(studentId,subjectId,attendanceRequest);
@@ -75,6 +81,18 @@ public class TeacherController {
                 assignedAttendance
         );
         return ResponseEntity.ok().body(responseDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseGenericDTO<Void>> deleteTeacherById(@PathVariable Long teacher_id) throws TeacherNotFoundException {
+        teacherService.deleteById(teacher_id);
+        return ResponseEntity.ok().body(
+                new ResponseGenericDTO<>(
+                        true,
+                        "Profesor eliminado correctamente",
+                        null
+                )
+        );
     }
 
 

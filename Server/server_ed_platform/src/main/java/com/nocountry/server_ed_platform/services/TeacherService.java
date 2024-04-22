@@ -26,4 +26,6 @@ public interface TeacherService {
 
 
     AssignAttendanceDTO AssignAttendanceByStudentIdAndSubjectId(Long StudentId, Long SubjectId, AttendanceDTO request);
+
+    TeacherDTO deleteById(Long id) throws TeacherNotFoundException;
 }
