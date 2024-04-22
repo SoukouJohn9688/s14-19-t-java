@@ -10,9 +10,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-
-
+} from "@/components/ui/select";
 
 const Register = () => {
   const emailRef = useRef(null);
@@ -23,7 +21,7 @@ const Register = () => {
   const DNIDocenteRef = useRef(null);
   const checkboxRef = useRef(null);
   const [isChecked, setIsChecked] = useState(false);
-  const [rol, setRol] = useState(null)
+  const [rol, setRol] = useState(null);
 
   useEffect(() => {
     console.log("Rol actualizado:", rol);
@@ -33,21 +31,21 @@ const Register = () => {
     setIsChecked(!isChecked);
   };
 
-    const handleSelect = (nuevoRol) => {
+  const handleSelect = (nuevoRol) => {
     console.log("Nuevo rol seleccionado:", nuevoRol);
     setRol(nuevoRol);
-  }
+  };
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-200"
+      className="flex flex-col items-center justify-center bg-gray-200 sm:min-h-screen"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="max-w-md w-full space-y-8 p-8 rounded-lg shadow-lg text-center bg-transparent">
+      <div className="space-y-8 my-28 sm:mt-20 sm:mb-6 p-8 bg-transparent shadow-lg  rounded-lg w-full max-w-md text-center">
         <h1 className="text-3xl font-bold text-gray-700">
           Registrar un usuario
         </h1>
@@ -74,59 +72,55 @@ const Register = () => {
             className="bg-transparent border border-slate-400"
             ref={contraseñaRef}
           />
-    <Select onValueChange={(e) => handleSelect(e)}>
-        <SelectTrigger className="w-[280px]">
-        <SelectValue placeholder="Selecciona tu rol" />
-        </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Rol</SelectLabel>
-          <SelectItem value="docente">Docente</SelectItem>
-          <SelectItem value="alumno">Alumno</SelectItem>
-          <SelectItem value="padre">Padre, madre o tutor</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+          <Select onValueChange={(e) => handleSelect(e)}>
+            <SelectTrigger className="w-[280px]">
+              <SelectValue placeholder="Selecciona tu rol" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Rol</SelectLabel>
+                <SelectItem value="docente">Docente</SelectItem>
+                <SelectItem value="alumno">Alumno</SelectItem>
+                <SelectItem value="padre">Padre, madre o tutor</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
 
           {rol === "docente" && (
-          <>
-             <Input
-            type = "number"
-            placeholder="DNI del docente"
-            className="bg-transparent border border-slate-400"
-            ref={DNIDocenteRef}
-            />
-          
-          </>
-           
+            <>
+              <Input
+                type="number"
+                placeholder="DNI del docente"
+                className="bg-transparent border border-slate-400"
+                ref={DNIDocenteRef}
+              />
+            </>
           )}
 
           {rol === "alumno" && (
             <Input
-            type = "number"
-            placeholder="DNI del alumno"
-            className="bg-transparent border border-slate-400"
-            ref={DNIAlumnoRef}
+              type="number"
+              placeholder="DNI del alumno"
+              className="bg-transparent border border-slate-400"
+              ref={DNIAlumnoRef}
             />
           )}
 
           {rol === "padre" && (
             <>
               <Input
-            type = "number"
-            placeholder="DNI del padre, madre o tutor"
-            className="bg-transparent border border-slate-400"
-            ref={DNIPadresRef}
-            />
-            <Input
-            type = "number"
-            placeholder="DNI del alumno"
-            className="bg-transparent border border-slate-400"
-            ref={DNIAlumnoRef}
-            />
-            
+                type="number"
+                placeholder="DNI del padre, madre o tutor"
+                className="bg-transparent border border-slate-400"
+                ref={DNIPadresRef}
+              />
+              <Input
+                type="number"
+                placeholder="DNI del alumno"
+                className="bg-transparent border border-slate-400"
+                ref={DNIAlumnoRef}
+              />
             </>
-            
           )}
           <label className="flex items-center justify-center">
             <Checkbox
@@ -145,12 +139,16 @@ const Register = () => {
           </label>
 
           <div className="flex flex-row gap-4">
-            <Button className="w-[70%] mx-auto mt-4 shadow-lg flex flex-row justify-center text-gray-700 bg-[rgba(245, 236, 239, 1)] hover:bg-[#d1cdce]  border-solid border-2 border-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={() => {}}>
+            <Button
+              className="w-[70%] mx-auto mt-4 shadow-lg flex flex-row justify-center text-gray-700 bg-[rgba(245, 236, 239, 1)] hover:bg-[#d1cdce]  border-solid border-2 border-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={() => {}}
+            >
               Cancelar
             </Button>
-            <Button className="w-[70%] mx-auto mt-4 flex justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-              onClick={() => {}}>
+            <Button
+              className="w-[70%] mx-auto mt-4 flex justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={() => {}}
+            >
               Registrarse
             </Button>
           </div>
@@ -158,7 +156,7 @@ const Register = () => {
 
         <p className="mt-4">
           ¿Ya tienes cuenta?
-          <Link to={'/'} className="text-blue-500">
+          <Link to={"/"} className="text-blue-500">
             Acceder
           </Link>
         </p>
