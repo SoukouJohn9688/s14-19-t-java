@@ -143,3 +143,13 @@ export const PadresData = [
   },
 
 ];
+
+
+export const events = [
+  {
+    id: 1,
+    title: 'Event 1',
+    start: new Date(),
+    end: new Date(),
+  }
+]

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const initialState = {
   attendance: [], // Array para almacenar la asistencia de los alumnos
-  attendanceById: {} // Objeto para filtrar las asistencias por el id del estudiante
+  attendanceById: {} // Objeto para guardar las asistencias por el id del estudiante
 };
 
 const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJjODFmOTRhOS1jMmNmLTQ0NTItYmFmMi1mYWYyZTNlN2MyMjYiLCJlbWFpbCI6ImFndXN0aW5AZW1haWwuY29tIiwicm9sZSI6IkNsaWVudGUiLCJDbGllbnRVc2VySWQiOiIyIiwibmJmIjoxNzEwMzcxMTgzLCJleHAiOjE3MTA0NTc1ODMsImlhdCI6MTcxMDM3MTE4M30.RgU3Q1bjuWcp8NFc4YZ-p0fZGJPtT5cJSnQUie9DAnw"
@@ -13,7 +13,20 @@ export const getAttendanceById = createAsyncThunk('attendance/getAttendanceById'
     const response = await axios(`http://localhost:8080/api/v1/attendance/${idStudent}`, {
       headers: {
         'Authorization': `Bearer ${authToken}`,
-       
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data
+  } catch (error) {
+    throw Error(error.message);
+  }
+})
+
+export const postAttendance = createAsyncThunk('attendance/postAttendance', async (attendance) => {
+  try {
+    const response = await axios.post(``, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
         'Content-Type': 'application/json'
       }
     });
@@ -24,16 +37,15 @@ export const getAttendanceById = createAsyncThunk('attendance/getAttendanceById'
 })
 
 
+
 const attendanceSlice = createSlice({
   name: 'attendance',
   initialState,
   reducers: {
-    // getAttendance(state, action) {
-    //   // tengo que hacer una funcion para hacer un get de la base de datos
-    //   // y despues ejecutar esta accion para pasar la asistencia de la base de datos al state
-    //   // Almacena las asistencias de los alumnos
-    //   state.attendance.push(action.payload);
-    // },
+    addAttendance(state, action) {
+      // Almacena las asistencias que guarda el docente
+      state.attendance = action.payload;
+    },
     // filterAttendanceById(state, action) {
     //   // filtra las asistencias por el id del estudiante
     //   const { idStudent } = action.payload;
@@ -63,12 +75,16 @@ const attendanceSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAttendanceById.fulfilled, (state, action) => {
       state.attendanceById = action.payload
-      // console.log("action.payload", action.payload)
-      // console.log('attendanceById:', state.attendanceById);
+    })
+
+  },
+  extraReducers: (builder) => {
+    builder.addCase(postAttendance.fulfilled, (state, action) => {
+      state.attendance = action.payload
     })
   }
 });
 
-export const { markAttendance, removeAttendance } = attendanceSlice.actions;
+export const { markAttendance, removeAttendance, addAttendance } = attendanceSlice.actions;
 
 export default attendanceSlice.reducer;

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -8,22 +7,28 @@ import es from '@fullcalendar/core/locales/es';
 import Swal from 'sweetalert2'
 import "./CalendarioAsistencias.css"
 import { useDispatch, useSelector } from "react-redux";
-import { getAttendanceById } from "../../redux/Attendance/attendance"
+import { addAttendance, getAttendanceById, postAttendance } from "../../redux/Attendance/attendance"
 import { AlumnosData } from "@/mock";
 const CalendarioAsistencias = () => {
   const [asist] = useState(AlumnosData)
 
-  // const dispatch = useDispatch()
+  // const userRol = useSelector((state) => state.auth.userRol);
+  const userRol = useSelector((state) => state.auth.userRol);
+  const asistenciasDocente = useSelector((state) => state.attendance.attendance);
+  console.log(asistenciasDocente, "asistenciasDocente")
+  const dispatch = useDispatch()
+
   // const asistencia = useSelector(state => state.attendance.attendanceById)
 
   // console.log(asistencia, "asistencia")
   // useEffect(() => {
-  //   dispatch(getAttendanceById(2))
+  //   dispatch(getAttendanceById(2))¿
 
   // }, [])
   // const selector = useSelector()
 
   const [allEvents, setAllEvents] = useState([]);
+
   useEffect(() => {
 
     const colorMapping = {
@@ -32,6 +37,7 @@ const CalendarioAsistencias = () => {
       'INJUSTIFICADO': '#FF0000',
       "NO_COMPUTABLE": '#3B82F6'
     };
+
     asist.map(asisto => {
       const updatedEvents = asisto.attendances.map(asistencia => ({
         id: asistencia.id,
@@ -45,9 +51,7 @@ const CalendarioAsistencias = () => {
 
   }, []); // 
 
-  console.log(allEvents, "allEvents");
-
-  const userRol = useSelector((state) => state.auth.userRol);
+  // console.log(allEvents, "allEvents");
 
   const [events, setEvents] = useState([
     { id: "1", title: "Presente", color: "#22C55E", backgroundColor: "#22C55E" },
@@ -55,7 +59,7 @@ const CalendarioAsistencias = () => {
     { id: "3", title: "Tardanza/ Ausente injustificado", color: "#FF0000", backgroundColor: "#FF0000" },
     { id: "4", title: "Tardanza/ Ausente no computable", color: "#3B82F6", backgroundColor: "#3B82F6" }
   ]);
-  
+
   // const [editable, setEditable] = useState(true);
 
   useEffect(() => {
@@ -69,7 +73,7 @@ const CalendarioAsistencias = () => {
           let id = eventEl.getAttribute("data")
           let start = eventEl.getAttribute("start")
           let color = eventEl.dataset.color
-          return { title, id, start, color, }
+          return { title, id, start, color }
         }
       });
 
@@ -82,7 +86,8 @@ const CalendarioAsistencias = () => {
 
   const handleEventClick = (clickInfo) => {
     console.log(clickInfo.event.id)
-    if (clickInfo.event.id) {
+    // if (clickInfo.event.id) {
+    if (userRol === "docente") {
       Swal.fire({
         title: "¿Eliminar evento?",
         text: "No podras revertir este cambio!",
@@ -115,11 +120,10 @@ const CalendarioAsistencias = () => {
       start: dropInfo.dateStr,
       color: dropInfo.draggedEl.dataset.color,
     }
-    setAllEvents(prevEvents =>
-      [...prevEvents, eventupdated]);
+    dispatch(addAttendance(eventupdated))
+    // dispatch(postAttendance(eventupdated))
+    setAllEvents(prevEvents => [...prevEvents, eventupdated]);
   }
-
-
 
   return (
     <div className="flex justify-center pt-8 ">
@@ -148,7 +152,7 @@ const CalendarioAsistencias = () => {
           eventClassNames="fc-pointer"
         />
       </div>
-      { userRol === 'docente' &&(<div className="col-span-1 p-4 mt-12">
+      {userRol === 'docente' && (<div className="col-span-1 p-4 mt-12">
         {/* <h1 className="text-lg font-bold mb-4 ">Referencias arrastables</h1> */}
         <div id="draggable-el" className="p-2 bg-gray-200 rounded-md w-72 ">
           {
