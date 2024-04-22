@@ -5,7 +5,7 @@ import { FaGraduationCap, FaRegCalendarCheck } from "react-icons/fa";
 
 const StudentRecord = ({ onShowGradeTable, onShowCalendarAsis }) => {
   return (
-    <div className="flex flex-col p-5 gap-5 border-b-[1px] last:border-0 pb-5 lg:w-[95%] md:border-b-0">
+    <div className="flex flex-col p-3 gap-5 border-b-[1px] last:border-0 pb-5 lg:w-[95%] md:border-b-0">
       <div className="flex items-center p-2">
         <HiUserCircle className="text-[#57CAAA] text-6xl m-2" />
         <h2 className="uppercase">Cabrera, Andres</h2>

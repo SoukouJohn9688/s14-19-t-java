@@ -1,5 +1,7 @@
 package com.nocountry.server_ed_platform.dtos;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -19,6 +21,7 @@ public class AttendanceDTO {
     @NotBlank(message = "El campo 'type' no puede estar en blanco")
     @Pattern(regexp = "presente|justificado|injustificado|no_computable",
             message = "El campo 'type' debe ser una de las opciones: presente, justificado, injustificado o no_computable")
+    @Enumerated(EnumType.STRING)
     private String type;
 
     @NotNull(message = "El campo 'date' no puede ser nulo")
