@@ -9,6 +9,7 @@ import com.nocountry.server_ed_platform.repositories.ParentRepo;
 import com.nocountry.server_ed_platform.services.ParentService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,8 +68,28 @@ public class ParentServImpl implements ParentService {
 
     }
 
+
+    //Metodo para desplegar informacion a editar.
+
     @Override
-    public ParentDTO updateParentById(Long StudentId, Long ParentId) {
+    @Transactional
+    public ParentDTO updateParentById(Long StudentId, Long ParentId) throws ParentNotFoundException {
+
+
+        Optional<Parent> parentDB = parentRepo.findById(ParentId);
+
+        if (parentDB.isPresent()) {
+            List<StudentDTO> foundStudents=findAllChildrenByParentId(parentDB.get().getId());
+            
+        }else{
+
+            throw new ParentNotFoundException(String.format("Padre con id %s no encontrado", ParentId));
+        }
+
+
+
+
+
         return null;
     }
 

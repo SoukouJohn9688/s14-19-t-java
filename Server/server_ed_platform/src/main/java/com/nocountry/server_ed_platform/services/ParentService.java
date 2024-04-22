@@ -19,5 +19,5 @@ public interface ParentService {
 
     //Metodos Admin.
 
-    ParentDTO updateParentById(Long StudentId, Long ParentId);
+    ParentDTO updateParentById(Long StudentId, Long ParentId) throws ParentNotFoundException;
 }

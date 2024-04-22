@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/attendance")
+@RequestMapping("/api/v1/admin")
 @Tag(name = "Admin")
 @SecurityRequirement(name = "bearerAuth")
 @RequiredArgsConstructor
 public class AdminController {
 
-    
+
 
 
 }
