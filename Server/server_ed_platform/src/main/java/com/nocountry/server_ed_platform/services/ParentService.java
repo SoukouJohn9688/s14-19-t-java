@@ -16,4 +16,8 @@ public interface ParentService {
     ParentDTO findById(Long parentId) throws ParentNotFoundException;
 
     List<StudentDTO> findAllChildrenByParentId(Long parentId) throws ParentNotFoundException;
+
+    //Metodos Admin.
+
+    ParentDTO updateParentById(Long StudentId, Long ParentId);
 }

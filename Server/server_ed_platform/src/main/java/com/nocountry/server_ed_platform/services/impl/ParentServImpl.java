@@ -67,5 +67,10 @@ public class ParentServImpl implements ParentService {
 
     }
 
+    @Override
+    public ParentDTO updateParentById(Long StudentId, Long ParentId) {
+        return null;
+    }
+
 
 }
