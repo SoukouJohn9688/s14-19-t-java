@@ -13,10 +13,10 @@ const reducers = combineReducers({
     attendance: attendanceReducer,
 });
 
-const persistConfig ={
+const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth']
+    whitelist: ['auth','attendance']
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers)
