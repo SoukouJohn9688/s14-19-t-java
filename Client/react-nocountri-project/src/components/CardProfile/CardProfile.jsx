@@ -24,8 +24,8 @@ const CardProfile = () => {
   return (
     <>
       {profiles.slice(0, 1).map((profile) => (
-        <Card
-          className="border-[2px] shadow-xl p-8 border-black"
+        <div
+          className="border-[2px] shadow-xl p-8 border-black rounded-2xl max-w-[500px] mx-auto"
           key={profile.email}
         >
           <div className="flex justify-center items-center">
@@ -34,7 +34,7 @@ const CardProfile = () => {
             </div>
           </div>
 
-          <div className="px-8 py-3">
+          <div className="py-3">
             <div className="flex justify-center items-center mb-4">
               <img src={fotoUser} alt="img" className="h-40" />{" "}
             </div>
@@ -57,7 +57,7 @@ const CardProfile = () => {
                 Nacionalidad: Argentina
               </p>
             </div>
-            <hr className="border-gray-200 my-6 lg:my-8 w-full" />
+            <hr className="border-gray-200 my-6 w-full" />
             <div>
               <h6 className="flex justify-start font-bold text-l">
                 {" "}
@@ -69,7 +69,7 @@ const CardProfile = () => {
                 Localidad: Buenos Aires, Argentina.
               </p>
             </div>
-            <hr className="border-gray-200 my-6 lg:my-8 w-full" />
+            <hr className="border-gray-200 my-6 w-full" />
             <div>
               <h6 className="flex justify-start gap-1 font-bold text-l">
                 {" "}
@@ -84,7 +84,7 @@ const CardProfile = () => {
               </p>
             </div>
           </div>
-        </Card>
+        </div>
       ))}
     </>
   );

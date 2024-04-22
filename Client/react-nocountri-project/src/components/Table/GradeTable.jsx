@@ -67,7 +67,7 @@ const GradeTable = () => {
   };
 
   return (
-    <div>
+    <div className='overflow-x-auto'>
       <table className="w-full border-collapse border border-black">
         <thead>
           <tr className="bg-gray-200">
