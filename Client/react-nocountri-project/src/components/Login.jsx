@@ -69,14 +69,14 @@ const Login = () => {
 
   return (
     <div
-      className="flex flex-col justify-center items-center bg-gray-200 min-h-screen"
+      className="flex flex-col justify-center items-center bg-gray-200 sm:min-h-screen"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="space-y-8 bg-transparent shadow-lg p-8 rounded-lg w-full max-w-md text-center">
+      <div className="space-y-8 my-28 sm:mt-20 sm:mb-6 p-8 bg-transparent shadow-lg  rounded-lg w-full max-w-md text-center">
         <h1 className="font-bold text-2xl place" style={{ color: color }}>
           {titulo}
         </h1>

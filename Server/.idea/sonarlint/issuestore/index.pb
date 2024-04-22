@@ -77,8 +77,6 @@ dserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/services/impl
 dserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/services/impl/AuthServiceImpl.java,c\b\cb3d6a29bf2e4b1dcc352f31427a701a189287a6
 ú
 lserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/exceptions/ClassroomNotFoundException.java,d\a\da3a6301430328c4d9f7f2d6c3038853a26a06c6
-ñ
-fserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/advice/RegjsterExceptionHandler.java,1\6\16ee95b2decc41756399996eb6e0348f4eb249ad
 ì
 cserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/ParentController.java,2\2\22e78d3c6d5d985d29ba73710f01656dc4356246
 î
@@ -99,3 +97,11 @@ eserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/advice/Subjec
 gserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/services/impl/SubjectServiceImpl.java,2\a\2ae2556f24c54535ee52a0e78b28f44f00a076d9
 î
 dserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/SubjectController.java,2\c\2cca96c418345500c184e0442addc16b8a097d9f
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+ê
+`server_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/OpenApiConfig.java,6\9\69320e6820a976e1e67f8efcc78406d57c043aec
+í
+bserver_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/GradeController.java,6\3\63b30dcae11d1a4e104842cad42b4a93f9f5ce3d
+ã
+[server_ed_platform/src/main/java/com/nocountry/server_ed_platform/config/OpenApiConfig.java,4\c\4c37a34ca24d7bd3ea7f8bf68e8f9fa4f868adf4

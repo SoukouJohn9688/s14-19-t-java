@@ -1,5 +1,5 @@
 import CardProfile from "@/components/CardProfile/CardProfile";
-import React, { useState } from "react";
+import { useState } from "react";
 import CalendarioGeneral from "@/components/CalendarioGeneral/CalendarioGeneral";
 import { CardStudents } from "@/components/CardStudents/CardStudents";
 import { CardTeachers } from "@/components/CardTeachers/CardTeachers";
@@ -51,14 +51,14 @@ const Home = () => {
 
   return (
     <div className="mt-12">
-      <div className="bg-gray-50 p-10">
-        <div className="gap-5 lg:gap-5 grid lg:grid-cols-4 grid-flow-row md:grid-flow-col">
-          <div className="md:col-span-1 mx-auto">
-            <div className="top-10 sticky">
-              <CardProfile />
+      <div className="bg-gray-50 p-8 lg:p-12">
+        <div className=" md:gap-5 md:grid lg:grid-cols-3 grid-flow-row md:grid-flow-col">
+          <div className="md:col-span-1">
+            <div className="top-10 sticky mb-16 lg:mb-0">
+              <CardProfile/>
             </div>
           </div>
-          <div className="gap-5 grid col-span-3">
+          <div className="gap-5 grid col-span-2 mb-10 lg:mb-0 lg:mx-9">
             {mainComponent}
             {showGradeTable && <GradeTable />}
             {!showCalendarAsis && <CalendarioGeneral />}

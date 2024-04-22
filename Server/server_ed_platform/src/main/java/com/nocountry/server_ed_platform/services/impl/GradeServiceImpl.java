@@ -2,13 +2,14 @@ package com.nocountry.server_ed_platform.services.impl;
 
 import com.nocountry.server_ed_platform.dtos.GradeDTO;
 import com.nocountry.server_ed_platform.dtos.Response.GradesResponseDTO;
-import com.nocountry.server_ed_platform.dtos.Response.SubjectsByStudentResponseDTO;
 import com.nocountry.server_ed_platform.dtos.SubjectGradeDTO;
 import com.nocountry.server_ed_platform.entities.CurrentYear;
 import com.nocountry.server_ed_platform.entities.Grade;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Subject;
 import com.nocountry.server_ed_platform.enumarations.PeriodEnum;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
+import com.nocountry.server_ed_platform.exceptions.SubjectNotFoundException;
 import com.nocountry.server_ed_platform.repositories.CurrentYearRepo;
 import com.nocountry.server_ed_platform.repositories.GradeRepo;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,14 +32,14 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     @Transactional
-    public GradeDTO AssignByStudentIdAndSubjectId(Long studentId, Long subjectId, GradeDTO request) {
+    public GradeDTO AssignByStudentIdAndSubjectId(Long studentId, Long subjectId, GradeDTO request) throws StudentNotFoundException, SubjectNotFoundException {
         Optional<Student> studentDB = studentRepo.findById(studentId);
         if (studentDB.isEmpty()) {
-            throw new RuntimeException("estudiante no encontrado");
+            throw new StudentNotFoundException("estudiante no encontrado");
         }
         Optional<Subject> subjectDB = subjectRepo.findById(subjectId);
         if (subjectDB.isEmpty()) {
-            throw new RuntimeException("materia no encontrada");
+            throw new SubjectNotFoundException("materia no encontrada");
         }
 
         Grade response = gradeRepo.save(Grade.builder()
@@ -74,13 +74,11 @@ public class GradeServiceImpl implements GradeService {
 
         List<Grade> grades = gradeRepo.findGradesByStudentIdAndSubjectId(studentId, subjectId);
 
-        List<GradeDTO> gradeDTOS = grades.stream().map(grade -> {
-            return GradeDTO.builder()
-                    .id(grade.getId())
-                    .periodType(grade.getPeriodType().name())
-                    .score(grade.getScore())
-                    .build();
-        }).toList();
+        List<GradeDTO> gradeDTOS = grades.stream().map(grade -> GradeDTO.builder()
+                .id(grade.getId())
+                .periodType(grade.getPeriodType().name())
+                .score(grade.getScore())
+                .build()).toList();
 
         SubjectGradeDTO subjectGradeDTO = SubjectGradeDTO.builder()
                 .subjectId(subjectId)
