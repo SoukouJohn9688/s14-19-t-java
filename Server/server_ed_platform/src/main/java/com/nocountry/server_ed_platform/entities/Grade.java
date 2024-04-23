@@ -1,8 +1,10 @@
 package com.nocountry.server_ed_platform.entities;
 
+
 import com.nocountry.server_ed_platform.enumarations.PeriodEnum;
 import jakarta.persistence.*;
 import lombok.*;
+
 
 @Entity
 @AllArgsConstructor

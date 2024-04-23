@@ -5,7 +5,7 @@ import com.nocountry.server_ed_platform.dtos.GradeDTO;
 import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignAttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignGradeStudentResponseDTO;
-import com.nocountry.server_ed_platform.dtos.Response.SubjectNameDTO;
+import com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Subject;
@@ -40,6 +40,7 @@ public class TeacherServImpl implements TeacherService {
     private final GradeService gradeService;
     private final AttendanceService attendanceService;
     private final AttendanceRepo attendanceRepo;
+
 
     @Override
     public List<TeacherDTO> findAll() {
@@ -77,12 +78,12 @@ public class TeacherServImpl implements TeacherService {
             throw new TeacherNotFoundException("Teacher with ID " + id + " not found.");
         }
 
+
     }
 
     @Override
     @Transactional
-    public AssignGradeStudentResponseDTO assignGradeByStudentIdSubjectId(Long studentId, Long subjectId,
-            GradeDTO request) throws SubjectNotFoundException, StudentNotFoundException {
+    public AssignGradeStudentResponseDTO assignGradeByStudentIdSubjectId(Long studentId, Long subjectId, GradeDTO request) throws SubjectNotFoundException, StudentNotFoundException {
         Optional<Student> studentDB = studentRepo.findById(studentId);
 
         if (studentDB.isEmpty()) {
@@ -129,41 +130,29 @@ public class TeacherServImpl implements TeacherService {
 
     @Override
     @Transactional
-    public AssignAttendanceDTO AssignAttendanceByStudentIdAndSubjectId(Long StudentId, Long SubjectId,
-            AttendanceDTO request) {
-        // Optional<Student> studentDB = studentRepo.findById(StudentId);
-        //
-        // if (studentDB.isEmpty()) {
-        // throw new RuntimeException("estudiante no encontrado");
-        // }
-        //
-        // Optional<Subject> subjectDB = subjectRepo.findById(SubjectId);
-        //
-        // if (subjectDB.isEmpty()) {
-        // throw new RuntimeException("materia no encontrada");
-        // }
+    public AssignAttendanceDTO AssignAttendanceByStudentIdAndSubjectId(Long StudentId, Long SubjectId, AttendanceDTO request) {
+//        Optional<Student> studentDB = studentRepo.findById(StudentId);
+//
+//        if (studentDB.isEmpty()) {
+//            throw new RuntimeException("estudiante no encontrado");
+//        }
+//
+//        Optional<Subject> subjectDB = subjectRepo.findById(SubjectId);
+//
+//        if (subjectDB.isEmpty()) {
+//            throw new RuntimeException("materia no encontrada");
+//        }
 
-        AttendanceDTO response = attendanceService.AssignByStudentIdAndSubjectId(StudentId, SubjectId, request);
-        //
-        return AssignAttendanceDTO.builder()
-                .StudentId(StudentId)
-                .attendanceDTO(response)
-                .build();
+
+            AttendanceDTO response = attendanceService.AssignByStudentIdAndSubjectId(StudentId,SubjectId,request);
+//
+            return AssignAttendanceDTO.builder()
+                    .StudentId(StudentId)
+                    .attendanceDTO(response)
+                    .build();
+
 
     }
 
-    @Override
-    @Transactional
-    public List<SubjectNameDTO> getSubjectByTeacherId(Long teacherId) throws TeacherNotFoundException {
-        Optional<Teacher> teacherDB = teacherRepo.findById(teacherId);
-        if (teacherDB.isEmpty()) {
-            throw new TeacherNotFoundException(String.format("profesor con id %s no encontrado", teacherId));
-        }
-        List<Subject> subjects = teacherDB.get().getSubjects();
-        return subjects.stream().map(subject -> SubjectNameDTO.builder()
-                .id(subject.getId())
-                .name(subject.getName().name())
-                .build()).toList();
-    }
 
 }

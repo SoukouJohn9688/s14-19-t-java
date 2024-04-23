@@ -5,7 +5,6 @@ import com.nocountry.server_ed_platform.dtos.GradeDTO;
 import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignAttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignGradeStudentResponseDTO;
-import com.nocountry.server_ed_platform.dtos.Response.SubjectNameDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.SubjectNotFoundException;
@@ -27,7 +26,6 @@ public interface TeacherService {
 
     void assignSubject(Long studentId, Long teacherId, String currentYear, TeacherDTO request);
 
-    AssignAttendanceDTO AssignAttendanceByStudentIdAndSubjectId(Long StudentId, Long SubjectId, AttendanceDTO request);
 
-    List<SubjectNameDTO> getSubjectByTeacherId(Long teacherId) throws TeacherNotFoundException;
+    AssignAttendanceDTO AssignAttendanceByStudentIdAndSubjectId(Long StudentId, Long SubjectId, AttendanceDTO request);
 }

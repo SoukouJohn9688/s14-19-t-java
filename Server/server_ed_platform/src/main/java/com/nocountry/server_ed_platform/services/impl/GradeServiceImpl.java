@@ -8,7 +8,6 @@ import com.nocountry.server_ed_platform.entities.Grade;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Subject;
 import com.nocountry.server_ed_platform.enumarations.PeriodEnum;
-import com.nocountry.server_ed_platform.exceptions.CurrentYearNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.SubjectNotFoundException;
 import com.nocountry.server_ed_platform.repositories.CurrentYearRepo;
@@ -33,8 +32,7 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     @Transactional
-    public GradeDTO AssignByStudentIdAndSubjectId(Long studentId, Long subjectId, GradeDTO request)
-            throws StudentNotFoundException, SubjectNotFoundException {
+    public GradeDTO AssignByStudentIdAndSubjectId(Long studentId, Long subjectId, GradeDTO request) throws StudentNotFoundException, SubjectNotFoundException {
         Optional<Student> studentDB = studentRepo.findById(studentId);
         if (studentDB.isEmpty()) {
             throw new StudentNotFoundException("estudiante no encontrado");
@@ -59,20 +57,19 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public GradesResponseDTO findGradesByStudentIdAndSubjectId(Long studentId, Long subjectId)
-            throws StudentNotFoundException, SubjectNotFoundException, CurrentYearNotFoundException {
+    public GradesResponseDTO findGradesByStudentIdAndSubjectId(Long studentId, Long subjectId) {
         Optional<Student> studentDB = studentRepo.findById(studentId);
         if (studentDB.isEmpty()) {
-            throw new StudentNotFoundException("estudiante no encontrado");
+            throw new RuntimeException("estudiante no encontrado");
         }
         Optional<Subject> subjectDB = subjectRepo.findById(subjectId);
         if (subjectDB.isEmpty()) {
-            throw new SubjectNotFoundException("materia no encontrada");
+            throw new RuntimeException("materia no encontrada");
         }
         Optional<CurrentYear> currentYearDB = currentYearRepo.findById(subjectDB.get().getId());
 
         if (currentYearDB.isEmpty()) {
-            throw new CurrentYearNotFoundException("anio actual no encontrado");
+            throw new RuntimeException("anio actual no encontrado");
         }
 
         List<Grade> grades = gradeRepo.findGradesByStudentIdAndSubjectId(studentId, subjectId);
@@ -88,6 +85,7 @@ public class GradeServiceImpl implements GradeService {
                 .name(subjectDB.get().getName().name())
                 .grades(gradeDTOS)
                 .build();
+
 
         return GradesResponseDTO.builder()
                 .currentYear(currentYearDB.get().getYear().name())
