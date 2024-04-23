@@ -1,6 +1,7 @@
 package com.nocountry.server_ed_platform.controllers;
 
 import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
+import com.nocountry.server_ed_platform.dtos.SubjectNameDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignAttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.Response.ResponseGenericDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping(value = "/api/v1/teacher")
 @RequiredArgsConstructor
@@ -28,28 +28,24 @@ import java.util.List;
 @SecurityRequirement(name = "bearerAuth")
 public class TeacherController {
 
-
     private static final Logger logger = LoggerFactory.getLogger(TeacherController.class);
 
     private final TeacherService teacherService;
 
-
-
     @Hidden
     @Secured("TEACHER")
     @PostMapping("/updateTeacher/{id}")
-    public ResponseEntity<TeacherDTO> updateTeacher(@PathVariable Long id){
+    public ResponseEntity<TeacherDTO> updateTeacher(@PathVariable Long id) {
 
         try {
-            TeacherDTO foundTeacher=teacherService.findById(id);
+            TeacherDTO foundTeacher = teacherService.findById(id);
             logger.info("Updated teacher with ID: " + foundTeacher.getTeacher_id());
             return new ResponseEntity<>(foundTeacher, HttpStatus.OK);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             logger.error("Error creating PET: " + ex.getMessage() + " cause: " + ex.getCause());
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
     }
-
 
     @Hidden
     @Secured("TEACHER")
@@ -60,9 +56,7 @@ public class TeacherController {
                 new ResponseGenericDTO<>(
                         true,
                         "peticion correcta",
-                        teacherService.findAll()
-                )
-        );
+                        teacherService.findAll()));
     }
 
     @Secured("TEACHER")
@@ -73,16 +67,23 @@ public class TeacherController {
             @PathVariable Long subjectId,
             @RequestBody AttendanceDTO attendanceRequest) throws AttendanceNotFoundException {
 
-        AssignAttendanceDTO assignedAttendance = teacherService.AssignAttendanceByStudentIdAndSubjectId(studentId,subjectId,attendanceRequest);
+        AssignAttendanceDTO assignedAttendance = teacherService.AssignAttendanceByStudentIdAndSubjectId(studentId,
+                subjectId, attendanceRequest);
         ResponseGenericDTO<AssignAttendanceDTO> responseDTO = new ResponseGenericDTO<>(
                 true,
                 "Asistencia añadida",
-                assignedAttendance
-        );
+                assignedAttendance);
         return ResponseEntity.ok().body(responseDTO);
     }
 
-
-
+    @Secured("TEACHER")
+    @GetMapping("{teacherId}/subjects")
+    public ResponseEntity<ResponseGenericDTO<?>> getSubjectByTeacherId(@PathVariable Long teacherId)
+            throws TeacherNotFoundException {
+        return ResponseEntity.ok().body(new ResponseGenericDTO<>(
+                true,
+                "Peticion exitosa",
+                teacherService.getSubjectByTeacherId(teacherId)));
+    }
 
 }
