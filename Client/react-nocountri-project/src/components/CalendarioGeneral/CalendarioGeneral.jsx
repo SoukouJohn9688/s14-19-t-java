@@ -11,11 +11,11 @@ import { useEffect, useState } from "react";
 
 const CalendarioGeneral = () => {
   const [allEventos, setAllEvents] = useState([]);
-  
+  const userRole = 'student'; // Replace this with the actual variable or function that checks the user's role
+
   //const dispatch = useDispatch();
   //const allEvents = useSelector((state) => state.calendar.events);
   console.log(allEventos, "all events")
-
 
   useEffect(() => {
     const updatedEvents = eventosColegio.map((evento) => ({
@@ -27,6 +27,15 @@ const CalendarioGeneral = () => {
   }, []);
 
   const handleEventClick = (clickInfo) => {
+    if (userRole === 'student' || userRole === 'parent') {
+      Swal.fire({
+        title: "No tienes permiso",
+        text: "No puedes editar el calendario como estudiante o padre.",
+        icon: "error",
+      });
+      return;
+    }
+
     console.log(clickInfo.event.id)
     if (clickInfo.event.id) {
       Swal.fire({
@@ -42,7 +51,7 @@ const CalendarioGeneral = () => {
         if (result.isConfirmed) {
           //dispatch(removeEvent(clickInfo.event.id)); // Dispatch action to remove event
           const updatedEvents = allEventos.filter(
-            (event) => Number(event.id, 'event id') !== Number(clickInfo.event.id, 'click info.id')
+            (event) => Number(event.id, 'event id')!== Number(clickInfo.event.id, 'click info.id')
           );
           // Actualizar el estado con la nueva lista de eventos
           setAllEvents(updatedEvents);
@@ -57,6 +66,15 @@ const CalendarioGeneral = () => {
   };
 
   const handleDateSelect = (selectInfo) => {
+    if (userRole === 'student' || userRole === 'parent') {
+      Swal.fire({
+        title: "No tienes permiso",
+        text: "No puedes crear eventos en el calendario como estudiante o padre.",
+        icon: "error",
+      });
+      return;
+    }
+
     Swal.fire({
       title: "Ingresa título de evento",
       input: "text",

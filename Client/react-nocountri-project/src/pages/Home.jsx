@@ -32,18 +32,16 @@ const Home = () => {
   if (userRol === "alumno") {
     mainComponent = (
       <CardStudents
-        onShowGradeTable={() => setShowGradeTable(true)}
+        onShowGradeTable={toggleGradeTable}
         onShowCalendarAsis={toggleCalendarAsis}
       />
     );
   } else if (userRol === "docente") {
-    mainComponent = <CardTeachers 
-    
-    />;
+    mainComponent = <CardTeachers />;
   } else if (userRol === "padre") {
     mainComponent = (
       <CardParents
-        onShowGradeTable={() => setShowGradeTable(true)}
+        onShowGradeTable={toggleGradeTable}
         onShowCalendarAsis={toggleCalendarAsis}
       />
     );
@@ -55,7 +53,7 @@ const Home = () => {
         <div className=" md:gap-5 md:grid lg:grid-cols-3 grid-flow-row md:grid-flow-col">
           <div className="md:col-span-1">
             <div className="top-10 sticky mb-16 lg:mb-0">
-              <CardProfile/>
+              <CardProfile />
             </div>
           </div>
           <div className="gap-5 grid col-span-2 mb-10 lg:mb-0 lg:mx-9">
