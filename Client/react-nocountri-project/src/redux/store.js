@@ -16,10 +16,10 @@ const reducers = combineReducers({
     calendar: calendarReducer  
 });
 
-const persistConfig ={
+const persistConfig = {
     key: 'root',
     storage,
-    whitelist: []
+    whitelist: ['auth','attendance']
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers)
