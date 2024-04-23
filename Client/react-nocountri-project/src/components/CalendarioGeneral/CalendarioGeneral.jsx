@@ -4,14 +4,14 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Swal from "sweetalert2";
 import es from "@fullcalendar/core/locales/es";
 import "./CalendarioGeneral.css";
-//import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 //import { removeEvent } from "../../redux/Calendar/calendar";
 import { eventosColegio } from "@/mock";
 import { useEffect, useState } from "react";
 
 const CalendarioGeneral = () => {
   const [allEventos, setAllEvents] = useState([]);
-  const userRole = 'student'; // Replace this with the actual variable or function that checks the user's role
+  const userRole = useSelector((state) => state.auth.userRol); // Replace this with the actual variable or function that checks the user's role
 
   //const dispatch = useDispatch();
   //const allEvents = useSelector((state) => state.calendar.events);
@@ -27,7 +27,7 @@ const CalendarioGeneral = () => {
   }, []);
 
   const handleEventClick = (clickInfo) => {
-    if (userRole === 'student' || userRole === 'parent') {
+    if (userRole === 'alumno' || userRole === 'padre') {
       Swal.fire({
         title: "No tienes permiso",
         text: "No puedes editar el calendario como estudiante o padre.",
@@ -66,7 +66,7 @@ const CalendarioGeneral = () => {
   };
 
   const handleDateSelect = (selectInfo) => {
-    if (userRole === 'student' || userRole === 'parent') {
+    if (userRole === 'alumno' || userRole === 'padre') {
       Swal.fire({
         title: "No tienes permiso",
         text: "No puedes crear eventos en el calendario como estudiante o padre.",
