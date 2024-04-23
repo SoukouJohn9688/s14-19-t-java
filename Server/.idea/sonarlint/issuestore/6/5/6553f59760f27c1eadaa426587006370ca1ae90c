@@ -1,0 +1,14 @@
+
+	java:S117@"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ξ—’£όÿÿÿÿ8¶ι³άπ1J$a295603f-fb5c-45a7-93dc-ae13cc925e5a
+
+java:S2629r"7Use the built-in formatting to construct this argument.(ύς–ύÿÿÿÿ8Σκ΄άπ1J$4242b9c7-8534-447e-9f3b-0c58930d7c76
+u
+java:S3416("2Update this logger to use "AdminController.class".(¦½8Ίι³άπ1J$4d024d7b-b630-48b2-8210-ac8d7d76545d
+q
+java:S6856?".Bind path variable "id" to a method parameter.(¤—‘χ8»ι³άπ1J$fa02c3b8-6725-4a42-88a9-95c06f5b15b4
+”
+java:S6856k"QBind path variable "teacherId", "subjectId", "currentYear" to a method parameter.(Ξ‹Λ8»ι³άπ1J$fcafbafa-f9f2-461b-b1d1-8f25c0479dba
+n
+java:S1452l"&Remove usage of generic wildcard type.(¦βκ°όÿÿÿÿ8Ει³άπ1J$5df4fb79-d871-4be7-8fe3-1eb5d99cbb07
+‰
+java:S3457r"AFormat specifiers should be used instead of string concatenation.(ύς–ύÿÿÿÿ8βκ΄άπ1J$a406c4ea-dd9a-49a2-bb7b-f5bcecb53567
