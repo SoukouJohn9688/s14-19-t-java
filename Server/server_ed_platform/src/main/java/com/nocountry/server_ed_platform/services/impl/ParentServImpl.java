@@ -71,7 +71,8 @@ public class ParentServImpl implements ParentService {
     public List<StudentDTO> findAllChildrenByParentId(Long parentId) throws ParentNotFoundException {
 
         Optional<Parent> parentDB = parentRepo.findById(parentId);
-
+        updatedParent.setId(parentDB.get().getId()); // nos aseguramos de que el updatedParent siempre posea el mismo Id que el padre en la base de datos
+        
         if (parentDB.isEmpty()) {
             throw new ParentNotFoundException(String.format("Padre con id %s no encontrado", parentId));
         }
