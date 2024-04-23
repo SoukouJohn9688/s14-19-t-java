@@ -8,10 +8,11 @@ export const ColegiosData = [
   },
 
 ];
-/* export const AsignaturasData = [
+ export const AsignaturasData = [
   {
     id: 1,
-    asignatures: "Mateaticas",
+    asignatures: "Matemáticas",
+    students: ["Vyky Legier", "Jocelyn Malinowski"],
     curricular: true,
     no_curricular: false,
   },
@@ -20,44 +21,24 @@ export const ColegiosData = [
     asignatures: "Lengua",
     curricular: true,
     no_curricular: false,
+    students: ["Vyky Legier", "Jocelyn Malinowski"],
   },
   {
     id: 3,
-    asignatures: "Cs.Naturales",
+    asignatures: "Ciencias Naturales",
     curricular: true,
     no_curricular: false,
+    students: ["Vyky Legier", "Jocelyn Malinowski"],
   },
   {
     id: 4,
-    asignatures: "Cs. Sociales",
+    asignatures: "Ciencias Sociales",
     curricular: true,
     no_curricular: false,
+    students: ["Vyky Legier", "Jocelyn Malinowski"],
   },
-  {
-    id: 5,
-    asignatures: "Dibujo",
-    curricular: true,
-    no_curricular: false,
-  },
-  {
-    id: 6,
-    asignatures: "Gimnacia",
-    curricular: true,
-    no_curricular: false,
-  },
-  {
-    id: 7,
-    asignatures: "Natacion",
-    curricular: false,
-    no_curricular: true,
-  },
-  {
-    id: 1,
-    asignatures: "Basquetball",
-    curricular: false,
-    no_curricular: true,
-  },
-]; */
+]; 
+
 export const AlumnosData = [
   {
     id: 1,
@@ -69,7 +50,7 @@ export const AlumnosData = [
     userName: "vyky_legier",
     password: 123456,
     gender: "Female",
-    asignatures: [1, 2, 3, 4, 5],
+    asignatures: ["Matemáticas", "Lengua", "Ciencias Sociales", "Ciencias Naturales", "Educación Física"],
     attendances: [
       {
         "id": 1,
@@ -103,7 +84,7 @@ export const AlumnosData = [
     userName: "jocelyn_malinowki",
     password: 123456,
     gender: "Female",
-    asignatures: [1, 2, 3, 4, 5, 8],
+    asignatures: ["Matemáticas", "Lengua", "Ciencias Sociales", "Ciencias Naturales", "Educación Física", "Otra asignatura"],
     attendances: [
       {
         "id": 1,
@@ -126,8 +107,7 @@ export const AlumnosData = [
         "date": "2024-04-04"
       },
     ]
-  },
-
+  }
 ];
 export const PadresData = [
   {
