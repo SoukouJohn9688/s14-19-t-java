@@ -27,17 +27,26 @@ const ModalRegister = ({ isOpen, onClose }) => {
   const DNIPadresRef = useRef(null);
   const DNIAlumnoRef = useRef(null);
   const DNIDocenteRef = useRef(null);
+  const cursoAlumnoRef = useRef(null);
+  const divisionAlumnoRef =useRef(null);
+  const [subjects, setSubjects] = useState('');
   const [rol, setRol] = useState(null);
 
   useEffect(() => {
     console.log("Rol actualizado:", rol);
   }, [rol]);
 
+  const handleSubjectsDocentes = (e) => {
+    const inputValue = e.target.value;
+    const formattedValue = inputValue.toLowerCase().trim()
+    setSubjects(formattedValue)
+  }
 
   const handleSelect = (nuevoRol) => {
     setRol(nuevoRol);
   };
 
+  
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogOverlay />
@@ -91,16 +100,52 @@ const ModalRegister = ({ isOpen, onClose }) => {
                 className="bg-transparent border border-slate-400"
                 ref={DNIDocenteRef}
               />
+              <Input
+              placeholder= "Materias que dicta"
+              className="bg-transparent border border-slate-400"
+              value={subjects}
+              onChange ={handleSubjectsDocentes}
+              />
             </>
           )}
 
           {rol === "alumno" && (
-            <Input
+            <>
+              <Input
               type="number"
               placeholder="DNI del alumno"
               className="bg-transparent border border-slate-400"
               ref={DNIAlumnoRef}
             />
+            <Select>
+            <SelectTrigger className="w-[280px]">
+            <SelectValue placeholder="Selecciona el año que cursa" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+              <SelectLabel>Curso</SelectLabel>
+                <SelectItem value="1">1°</SelectItem>
+                <SelectItem value="2">2°</SelectItem>
+                <SelectItem value="3">3°</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+    </Select>
+            <Select>
+            <SelectTrigger className="w-[280px]">
+            <SelectValue placeholder="Selecciona la división" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+              <SelectLabel>División</SelectLabel>
+                <SelectItem value="A">A</SelectItem>
+                <SelectItem value="B">B</SelectItem>
+                <SelectItem value="C">C</SelectItem>
+                <SelectItem value="D">D</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+    </Select>
+            </>
+            
           )}
 
           {rol === "padre" && (
