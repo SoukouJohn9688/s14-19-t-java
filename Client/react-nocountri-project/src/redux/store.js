@@ -19,7 +19,7 @@ const reducers = combineReducers({
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth','attendance']
+    whitelist: ['auth','attendance', 'grades']
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers)
@@ -30,5 +30,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
-
