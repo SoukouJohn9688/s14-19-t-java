@@ -95,6 +95,20 @@ public class TeacherController {
         );
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<ResponseGenericDTO<TeacherDTO>> createTeacher(@RequestBody TeacherRegisterDTO request) {
+
+        TeacherDTO createdTeacher = teacherService.createTeacher(request);
+
+        ResponseGenericDTO<TeacherDTO> responseDTO = new ResponseGenericDTO<>(
+                true,
+                "Profesor creado con éxito",
+                createdTeacher
+        );
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+    }
 
 
 

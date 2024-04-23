@@ -5,6 +5,7 @@ import com.nocountry.server_ed_platform.dtos.GradeDTO;
 import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignAttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignGradeStudentResponseDTO;
+import com.nocountry.server_ed_platform.dtos.SubjectGradeDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
 
@@ -28,4 +29,10 @@ public interface TeacherService {
     AssignAttendanceDTO AssignAttendanceByStudentIdAndSubjectId(Long StudentId, Long SubjectId, AttendanceDTO request);
 
     TeacherDTO deleteById(Long id) throws TeacherNotFoundException;
+
+
+
+
+
+
 }

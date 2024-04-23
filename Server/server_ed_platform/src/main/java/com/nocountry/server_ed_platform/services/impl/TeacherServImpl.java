@@ -84,20 +84,6 @@ public class TeacherServImpl implements TeacherService {
         }
     }
 
-
-
-//        if (teacherFound.isPresent()) {
-//            modelMapper.map(request, teacherFound.get());
-//
-//            return modelMapper.map(teacherFound.get(), TeacherDTO.class);
-//        } else {
-//
-//            throw new TeacherNotFoundException("Teacher with ID " + id + " not found.");
-    // }
-
-
-    //}
-
     @Override
     @Transactional
     public AssignGradeStudentResponseDTO assignGradeByStudentIdSubjectId(Long studentId, Long subjectId, GradeDTO request) {
