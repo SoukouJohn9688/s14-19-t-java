@@ -1,69 +1,101 @@
-import { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import Swal from "sweetalert2";
 import es from "@fullcalendar/core/locales/es";
 import "./CalendarioGeneral.css";
+//import { useDispatch, useSelector } from "react-redux";
+//import { removeEvent } from "../../redux/Calendar/calendar";
+import { eventosColegio } from "@/mock";
+import { useEffect, useState } from "react";
 
 const CalendarioGeneral = () => {
-  const [allEvents, setAllEvents] = useState([]);
+  const [allEventos, setAllEvents] = useState([]);
+  const userRole = 'student'; // Replace this with the actual variable or function that checks the user's role
+
+  //const dispatch = useDispatch();
+  //const allEvents = useSelector((state) => state.calendar.events);
+  console.log(allEventos, "all events")
+
+  useEffect(() => {
+    const updatedEvents = eventosColegio.map((evento) => ({
+      id: evento.id,
+      title: evento.title,
+      start: evento.date,
+    }));
+    setAllEvents(updatedEvents);
+  }, []);
 
   const handleEventClick = (clickInfo) => {
+    if (userRole === 'student' || userRole === 'parent') {
+      Swal.fire({
+        title: "No tienes permiso",
+        text: "No puedes editar el calendario como estudiante o padre.",
+        icon: "error",
+      });
+      return;
+    }
+
+    console.log(clickInfo.event.id)
     if (clickInfo.event.id) {
       Swal.fire({
         title: "¿Eliminar evento?",
-        text: "No podras revertir este cambio!",
+        text: "No podrás revertir este cambio!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         cancelButtonText: "Cancelar",
-        confirmButtonText: "Si, borrar!",
+        confirmButtonText: "Sí, borrar!",
       }).then((result) => {
         if (result.isConfirmed) {
-          // Filtrar la lista de eventos para eliminar el evento seleccionado
-          const updatedEvents = allEvents.filter(
-            (event) => event.id !== clickInfo.event.id
+          //dispatch(removeEvent(clickInfo.event.id)); // Dispatch action to remove event
+          const updatedEvents = allEventos.filter(
+            (event) => Number(event.id, 'event id')!== Number(clickInfo.event.id, 'click info.id')
           );
           // Actualizar el estado con la nueva lista de eventos
           setAllEvents(updatedEvents);
           Swal.fire({
             title: "Borrado!",
-            text: "Tarjeta borrada con exito.",
+            text: "Evento borrado con éxito.",
             icon: "success",
           });
         }
       });
     }
   };
+
   const handleDateSelect = (selectInfo) => {
+    if (userRole === 'student' || userRole === 'parent') {
+      Swal.fire({
+        title: "No tienes permiso",
+        text: "No puedes crear eventos en el calendario como estudiante o padre.",
+        icon: "error",
+      });
+      return;
+    }
+
     Swal.fire({
       title: "Ingresa título de evento",
       input: "text",
       showCancelButton: true,
       confirmButtonText: "Crear evento",
       cancelButtonText: "Cancelar",
-      // Allow empty title with warning message
-      allowOutsideClick: false, // Prevent closing on outside click (optional)
+      allowOutsideClick: false,
     }).then((result) => {
       if (result.isConfirmed) {
         const title = result.value;
         if (title) {
           const newEvent = {
-            id: Math.random().toString(36).substr(2, 9),
+            id: new Date().getTime(),
             title,
             start: selectInfo.startStr,
-            end: selectInfo.endStr || selectInfo.startStr,
           };
-          setAllEvents([...allEvents, newEvent]);
+          //dispatch(addEvent(newEvent)); // Dispatch action to add event
+
+          setAllEvents(prevEvent => [...prevEvent,newEvent])
         } else {
-          // Handle empty title case (optional)
-          Swal.fire(
-            "Advertencia",
-            "Ingrese un titulo para su evento.",
-            "warning"
-          );
+          Swal.fire("Advertencia", "Ingrese un título para su evento.", "warning");
         }
       }
     });
@@ -74,12 +106,11 @@ const CalendarioGeneral = () => {
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        /* editable={true} */
         selectable={true}
         selectMirror={true}
         dayMaxEvents={true}
         locale={es}
-        events={allEvents}
+        events={allEventos}
         eventClick={(data) => handleEventClick(data)}
         select={handleDateSelect}
         eventClassNames="fc-pointer"

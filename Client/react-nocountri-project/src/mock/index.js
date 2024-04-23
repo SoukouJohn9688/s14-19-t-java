@@ -144,6 +144,39 @@ export const PadresData = [
 
 ];
 
+export const eventosColegio = [
+  { 
+      id: 1,
+      title: "evento importante",
+      date: "2024-04-22" 
+  },
+  { 
+      id: 2,
+      title: "evento destacado",
+      date: "2024-04-16" 
+  },
+  { 
+      id: 3,
+      title: "conferencia anual",
+      date: "2024-04-10" 
+  },
+  { 
+      id: 4,
+      title: "reunión de equipo",
+      date: "2024-04-05" 
+  },
+  { 
+      id: 5,
+      title: "entrega de premios",
+      date: "2024-04-20" 
+  },
+  { 
+      id: 6,
+      title: "seminario de desarrollo",
+      date: "2024-04-15" 
+  }
+];
+
 
 export const events = [
   {
