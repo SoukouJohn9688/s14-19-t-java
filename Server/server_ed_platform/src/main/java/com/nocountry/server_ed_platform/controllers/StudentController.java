@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/v1/student")
 @RequiredArgsConstructor
@@ -30,6 +32,17 @@ public class StudentController {
                 true,
                 "Estudiante encontrado",
                 studentService.findByStudentId(studentId)
+        ));
+    }
+
+
+    @Secured("STUDENT")
+    @GetMapping("/")
+    public ResponseEntity<ResponseGenericDTO<List<StudentDTO>>> findALl()  {
+        return ResponseEntity.ok().body(new ResponseGenericDTO<>(
+                true,
+                "Lista de estudiantes",
+                studentService.findAll()
         ));
     }
 

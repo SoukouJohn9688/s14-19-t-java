@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class GradeController {
     private final GradeService gradeService;
 
-    @Secured({"STUDENT", "PARENT"})
+    @Secured({"STUDENT", "PARENT", "TEACHER"})
     @GetMapping("/student/{studentId}/subject/{subjectId}")
-    public ResponseEntity<ResponseGenericDTO<GradesResponseDTO>> findGradesByStudentIdAndSubjectId(@PathVariable Long studentId, @PathVariable Long subjectId) {
+    public ResponseEntity<ResponseGenericDTO<GradesResponseDTO>> findGradesByStudentIdAndSubjectId(@PathVariable("studentId") Long studentId, @PathVariable("subjectId") Long subjectId) {
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(
                 true,
                 "Notas encontradas",
