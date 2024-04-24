@@ -25,6 +25,7 @@ public class StudentController {
 
     private final StudentService studentService;
 
+
     @Secured({"STUDENT","TEACHER"})
     @GetMapping("/{studentId}")
     public ResponseEntity<ResponseGenericDTO<StudentDTO>> findByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
@@ -36,6 +37,7 @@ public class StudentController {
     }
 
 
+
     @Secured({"STUDENT","TEACHER"})
     @GetMapping("/")
     public ResponseEntity<ResponseGenericDTO<List<StudentDTO>>> findALl()  {
@@ -45,6 +47,7 @@ public class StudentController {
                 studentService.findAll()
         ));
     }
+
 
 
 

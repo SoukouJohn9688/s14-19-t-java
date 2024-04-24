@@ -10,6 +10,8 @@ import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Subject;
 import com.nocountry.server_ed_platform.entities.Teacher;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
+import com.nocountry.server_ed_platform.exceptions.SubjectNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
 import com.nocountry.server_ed_platform.repositories.AttendanceRepo;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
@@ -81,7 +83,7 @@ public class TeacherServImpl implements TeacherService {
 
     @Override
     @Transactional
-    public AssignGradeStudentResponseDTO assignGradeByStudentIdSubjectId(Long studentId, Long subjectId, GradeDTO request) {
+    public AssignGradeStudentResponseDTO assignGradeByStudentIdSubjectId(Long studentId, Long subjectId, GradeDTO request) throws SubjectNotFoundException, StudentNotFoundException {
         Optional<Student> studentDB = studentRepo.findById(studentId);
 
         if (studentDB.isEmpty()) {

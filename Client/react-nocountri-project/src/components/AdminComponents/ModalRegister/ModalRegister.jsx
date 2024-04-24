@@ -1,7 +1,15 @@
-import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import backgroundImage from "../assets/background_login.png";
-import { Button, Input, Checkbox } from "@/components";
+import React, { useRef, useState, useEffect } from "react";
+import {
+  Dialog,
+  DialogOverlay,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+  Button,
+  Input
+} from "@/components";
+
 import {
   Select,
   SelectContent,
@@ -12,43 +20,41 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const Register = () => {
+const ModalRegister = ({ isOpen, onClose }) => {
   const emailRef = useRef(null);
   const contraseñaRef = useRef(null);
   const userRef = useRef(null);
   const DNIPadresRef = useRef(null);
   const DNIAlumnoRef = useRef(null);
   const DNIDocenteRef = useRef(null);
-  const checkboxRef = useRef(null);
-  const [isChecked, setIsChecked] = useState(false);
+  const cursoAlumnoRef = useRef(null);
+  const divisionAlumnoRef =useRef(null);
+  const [subjects, setSubjects] = useState('');
   const [rol, setRol] = useState(null);
 
   useEffect(() => {
     console.log("Rol actualizado:", rol);
   }, [rol]);
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
+  const handleSubjectsDocentes = (e) => {
+    const inputValue = e.target.value;
+    const formattedValue = inputValue.toLowerCase().trim()
+    setSubjects(formattedValue)
+  }
 
   const handleSelect = (nuevoRol) => {
-    console.log("Nuevo rol seleccionado:", nuevoRol);
     setRol(nuevoRol);
   };
 
+  
   return (
-    <div
-      className="flex flex-col items-center justify-center bg-gray-200 sm:min-h-screen"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className="space-y-8 my-28 sm:mt-20 sm:mb-6 p-8 bg-transparent shadow-lg  rounded-lg w-full max-w-md text-center">
-        <h1 className="text-3xl font-bold text-gray-700">
-          Registrar un usuario
-        </h1>
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogOverlay />
+      <DialogContent>
+        <DialogTitle>Agregar Usuario</DialogTitle>
+        <DialogDescription>
+          Completa los campos para registrar un nuevo usuario.
+        </DialogDescription>
         <form className="space-y-4 flex flex-col">
           <Input
             placeholder="Nombre y apellido"
@@ -94,16 +100,52 @@ const Register = () => {
                 className="bg-transparent border border-slate-400"
                 ref={DNIDocenteRef}
               />
+              <Input
+              placeholder= "Materias que dicta"
+              className="bg-transparent border border-slate-400"
+              value={subjects}
+              onChange ={handleSubjectsDocentes}
+              />
             </>
           )}
 
           {rol === "alumno" && (
-            <Input
+            <>
+              <Input
               type="number"
               placeholder="DNI del alumno"
               className="bg-transparent border border-slate-400"
               ref={DNIAlumnoRef}
             />
+            <Select>
+            <SelectTrigger className="w-[280px]">
+            <SelectValue placeholder="Selecciona el año que cursa" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+              <SelectLabel>Curso</SelectLabel>
+                <SelectItem value="1">1°</SelectItem>
+                <SelectItem value="2">2°</SelectItem>
+                <SelectItem value="3">3°</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+    </Select>
+            <Select>
+            <SelectTrigger className="w-[280px]">
+            <SelectValue placeholder="Selecciona la división" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+              <SelectLabel>División</SelectLabel>
+                <SelectItem value="A">A</SelectItem>
+                <SelectItem value="B">B</SelectItem>
+                <SelectItem value="C">C</SelectItem>
+                <SelectItem value="D">D</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+    </Select>
+            </>
+            
           )}
 
           {rol === "padre" && (
@@ -122,21 +164,6 @@ const Register = () => {
               />
             </>
           )}
-          <label className="flex items-center justify-center">
-            <Checkbox
-              className="mr-1"
-              ref={checkboxRef}
-              onChange={handleCheckboxChange}
-              checked={isChecked}
-            />
-            <span className="text-xs">
-              Acepto términos, condiciones y políticas de privacidad de&nbsp;
-              <a href="#" className="text-blue-500">
-                EdTech
-              </a>
-              .
-            </span>
-          </label>
 
           <div className="flex flex-row gap-4">
             <Button
@@ -149,20 +176,14 @@ const Register = () => {
               className="w-[70%] mx-auto mt-4 flex justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               onClick={() => {}}
             >
-              Registrarse
+              Registrar nuevo usuario
             </Button>
           </div>
         </form>
-
-        <p className="mt-4">
-          ¿Ya tienes cuenta?
-          <Link to={"/"} className="text-blue-500">
-            Acceder
-          </Link>
-        </p>
-      </div>
-    </div>
+        <DialogClose asChild />
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default Register;
+export default ModalRegister;

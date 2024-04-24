@@ -45,7 +45,7 @@
     docker ps
     ```
 
-2. Introduce los datos del siguiente [script](https://github.com/No-Country/s14-19-t-java/tree/dev-backend-attendance/Server/server_ed_platform/data.sql).
+2. Introduce los datos del siguiente [script](https://github.com/No-Country/s14-19-t-java/blob/dev/Server/server_ed_platform/data.sql).
 
 ### En caso de haber cambios en el server debes eliminar los contenedores e imaneges creadas.
 
@@ -66,16 +66,21 @@
     ```
     docker images
     ```
-### Importacion de colecciones de postman
-> **NOTA** Descargue e importe los archivos `json`
-1. `environment` [json](https://github.com/No-Country/s14-19-t-java/blob/dev-backend-xonlinex/Server/Server_Ed_platform.postman_environment.json)
-2. `collection` [json](https://github.com/No-Country/s14-19-t-java/blob/dev-backend-xonlinex/Server/Server_Ed_Requests.postman_collection.json)
-
 ### Usuarios
 1. Estudiante
+   
     ```json
     {
         "email": "student1@email.com",
         "password": "Student#123"
     }
     ```
+2. Padre
+
+   ```json
+    {
+        "email": "parent1@email.com",
+        "password": "Parent#123"
+    }
+    ```
+> url de [swagger](http://localhost:8080/swagger-ui.html).

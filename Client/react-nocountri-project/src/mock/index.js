@@ -6,12 +6,13 @@ export const ColegiosData = [
     userName: "public_erv",
     password: "123456"
   },
- 
+
 ];
-/* export const AsignaturasData = [
+ export const AsignaturasData = [
   {
     id: 1,
-    asignatures: "Mateaticas",
+    asignatures: "Matemáticas",
+    students: ["Vyky Legier", "Jocelyn Malinowski"],
     curricular: true,
     no_curricular: false,
   },
@@ -20,44 +21,24 @@ export const ColegiosData = [
     asignatures: "Lengua",
     curricular: true,
     no_curricular: false,
+    students: ["Vyky Legier", "Jocelyn Malinowski"],
   },
   {
     id: 3,
-    asignatures: "Cs.Naturales",
+    asignatures: "Ciencias Naturales",
     curricular: true,
     no_curricular: false,
+    students: ["Vyky Legier", "Jocelyn Malinowski"],
   },
   {
     id: 4,
-    asignatures: "Cs. Sociales",
+    asignatures: "Ciencias Sociales",
     curricular: true,
     no_curricular: false,
+    students: ["Vyky Legier", "Jocelyn Malinowski"],
   },
-  {
-    id: 5,
-    asignatures: "Dibujo",
-    curricular: true,
-    no_curricular: false,
-  },
-  {
-    id: 6,
-    asignatures: "Gimnacia",
-    curricular: true,
-    no_curricular: false,
-  },
-  {
-    id: 7,
-    asignatures: "Natacion",
-    curricular: false,
-    no_curricular: true,
-  },
-  {
-    id: 1,
-    asignatures: "Basquetball",
-    curricular: false,
-    no_curricular: true,
-  },
-]; */
+]; 
+
 export const AlumnosData = [
   {
     id: 1,
@@ -69,7 +50,29 @@ export const AlumnosData = [
     userName: "vyky_legier",
     password: 123456,
     gender: "Female",
-    asignatures: [1, 2, 3, 4, 5],
+    asignatures: ["Matemáticas", "Lengua", "Ciencias Sociales", "Ciencias Naturales", "Educación Física"],
+    attendances: [
+      {
+        "id": 1,
+        "type": "PRESENTE",
+        "date": "2024-04-01"
+      },
+      {
+        "id": 2,
+        "type": "JUSTIFICADO",
+        "date": "2024-04-02"
+      },
+      {
+        "id": 3,
+        "type": "INJUSTIFICADO",
+        "date": "2024-04-03"
+      },
+      {
+        "id": 4,
+        "type": "NO_COMPUTABLE",
+        "date": "2024-04-03"
+      },
+    ]
   },
   {
     id: 2,
@@ -78,12 +81,33 @@ export const AlumnosData = [
     dni: 45881805,
     edad: 16,
     email: "jmalinowski1@unblog.fr",
-    userName:"jocelyn_malinowki",
+    userName: "jocelyn_malinowki",
     password: 123456,
     gender: "Female",
-    asignatures: [1, 2, 3, 4, 5, 8],
-  },
-  
+    asignatures: ["Matemáticas", "Lengua", "Ciencias Sociales", "Ciencias Naturales", "Educación Física", "Otra asignatura"],
+    attendances: [
+      {
+        "id": 1,
+        "type": "PRESENTE",
+        "date": "2024-04-01"
+      },
+      {
+        "id": 2,
+        "type": "JUSTIFICADO",
+        "date": "2024-04-02"
+      },
+      {
+        "id": 3,
+        "type": "NO_COMPUTABLE",
+        "date": "2024-04-03"
+      },
+      {
+        "id": 4,
+        "type": "INJUSTIFICADO",
+        "date": "2024-04-04"
+      },
+    ]
+  }
 ];
 export const PadresData = [
   {
@@ -93,9 +117,52 @@ export const PadresData = [
     dni: 35287645,
     hijos: [1, 2],
     email: "mcortin0@elegantthemes.com",
-    userName:"marcia_cortin",
+    userName: "marcia_cortin",
     password: 123456,
     phone: "748-375-9731",
   },
-  
+
 ];
+
+export const eventosColegio = [
+  { 
+      id: 1,
+      title: "evento importante",
+      date: "2024-04-22" 
+  },
+  { 
+      id: 2,
+      title: "evento destacado",
+      date: "2024-04-16" 
+  },
+  { 
+      id: 3,
+      title: "conferencia anual",
+      date: "2024-04-10" 
+  },
+  { 
+      id: 4,
+      title: "reunión de equipo",
+      date: "2024-04-05" 
+  },
+  { 
+      id: 5,
+      title: "entrega de premios",
+      date: "2024-04-20" 
+  },
+  { 
+      id: 6,
+      title: "seminario de desarrollo",
+      date: "2024-04-15" 
+  }
+];
+
+
+export const events = [
+  {
+    id: 1,
+    title: 'Event 1',
+    start: new Date(),
+    end: new Date(),
+  }
+]

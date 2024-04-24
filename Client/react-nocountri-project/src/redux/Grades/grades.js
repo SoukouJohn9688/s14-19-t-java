@@ -1,30 +1,92 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  grades: [], // Array para almacenar las calificaciones de los alumnos
-};
-
 const gradesSlice = createSlice({
   name: 'grades',
-  initialState,
+  initialState: {
+    subjects: {},
+    showIntensification: {}
+  },
   reducers: {
-    addGrade(state, action) {
-      state.grades.push(action.payload); // Agrega una nueva calificación al array
+    updateFirstSemesterGrades(state, action) {
+      const { subject, index, grade } = action.payload;
+      if (!state.subjects[subject]) {
+        state.subjects[subject] = {
+          'Primer Semestre': [],
+          'Segundo Semestre': [],
+          'Intensificación': [],
+        };
+      }
+      state.subjects[subject]['Primer Semestre'][index] = grade;
     },
-    updateGrade(state, action) {
-      const { studentId, newGrade } = action.payload;
-      const index = state.grades.findIndex(grade => grade.studentId === studentId);
-      if (index !== -1) {
-        state.grades[index].grade = newGrade; // Actualiza la calificación de un alumno específico
+
+    
+    updateSecondSemesterGrades(state, action) {
+      const { subject, index, grade } = action.payload;
+      if (!state.subjects[subject]) {
+        state.subjects[subject] = {
+          'Primer Semestre': [],
+          'Segundo Semestre': [],
+          'Intensificación': [],
+        };
+      }
+      state.subjects[subject]['Segundo Semestre'][index] = grade;
+    },
+    
+   
+    updateIntensification(state, action) {
+      const { subject, grade } = action.payload;
+      if (!state.subjects[subject]) {
+        state.subjects[subject] = {
+          'Primer Semestre': [],
+          'Segundo Semestre': [],
+          'Intensificación': [],
+        };
+      }
+      state.showIntensification[subject] = grade; // Actualizar showIntensification
+    },
+    
+    updateFinalGrade(state, action) {
+      const { subject, grade } = action.payload;
+      if (!state.subjects[subject]) {
+        state.subjects[subject] = {
+          'Primer Semestre': [],
+          'Segundo Semestre': [],
+          'Intensificación': [],
+        };
+      }
+      state.subjects[subject].finalGrade = grade;
+    },
+
+    removeIntensificationGrade(state, action) {
+      const { subject } = action.payload;
+      if (state.subjects[subject]?.['Intensificación'].length > 0) {
+        state.subjects[subject]['Intensificación'].pop();
       }
     },
-    removeGrade(state, action) {
-      const studentIdToRemove = action.payload;
-      state.grades = state.grades.filter(grade => grade.studentId !== studentIdToRemove); // Elimina la calificación de un alumno específico
+    removeSecondSemesterGrade(state, action) {
+      const { subject } = action.payload;
+      if (state.subjects[subject]?.['Segundo Semestre'].length > 0) {
+        state.subjects[subject]['Segundo Semestre'].pop();
+      }
+    },
+    removeFirstSemesterGrade(state, action) {
+      const { subject } = action.payload;
+      if (state.subjects[subject]?.['Primer Semestre'].length > 0) {
+        state.subjects[subject]['Primer Semestre'].pop();
+      }
     },
   },
 });
 
-export const { addGrade, updateGrade, removeGrade } = gradesSlice.actions;
+
+export const {
+  updateFirstSemesterGrades,
+  updateSecondSemesterGrades,
+  updateIntensification,
+  updateFinalGrade,
+  removeFirstSemesterGrade,
+  removeSecondSemesterGrade,
+  removeIntensificationGrade,
+} = gradesSlice.actions;
 
 export default gradesSlice.reducer;
