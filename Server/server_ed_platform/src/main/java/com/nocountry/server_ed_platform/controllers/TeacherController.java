@@ -36,6 +36,10 @@ public class TeacherController {
 
 
 
+
+
+    
+
     @PostMapping("/updateTeacher/{id}")
     public ResponseEntity<TeacherDTO> updateTeacher(@PathVariable Long id, @RequestBody TeacherRegisterDTO teacherDTO) throws TeacherNotFoundException, Exception {
 
