@@ -20,6 +20,7 @@ import com.nocountry.server_ed_platform.services.AttendanceService;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/attendance")
@@ -37,6 +38,18 @@ public class AttendanceController {
                 true,
                 "Peticion exitosa",
                 attendanceService.findAttendanceByStudentId(studentId))
+        );
+    }
+
+    @Secured({"STUDENT", "PARENT","ADMIN", "TEACHER"})
+    @GetMapping("/")
+    public ResponseEntity<ResponseGenericDTO<List<AttendanceDTO>>> findAll()throws AttendanceNotFoundException {
+        return ResponseEntity.ok().body(
+                new ResponseGenericDTO<>(
+                        true,
+                        "peticion correcta",
+                        attendanceService.findAll()
+                )
         );
     }
 
