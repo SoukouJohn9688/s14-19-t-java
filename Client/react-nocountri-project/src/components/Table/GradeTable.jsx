@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { updateFirstSemesterGrades, updateSecondSemesterGrades, updateIntensification } from '@/redux/Grades/grades';
+import { updateFirstSemesterGrades, removeFirstSemesterGrade, removeSecondSemesterGrade, removeIntensificationGrade, updateSecondSemesterGrades, updateIntensification } from '@/redux/Grades/grades';
 import { useDispatch, useSelector } from 'react-redux';
 
 const GradeTable = () => {
@@ -7,9 +7,6 @@ const GradeTable = () => {
   const dispatch = useDispatch();
   const grades = useSelector(state => state.grades.subjects);
   const showIntensification = useSelector(state => state.grades.showIntensification);
-
-  // Resto del código sin cambios
-
 
   // Función para manejar el cambio de calificación
   const handleGradeChange = (subject, semester, index, value) => {
@@ -48,102 +45,142 @@ const GradeTable = () => {
       const newShowIntensification = {};
       subjects.forEach(subject => {
         const finalAverage = calculateFinalAverageForSubject(subject);
-        newShowIntensification[subject] = finalAverage < 7;
-        // Actualizar el estado directamente con las acciones de Redux
-        dispatch(updateIntensification({ subject, grade: newShowIntensification[subject] }));
+        const shouldShowIntensification = finalAverage < 7;
+        if (shouldShowIntensification !== showIntensification[subject]) {
+          newShowIntensification[subject] = shouldShowIntensification;
+          // Solo despachar la acción si hay cambios relevantes
+          dispatch(updateIntensification({ subject, grade: shouldShowIntensification }));
+        }
       });
     }
-  }, [grades]);
-
-  // Función para añadir un input para una nueva calificación
+  }, [grades, showIntensification]);
+  
   const handleAddGradeInput = (subject, semester) => {
     if (semester === 'Primer Semestre') {
       dispatch(updateFirstSemesterGrades({ subject, index: grades[subject]?.[semester]?.length || 0, grade: '' }));
     } else if (semester === 'Segundo Semestre') {
       dispatch(updateSecondSemesterGrades({ subject, index: grades[subject]?.[semester]?.length || 0, grade: '' }));
-    } else {
-      dispatch(updateIntensification({ subject, index: grades[subject]?.[semester]?.length || 0, grade: '' }));
+    } else if (semester === 'Intensificación') {
+      dispatch(updateIntensification({ subject, grade: [...(grades[subject]?.[semester] || []), null] }));
+      const finalAverage = calculateFinalAverageForSubject(subject);
+      if (finalAverage >= 7 && !grades[subject]?.['Intensificación'].some(grade => parseFloat(grade) < 7)) {
+        dispatch(updateIntensification({ subject, grade: true }));
+      }
     }
-  };
+  };  
+  
+// Función para eliminar el último input de una materia específica
+const handleRemoveGradeInput = (subject, semester) => {
+  if (semester === 'Primer Semestre') {
+    dispatch(removeFirstSemesterGrade({ subject }));
+  } else if (semester === 'Segundo Semestre') {
+    dispatch(removeSecondSemesterGrade({ subject }));
+  } else if (semester === 'Intensificación') {
+    dispatch(removeIntensificationGrade({ subject }));
+  }
+};
 
-    
-    return (
-      <div>
-        <table className="w-full border-collapse border border-black">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border border-black px-4 py-2">Espacio Curricular</th>
-              <th className="border border-black px-4 py-2">Primer Semestre</th>
-              <th className="border border-black px-4 py-2">Segundo Semestre</th>
-              <th className="border border-black px-4 py-2">Calificación final</th>
-              <th className="border border-black px-4 py-2">Intensificación</th>
-              <th className="border border-black px-4 py-2">Acreditación</th>
-            </tr>
-          </thead>
-          <tbody>
-            {subjects.map((subject) => (
-              <tr key={subject} className="bg-white">
-                <td className="border border-black px-4 py-2">{subject}</td>
-                {['Primer Semestre', 'Segundo Semestre'].map((semester) => (
-                  <td key={`${subject}-${semester}`} className="border border-black px-4 py-2">
-                    <div className="flex flex-col items-center">
-                      <div className="flex items-center gap-2">
-                        {grades[subject]?.[semester].map((grade, index) => (
-                          <div key={index} className="flex items-center gap-2">
-                            <input
-                              className="w-[40px] border-2 border-blue-500"
-                              type="number"
-                              value={grade}
-                              min={1}
-                              max={10}
-                              onChange={(e) => handleGradeChange(subject, semester, index, e.target.value)}
-                            />
-                          </div>
-                        ))}
-                        {semester !== 'Intensificación' && 
-                          <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, semester)}>+</button>
-                        }
-                      </div>
-                      {semester !== 'Intensificación' && 
-                        <span>Promedio: {calculateSemesterAverage(grades[subject]?.[semester])}</span>
-                      }
+
+return (
+  <div>
+    <table className="w-full border-collapse border border-black">
+      <thead>
+        <tr className="bg-gray-200">
+          <th className="border border-black px-4 py-2">Espacio Curricular</th>
+          <th className="border border-black px-4 py-2">Primer Semestre</th>
+          <th className="border border-black px-4 py-2">Segundo Semestre</th>
+          <th className="border border-black px-4 py-2">Calificación final</th>
+          <th className="border border-black px-4 py-2">Intensificación</th>
+          <th className="border border-black px-4 py-2">Acreditación</th>
+        </tr>
+      </thead>
+      <tbody>
+        {subjects.map((subject) => (
+          <tr key={subject} className="bg-white">
+            <td className="border border-black px-4 py-2">{subject}</td>
+            <td className="border border-black px-4 py-2">
+              <div className="flex flex-col items-center">
+                <div className="flex items-center gap-2">
+                  {grades[subject]?.['Primer Semestre'].map((grade, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <input
+                        className="w-[40px] border-2 border-blue-500"
+                        type="number"
+                        value={grade}
+                        min={1}
+                        max={10}
+                        onChange={(e) => handleGradeChange(subject, 'Primer Semestre', index, e.target.value)}
+                      />
                     </div>
-                  </td>
-                ))}
-                <td className="border border-black px-4 py-2">
-                  {calculateFinalAverageForSubject(subject)}
-                </td>
-                <td className="border border-black px-4 py-2">
-                  {showIntensification[subject] ? (
-                    <div style={{ display: 'flex', gap: '5px' }}>
-                      {grades[subject]?.['Intensificación'].map((grade, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <input
-                            key={index}
-                            type="number"
-                            value={grade}
-                            onChange={(e) => handleGradeChange(subject, 'Intensificación', index, e.target.value)}
-                            className="w-[40px] border-2 border-blue-500"
-                            min={1}
-                            max={10}
-                          />
-                        </div>
-                      ))}
-                      {showIntensification[subject] && grades[subject]?.['Intensificación'].length < 3 && (
-                        <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, 'Intensificación')}>+</button>
-                      )}
+                  ))}
+                  <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleRemoveGradeInput(subject, 'Primer Semestre')}>-</button>
+                  <button className="bg-green-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, 'Primer Semestre')}>+</button>
+                </div>
+                <span>Promedio: {calculateSemesterAverage(grades[subject]?.['Primer Semestre'])}</span>
+              </div>
+            </td>
+            <td className="border border-black px-4 py-2">
+              <div className="flex flex-col items-center">
+                <div className="flex items-center gap-2">
+                  {grades[subject]?.['Segundo Semestre'].map((grade, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <input
+                        className="w-[40px] border-2 border-blue-500"
+                        type="number"
+                        value={grade}
+                        min={1}
+                        max={10}
+                        onChange={(e) => handleGradeChange(subject, 'Segundo Semestre', index, e.target.value)}
+                      />
                     </div>
-                  ) : null}
-                </td>
-                <td className="border border-black px-4 py-2">
-                  {calculateFinalAverageForSubject(subject) >= 7 || grades[subject]?.['Intensificación'].some(grade => parseFloat(grade) >= 7) ? 'APROBADO' : null}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
+                  ))}
+                  <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleRemoveGradeInput(subject, 'Segundo Semestre')}>-</button>
+                  <button className="bg-green-500 text-white px-2 py-1 rounded" onClick={() => handleAddGradeInput(subject, 'Segundo Semestre')}>+</button>
+                </div>
+                <span>Promedio: {calculateSemesterAverage(grades[subject]?.['Segundo Semestre'])}</span>
+              </div>
+            </td>
+            <td className="border border-black px-4 py-2">
+              {calculateFinalAverageForSubject(subject)}
+            </td>
+            <td className="border border-black px-4 py-2">
+              {showIntensification[subject] ? (
+                <div style={{ display: 'flex', gap: '5px' }}>
+                  {grades[subject]?.['Intensificación'].map((grade, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <input
+                        key={index}
+                        type="number"
+                        value={grade}
+                        onChange={(e) => handleGradeChange(subject, 'Intensificación', index, e.target.value)}
+                        className="w-[40px] border-2 border-blue-500"
+                        min={1}
+                        max={10}
+                      />
+                    </div>
+                  ))}
+                  {!grades[subject]?.['Intensificación'].some(grade => parseFloat(grade) >= 7) &&
+                    calculateFinalAverageForSubject(subject) < 7 && (
+                      <button
+                        className="bg-blue-500 text-white px-2 py-1 rounded"
+                        onClick={() => handleAddGradeInput(subject, 'Intensificación')}
+                      >
+                        +
+                      </button>
+                    )}
+                </div>
+              ) : null}
+            </td>
+            <td className="border border-black px-4 py-2">
+              {calculateFinalAverageForSubject(subject) >= 7 || grades[subject]?.['Intensificación'].some(grade => parseFloat(grade) >= 7) ? 'APROBADO' : null}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+};
 
   export default GradeTable;
