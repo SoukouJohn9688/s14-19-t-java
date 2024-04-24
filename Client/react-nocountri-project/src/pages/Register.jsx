@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import backgroundImage from "../assets/background_login.png";
 import { Button, Input, Checkbox } from "@/components";
 import {
@@ -13,26 +14,24 @@ import {
 } from "@/components/ui/select";
 
 const Register = () => {
-  const emailRef = useRef(null);
-  const contraseñaRef = useRef(null);
-  const userRef = useRef(null);
-  const DNIPadresRef = useRef(null);
-  const DNIAlumnoRef = useRef(null);
-  const DNIDocenteRef = useRef(null);
-  const checkboxRef = useRef(null);
-  const [isChecked, setIsChecked] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    // Manejar los datos del formulario aquí (por ejemplo, enviar una solicitud de registro)
+    console.log(data);
+  };
+
   const [rol, setRol] = useState(null);
 
   useEffect(() => {
     console.log("Rol actualizado:", rol);
   }, [rol]);
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
   const handleSelect = (nuevoRol) => {
-    console.log("Nuevo rol seleccionado:", nuevoRol);
     setRol(nuevoRol);
   };
 
@@ -49,29 +48,33 @@ const Register = () => {
         <h1 className="text-3xl font-bold text-gray-700">
           Registrar un usuario
         </h1>
-        <form className="space-y-4 flex flex-col">
+        <form className="space-y-4 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           <Input
             placeholder="Nombre y apellido"
             className="bg-transparent border border-slate-400"
-            ref={userRef}
+            {...register("nombre", { required: true })}
           />
+          {errors.nombre && <span>Este campo es obligatorio</span>}
           <Input
             placeholder="Email"
             className="bg-transparent border border-slate-400"
-            ref={emailRef}
+            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
           />
+          {errors.email && <span>Por favor ingresa un email válido</span>}
           <Input
             type="password"
             placeholder="Contraseña"
             className="bg-transparent border border-slate-400"
-            ref={contraseñaRef}
+            {...register("contraseña", { required: true })}
           />
+          {errors.contraseña && <span>Este campo es obligatorio</span>}
           <Input
             type="password"
             placeholder="Repetir contraseña"
             className="bg-transparent border border-slate-400"
-            ref={contraseñaRef}
+            {...register("repetirContraseña", { required: true })}
           />
+          {errors.repetirContraseña && <span>Este campo es obligatorio</span>}
           <Select onValueChange={(e) => handleSelect(e)}>
             <SelectTrigger className="w-[280px]">
               <SelectValue placeholder="Selecciona tu rol" />
@@ -92,8 +95,9 @@ const Register = () => {
                 type="number"
                 placeholder="DNI del docente"
                 className="bg-transparent border border-slate-400"
-                ref={DNIDocenteRef}
+                {...register("dniDocente", { required: true })}
               />
+              {errors.dniDocente && <span>Este campo es obligatorio</span>}
             </>
           )}
 
@@ -102,7 +106,7 @@ const Register = () => {
               type="number"
               placeholder="DNI del alumno"
               className="bg-transparent border border-slate-400"
-              ref={DNIAlumnoRef}
+              {...register("dniAlumno", { required: true })}
             />
           )}
 
@@ -112,22 +116,20 @@ const Register = () => {
                 type="number"
                 placeholder="DNI del padre, madre o tutor"
                 className="bg-transparent border border-slate-400"
-                ref={DNIPadresRef}
+                {...register("dniPadres", { required: true })}
               />
               <Input
                 type="number"
                 placeholder="DNI del alumno"
                 className="bg-transparent border border-slate-400"
-                ref={DNIAlumnoRef}
+                {...register("dniAlumno", { required: true })}
               />
             </>
           )}
           <label className="flex items-center justify-center">
             <Checkbox
               className="mr-1"
-              ref={checkboxRef}
-              onChange={handleCheckboxChange}
-              checked={isChecked}
+              {...register("terminos", { required: true })}
             />
             <span className="text-xs">
               Acepto términos, condiciones y políticas de privacidad de&nbsp;
@@ -140,14 +142,14 @@ const Register = () => {
 
           <div className="flex flex-row gap-4">
             <Button
+              type="button"
               className="w-[70%] mx-auto mt-4 shadow-lg flex flex-row justify-center text-gray-700 bg-[rgba(245, 236, 239, 1)] hover:bg-[#d1cdce]  border-solid border-2 border-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              onClick={() => {}}
             >
               Cancelar
             </Button>
             <Button
+              type="submit"
               className="w-[70%] mx-auto mt-4 flex justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              onClick={() => {}}
             >
               Registrarse
             </Button>
