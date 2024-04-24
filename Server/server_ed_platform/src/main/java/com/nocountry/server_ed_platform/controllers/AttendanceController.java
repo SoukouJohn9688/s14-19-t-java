@@ -4,6 +4,7 @@ import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
 import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.DuplicateDateException;
 import com.nocountry.server_ed_platform.exceptions.FutureDateException;
+import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,6 +20,8 @@ import com.nocountry.server_ed_platform.services.AttendanceService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/attendance")
 @Tag(name = "Attendance")
@@ -33,6 +36,17 @@ public class AttendanceController {
     @GetMapping("/{studentId}")
     public ResponseEntity<AttendanceResponseDTO> getAttendanceByStudentId(@PathVariable Long studentId) {
         return ResponseEntity.ok().body(attendanceService.findAttendanceByStudentId(studentId));
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<ResponseGenericDTO<List<AttendanceDTO>>> findAll()throws AttendanceNotFoundException {
+        return ResponseEntity.ok().body(
+                new ResponseGenericDTO<>(
+                        true,
+                        "peticion correcta",
+                        attendanceService.findAll()
+                )
+        );
     }
 
     @Hidden

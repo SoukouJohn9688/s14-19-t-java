@@ -18,9 +18,11 @@ import com.nocountry.server_ed_platform.repositories.SubjectRepo;
 import com.nocountry.server_ed_platform.services.AttendanceService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,8 +34,19 @@ public class AttendanceServiceImpl implements AttendanceService {
     private final AttendanceRepo attendanceRepo;
     private final StudentRepo studentRepo;
     private final SubjectRepo subjectRepo;
+    private final ModelMapper modelMapper;
 
 
+
+    @Override
+    public List<AttendanceDTO> findAll() {
+        List<Attendance> attendanceDB = attendanceRepo.findAll();
+        List<AttendanceDTO> attendanceDTOS = new ArrayList<>();
+        for(Attendance attendance : attendanceDB){
+            attendanceDTOS.add(modelMapper.map(attendance, AttendanceDTO.class));
+        }
+        return attendanceDTOS;
+    }
 
     @Override
     public AttendanceResponseDTO findAttendanceByStudentId(Long studentId) {
