@@ -17,22 +17,41 @@ const Home = () => {
 
   const [alumnos, setAlumnos] = useState([]);
 
+
+
+
   useEffect(() => {
+    console.log("Suppp Token Home",token);
+    fetch("http://localhost:8080/api/v1/student/").then(response =>response.json()
+    .then(data=>console.log(data)))
+    const axiosConfig = axios.create({
+      baseURL: '"http://localhost:8080/api/v1/', //replace with your BaseURL
+      headers: {
+        'Content-Type': 'application/json', // change according header type accordingly
+      },
+    });
+    console.log("Hey Whassuppp. Iniciando");
     const TotalAlumnos = async () => {
       const response = await axios.get(
         "http://localhost:8080/api/v1/student/",
         { accessToken: token, tokenType: "Bearer" }
       );
-      //const alumnosId = response.data.data(alumno=> alumno.id)
-      console.log(response);
+      
+   // const alumnosId = response.data.data(alumno=> alumno.id)
+     //console.log(response);
       //return alumnosId;
     };
+
+    console.log(typeof TotalAlumnos);
 
     const ArrayAsociativo = TotalAlumnos();
 
     const FetchNombreyMateria = async () => {
       let array = [];
       ArrayAsociativo.forEach(async (e) => {
+
+        console.log("Valor del id: ",e);
+
         const materias = await axios.get(
           `http://localhost:8080/api/v1/subject/${e}`,
           { accessToken: token, tokenType: "Bearer" }
