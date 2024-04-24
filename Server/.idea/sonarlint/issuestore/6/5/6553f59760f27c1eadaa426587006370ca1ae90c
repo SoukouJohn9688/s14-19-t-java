@@ -1,0 +1,42 @@
+
+b	java:S112M"FDefine and throw a dedicated exception instead of using a generic one.(Ò‰¥8ϋ“ήπ1
+	java:S117@"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ξ—’£όÿÿÿÿ8¶ι³άπ1J$a295603f-fb5c-45a7-93dc-ae13cc925e5a
+
+java:S2629r"7Use the built-in formatting to construct this argument.(ύς–ύÿÿÿÿ8Σκ΄άπ1J$4242b9c7-8534-447e-9f3b-0c58930d7c76
+u
+java:S3416("2Update this logger to use "AdminController.class".(¦½8Ίι³άπ1J$4d024d7b-b630-48b2-8210-ac8d7d76545d
+q
+java:S6856?".Bind path variable "id" to a method parameter.(¤—‘χ8»ι³άπ1J$fa02c3b8-6725-4a42-88a9-95c06f5b15b4
+”
+java:S6856k"QBind path variable "teacherId", "subjectId", "currentYear" to a method parameter.(Ξ‹Λ8»ι³άπ1J$fcafbafa-f9f2-461b-b1d1-8f25c0479dba
+½
+java:S1130M"Remove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException' which is a subclass of 'java.lang.Exception'.(Ò‰¥8Ή”ήπ1
+^
+java:S3457Q"AFormat specifiers should be used instead of string concatenation.(ζέδό8»”ήπ1
+»
+java:S1130`"Remove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException', as it cannot be thrown from method's body.(¦Ό8Ύ”ήπ1
+n
+java:S1452l"&Remove usage of generic wildcard type.(¦βκ°όÿÿÿÿ8Ει³άπ1J$5df4fb79-d871-4be7-8fe3-1eb5d99cbb07
+‰
+java:S3457r"AFormat specifiers should be used instead of string concatenation.(ύς–ύÿÿÿÿ8βκ΄άπ1J$a406c4ea-dd9a-49a2-bb7b-f5bcecb53567
+m
+java:S1128"PRemove this unused import 'com.nocountry.server_ed_platform.dtos.AttendanceDTO'.(ωΊσ8Γ”ήπ1
+
+java:S1128"_Remove this unused import 'com.nocountry.server_ed_platform.dtos.Response.AssignAttendanceDTO'.(νΪÿÿÿÿÿ8Δ”ήπ1
+o
+java:S1128"RRemove this unused import 'com.nocountry.server_ed_platform.dtos.SubjectGradeDTO'.(Ν•±θ8Δ”ήπ1
+k
+java:S1128
+"NRemove this unused import 'com.nocountry.server_ed_platform.entities.Subject'.(ώ²£–8Δ”ήπ1
+k
+java:S1128"NRemove this unused import 'com.nocountry.server_ed_platform.entities.Teacher'.(τ™Θ¶8Δ”ήπ1
+†
+java:S1128"dRemove this unused import 'com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException'.(‡λύ…ωÿÿÿÿ8Ε”ήπ1
+u
+java:S1128"XRemove this unused import 'com.nocountry.server_ed_platform.services.AttendanceService'.(…‹Ψ„8Ε”ήπ1
+r
+java:S1128"URemove this unused import 'com.nocountry.server_ed_platform.services.SubjectService'.(‹—ÿ«8Ε”ήπ1
+[
+java:S1128">Remove this unused import 'jakarta.transaction.Transactional'.(ί–Κ³8Ε”ήπ1
+Q
+java:S1128"/Remove this unused import 'java.util.Optional'.(¨λέόÿÿÿÿ8Ε”ήπ1

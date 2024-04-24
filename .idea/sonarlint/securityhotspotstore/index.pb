@@ -3,8 +3,6 @@
 eServer/server_ed_platform/src/main/java/com/nocountry/server_ed_platform/services/TeacherService.java,a\3\a33a203bfd712c02e5b49647b894ffb08c239431
 õ
 kServer/server_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/TeacherController.java,7\0\705eca3077db807ab3450c2c48e5aced7e3f4261
-ò
-hServer/server_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/HomeController.java,2\0\20fc44296aa4b3650c25e90c5ca0c54862ed9bb6
 õ
 kServer/server_ed_platform/src/main/java/com/nocountry/server_ed_platform/controllers/StudentController.java,b\f\bf657ff5cb8f023a3f07055d57754ca5a823d929
 ù

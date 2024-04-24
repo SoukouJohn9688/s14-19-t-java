@@ -1,2 +1,6 @@
 
-•	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(é±ª©ùÿÿÿÿ8ÕÊ ¾î1J$c7f76703-00df-4683-82b1-b20dbe46452a
+“	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£ù±™8æÀµ¿ğ1J$91278047-4232-466a-af5a-2fa045f06084
+“	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£ù±™8çÀµ¿ğ1J$f407b7fb-74a4-4499-a881-a5af96acc9f2
+	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£ù±™8êÀµ¿ğ1J$5dd434a7-c4b4-4ccc-abc8-9d5a901e9301
+o
+java:S1128"RRemove this unused import 'com.nocountry.server_ed_platform.dtos.SubjectGradeDTO'.(Í•±è8‰¯µìğ1

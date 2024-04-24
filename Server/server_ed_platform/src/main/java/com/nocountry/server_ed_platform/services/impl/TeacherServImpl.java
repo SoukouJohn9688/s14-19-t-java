@@ -69,16 +69,21 @@ public class TeacherServImpl implements TeacherService {
     public TeacherDTO updateTeacher(Long id, TeacherRegisterDTO request) throws TeacherNotFoundException {
         Optional<Teacher> teacherFound = teacherRepo.findById(id);
 
-        if (teacherFound.isPresent()) {
-            modelMapper.map(request, teacherFound.get());
-
-            return modelMapper.map(teacherFound.get(), TeacherDTO.class);
-        } else {
-
-            throw new TeacherNotFoundException("Teacher with ID " + id + " not found.");
+        if (teacherFound.isEmpty()) {
+            throw new TeacherNotFoundException(String.format(" el profesor con el id %s no encontrado", id));
         }
 
+        if (teacherFound.isPresent()) {
+            Teacher teacher = teacherFound.get();
 
+            teacher.setName(request.getName());
+            teacher.setSurname(request.getSurname());
+            Teacher teacherEdited = teacherRepo.save(teacher);
+
+            return modelMapper.map(teacherEdited, TeacherDTO.class);
+        } else {
+            throw new TeacherNotFoundException("El profesor con el id" + id + "no se encontro");
+        }
     }
 
     @Override
@@ -144,14 +149,26 @@ public class TeacherServImpl implements TeacherService {
 //        }
 
 
-            AttendanceDTO response = attendanceService.AssignByStudentIdAndSubjectId(StudentId,SubjectId,request);
+        AttendanceDTO response = attendanceService.AssignByStudentIdAndSubjectId(StudentId,SubjectId,request);
 //
-            return AssignAttendanceDTO.builder()
-                    .StudentId(StudentId)
-                    .attendanceDTO(response)
-                    .build();
+        return AssignAttendanceDTO.builder()
+                .StudentId(StudentId)
+                .attendanceDTO(response)
+                .build();
 
 
+    }
+    @Override
+    public TeacherDTO deleteById(Long id) throws TeacherNotFoundException {
+        Teacher teacher = teacherRepo.findById(id).orElse(null);
+        if (teacher != null) {
+            teacherRepo.deleteById(id);
+            return modelMapper.map(teacher, TeacherDTO.class);
+        }
+        else {
+
+            throw new TeacherNotFoundException("Teacher with ID " + id + " not found.");
+        }
     }
 
 

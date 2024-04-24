@@ -30,7 +30,7 @@ public class AttendanceController {
 
     private final AttendanceService attendanceService;
 
-    @Secured({"STUDENT", "PARENT","ADMIN"})
+    @Secured({"STUDENT", "PARENT","ADMIN", "TEACHER"})
     @GetMapping("/{studentId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceResponseDTO>> getAttendanceByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(
@@ -41,7 +41,7 @@ public class AttendanceController {
     }
 
     @Hidden
-    @Secured({"STUDENT", "PARENT","ADMIN"})
+    @Secured({"STUDENT", "PARENT","ADMIN", "TEACHER"})
     @PostMapping("/save/{studentId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> saveAttendance(
             @PathVariable Long studentId,
@@ -56,7 +56,7 @@ public class AttendanceController {
                 attendanceService.saveAttendance(studentId, attendanceDTO)
         ));
     }
-    @Secured({"STUDENT", "TEACHER","ADMIN"})
+    @Secured({ "TEACHER","ADMIN"})
     @PutMapping("/update/{attendanceId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> updateTypeOfAttendanceById(
             @PathVariable Long attendanceId,
