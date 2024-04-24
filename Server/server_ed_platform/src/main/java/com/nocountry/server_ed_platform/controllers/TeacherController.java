@@ -4,8 +4,10 @@ import com.nocountry.server_ed_platform.dtos.AttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignAttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.Response.ResponseGenericDTO;
+import com.nocountry.server_ed_platform.dtos.StudentDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
 import com.nocountry.server_ed_platform.services.TeacherService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -34,6 +36,16 @@ public class TeacherController {
     private final TeacherService teacherService;
 
 
+
+    @Secured("TEACHER")
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseGenericDTO<TeacherDTO>> findByTeacherId(@PathVariable Long id) throws TeacherNotFoundException {
+        return ResponseEntity.ok().body(new ResponseGenericDTO<>(
+                true,
+                "Profesor encontrado",
+                teacherService.findById(id)
+        ));
+    }
 
     @PostMapping("/updateTeacher/{id}")
     public ResponseEntity<TeacherDTO> updateTeacher(@PathVariable Long id, @RequestBody TeacherRegisterDTO teacherDTO) throws TeacherNotFoundException, Exception {

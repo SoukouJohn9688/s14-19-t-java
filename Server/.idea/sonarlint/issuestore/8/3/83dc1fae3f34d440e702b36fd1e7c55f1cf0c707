@@ -1,13 +1,20 @@
 
-ˆ	java:S112'"FDefine and throw a dedicated exception instead of using a generic one.(Ò‰¥8’äıŞğ1J$014a5106-2c3b-4c6d-beb9-19fc87119d00
-˜	java:S117V"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î—’£üÿÿÿÿ8·Âºğ1J$986e2af5-de9c-47f1-af02-c54691965bb5
+ˆ	java:S1123"FDefine and throw a dedicated exception instead of using a generic one.(Ò‰¥8Ç¢Í‹ñ1J$18dcd09d-de90-4eb4-8a25-5506074dadfc
+˜	java:S117b"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î—’£üÿÿÿÿ8È¢Í‹ñ1J$9707d9a0-b12d-43c3-ae02-6acfffdd376c
 q
-java:S6856U".Bind path variable "id" to a method parameter.(¤—‘÷8ğ¤£¿ğ1J$e4b6f2aa-810d-479b-987c-db7100d52e12
+java:S6856a".Bind path variable "id" to a method parameter.(¤—‘÷8Ô¢Í‹ñ1J$f1e50652-6d08-4187-bf92-9866664ba2a7
+æ
+java:S1130*"Remove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException', as it cannot be thrown from method's body.(ƒƒŸ‰ûÿÿÿÿ8Ú¢Í‹ñ1J$007950c5-b4e4-4d72-8c95-d077cedb9cbd
 ã
-java:S1130'"ŸRemove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException' which is a subclass of 'java.lang.Exception'.(Ò‰¥8°äıŞğ1J$ace1f6e2-05f6-419b-ab65-f4216455a45e
+java:S11303"ŸRemove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException' which is a subclass of 'java.lang.Exception'.(Ò‰¥8Ø¢Í‹ñ1J$6421e44d-9360-4d3f-8b60-d83ff1cd2f44
 „
-java:S3457+"AFormat specifiers should be used instead of string concatenation.(æİäü8±äıŞğ1J$46cb1871-096c-45a4-b280-5c2a7448aa2d
-á
-java:S1130:"Remove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException', as it cannot be thrown from method's body.(¦ŸŠ¼8³äıŞğ1J$b4ebc1ec-700a-4d35-92a2-f93af2a3d0c2
+java:S34577"AFormat specifiers should be used instead of string concatenation.(æİäü8Ù¢Í‹ñ1J$ee6c670b-df90-447f-ba39-b932b67130d1
+»
+java:S1130F"Remove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException', as it cannot be thrown from method's body.(¦ŸŠ¼8…àÍ‹ñ1
 ä
-java:S1130J" Remove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException', as it cannot be thrown from method's body.(ÏğŠ„8µäıŞğ1J$7a7f4c85-dac9-4b59-aa0a-ce9d0115f758
+java:S1130V" Remove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException', as it cannot be thrown from method's body.(ÏğŠ„8Û¢Í‹ñ1J$39e423d8-d131-4c2f-a0b2-77755b44f43b
+o
+java:S1128"MRemove this unused import 'com.nocountry.server_ed_platform.dtos.StudentDTO'.(ÕõÂÏüÿÿÿÿ8ˆàÍ‹ñ1
+ƒ
+java:S1128
+"aRemove this unused import 'com.nocountry.server_ed_platform.exceptions.StudentNotFoundException'.(ê¹åšûÿÿÿÿ8ˆàÍ‹ñ1

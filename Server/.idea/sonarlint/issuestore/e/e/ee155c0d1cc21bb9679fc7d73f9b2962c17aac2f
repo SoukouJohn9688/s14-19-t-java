@@ -1,12 +1,10 @@
 
-	java:S112]"FDefine and throw a dedicated exception instead of using a generic one.(ƒëèûÿÿÿÿ8ğÆÄºğ1J$8f4442c8-8992-472c-ad8e-0e4c55bf354d
-ˆ	java:S112c"FDefine and throw a dedicated exception instead of using a generic one.(ƒË€8ğÆÄºğ1J$4e031b46-ded9-441b-a9a9-3e0a889f8903
-ˆ	java:S112q"FDefine and throw a dedicated exception instead of using a generic one.(ƒË€8ğÆÄºğ1J$b690e893-244d-41a2-9776-f938c596cc1b
-ˆ	java:S112w"FDefine and throw a dedicated exception instead of using a generic one.(òÍÀ8ñÆÄºğ1J$276c8326-e39e-4426-96f5-e300fefd2bf8
-”	java:S117ˆ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ú‘£8ñÆÄºğ1J$39e378f0-b753-4295-be0e-d44d7a366b4a
-”	java:S117ˆ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ú‘£8òÆÄºğ1J$d442e93d-964c-42b7-96f8-141af7fcf3d0
-e
-java:S2583J"CChange this condition so that it does not always evaluate to "true"(‹„ãşıÿÿÿÿ8Ÿ—œŞğ1
-~	java:S125‰"<This block of commented-out lines of code should be removed.(ÇÕ¿B8ÇÄºğ1J$ee936296-bd11-4fd1-93dd-8fd22852e4db
-~
-java:S1128"aRemove this unused import 'com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO'.(¥ğ8¸—œŞğ1
+	java:S112k"FDefine and throw a dedicated exception instead of using a generic one.(ƒëèûÿÿÿÿ8ÎÁ‹ñ1J$c2ca323a-e4fc-4a35-8529-68a663f3747e
+ˆ	java:S112q"FDefine and throw a dedicated exception instead of using a generic one.(ƒË€8ÎÁ‹ñ1J$255bc808-5205-4bb4-b0e4-782d408de237
+ˆ	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ƒË€8ÎÁ‹ñ1J$d8423825-2a36-43e2-80db-57533b2bff4c
+‰	java:S112…"FDefine and throw a dedicated exception instead of using a generic one.(òÍÀ8ÎÁ‹ñ1J$4bd6e61b-3791-4297-a1ce-673f97f2b41d
+”	java:S117–"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ú‘£8ÎÁ‹ñ1J$9da50be0-98c8-4c17-8b01-1c04e0f99e0e
+”	java:S117–"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ú‘£8ÎÁ‹ñ1J$0cf3899c-e898-45b9-9b58-c7587ac546fe
+‹
+java:S2583X"CChange this condition so that it does not always evaluate to "true"(‹„ãşıÿÿÿÿ8ÎÁ‹ñ1J$6c35f741-56a8-4c9f-a6dd-26bfe51863b3
+~	java:S125—"<This block of commented-out lines of code should be removed.(ÇÕ¿B8¨ÎÁ‹ñ1J$266f17dd-351a-4f72-be81-230189c9bbe2

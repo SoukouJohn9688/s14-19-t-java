@@ -6,10 +6,12 @@ import com.nocountry.server_ed_platform.dtos.Request.TeacherRegisterDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignAttendanceDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AssignGradeStudentResponseDTO;
 import com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO;
+import com.nocountry.server_ed_platform.dtos.StudentDTO;
 import com.nocountry.server_ed_platform.dtos.TeacherDTO;
 import com.nocountry.server_ed_platform.entities.Student;
 import com.nocountry.server_ed_platform.entities.Subject;
 import com.nocountry.server_ed_platform.entities.Teacher;
+import com.nocountry.server_ed_platform.exceptions.StudentNotFoundException;
 import com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException;
 import com.nocountry.server_ed_platform.repositories.AttendanceRepo;
 import com.nocountry.server_ed_platform.repositories.StudentRepo;
@@ -58,8 +60,20 @@ public class TeacherServImpl implements TeacherService {
     }
 
     @Override
-    public TeacherDTO findById(Long id) {
-        return null;
+    public TeacherDTO findById(Long id)throws TeacherNotFoundException {
+        Optional<Teacher> teacherdb = teacherRepo.findById(id);
+
+        if (teacherdb.isEmpty()) {
+            throw new TeacherNotFoundException("profesor con el id "+ id + "no encontrado");
+        }
+
+        return TeacherDTO.builder()
+                .teacher_id(teacherdb.get().getId())
+                .name(teacherdb.get().getName())
+                .surname(teacherdb.get().getSurname())
+                .dni(teacherdb.get().getDni())
+                .build();
+
     }
 
     @Transactional

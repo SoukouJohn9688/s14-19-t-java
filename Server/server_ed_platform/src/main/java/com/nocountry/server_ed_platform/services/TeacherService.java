@@ -17,7 +17,7 @@ public interface TeacherService {
 
     TeacherDTO createTeacher(TeacherRegisterDTO request);
 
-    TeacherDTO findById(Long id);
+    TeacherDTO findById(Long id)throws TeacherNotFoundException;
 
     TeacherDTO updateTeacher(Long id, TeacherRegisterDTO request) throws TeacherNotFoundException;
 

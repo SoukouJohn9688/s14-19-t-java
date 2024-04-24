@@ -1,22 +1,22 @@
 
-g	java:S112 "FDefine and throw a dedicated exception instead of using a generic one.(ƒëèûÿÿÿÿ8Ç¥´¾î1
-a	java:S112%"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8Ç¥´¾î1
-a	java:S112*"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8…Áğ1
-a	java:S112/"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8…Áğ1
-a	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8…Áğ1
-a	java:S1129"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8…Áğ1
-a	java:S112>"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8…Áğ1
-n
-java:S1192%"RDefine a constant instead of duplicating this literal "Materia no existe" 6 times.(«£ØA8…Áğ1
-c
-java:S1854G"ARemove this useless assignment to local variable "listStudents6".(×ŞßÌøÿÿÿÿ8•…Áğ1
-c
-java:S1854F"ARemove this useless assignment to local variable "listStudents5".(¯ö‚Öÿÿÿÿÿ8•…Áğ1
-^
-java:S1854E"ARemove this useless assignment to local variable "listStudents4".( ûÔç8•…Áğ1
-c
-java:S1854D"ARemove this useless assignment to local variable "listStudents3".(Ã÷äâøÿÿÿÿ8•…Áğ1
-c
-java:S1854C"ARemove this useless assignment to local variable "listStudents2".(œØüÖşÿÿÿÿ8•…Áğ1
-b
-java:S1854B"@Remove this useless assignment to local variable "listStudents".(…®÷áşÿÿÿÿ8•…Áğ1
+	java:S112 "FDefine and throw a dedicated exception instead of using a generic one.(ƒëèûÿÿÿÿ8Ç¥´¾î1J$e87ae172-2310-4b01-a51d-c09c06bdcb5f
+‡	java:S112%"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8Ç¥´¾î1J$4ed3706a-c5be-4552-b124-330e84a83631
+‡	java:S112*"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8…Áğ1J$9558391e-53f5-4e27-ae9a-a5dd5db10a41
+‡	java:S112/"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8…Áğ1J$a0af3a3c-ed93-4889-a3a9-0c0a133b4ada
+‡	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8…Áğ1J$c1479795-8a43-4084-9641-bcd689ff345e
+‡	java:S1129"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8…Áğ1J$e4cc5f2d-1037-4e29-abf9-3c5158842462
+‡	java:S112>"FDefine and throw a dedicated exception instead of using a generic one.(«£ØA8…Áğ1J$3a41c89a-b074-48c9-8dcc-4427b008ebd5
+”
+java:S1192%"RDefine a constant instead of duplicating this literal "Materia no existe" 6 times.(«£ØA8…Áğ1J$d02c270b-012d-43e5-a526-dfb1ceffec4f
+‰
+java:S1854G"ARemove this useless assignment to local variable "listStudents6".(×ŞßÌøÿÿÿÿ8•…Áğ1J$55d8cabc-c3e5-4ddb-b8ad-ffbef722ecff
+‰
+java:S1854F"ARemove this useless assignment to local variable "listStudents5".(¯ö‚Öÿÿÿÿÿ8•…Áğ1J$e4944100-4b2b-4cb4-9649-70ebec79a268
+„
+java:S1854E"ARemove this useless assignment to local variable "listStudents4".( ûÔç8•…Áğ1J$3c8422fd-48b2-4856-89d2-7adbb1fb7846
+‰
+java:S1854D"ARemove this useless assignment to local variable "listStudents3".(Ã÷äâøÿÿÿÿ8•…Áğ1J$badf2064-75df-4ba8-a8ba-16f9d518485e
+‰
+java:S1854C"ARemove this useless assignment to local variable "listStudents2".(œØüÖşÿÿÿÿ8•…Áğ1J$21ca7983-b0b1-4c1a-8c9b-4737a64b6721
+ˆ
+java:S1854B"@Remove this useless assignment to local variable "listStudents".(…®÷áşÿÿÿÿ8•…Áğ1J$fa11764a-0945-45d6-bc56-f1dc0a51d14e

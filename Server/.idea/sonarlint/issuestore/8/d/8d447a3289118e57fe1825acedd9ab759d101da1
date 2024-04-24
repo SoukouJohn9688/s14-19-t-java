@@ -1,4 +1,7 @@
 
-j	java:S116"URename this field "teacher_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Û’¼Ù
+p
+java:S1128"SRemove this unused import 'com.nocountry.server_ed_platform.enumarations.UserRole'.(áÆ­8ù¸¾‹ñ1
 e
 java:S1128"ORemove this unused import 'org.springframework.security.core.userdetails.User'.(–Ä€
+R
+java:S1128	"0Remove this unused import 'java.time.LocalDate'.(›‘¬èıÿÿÿÿ8ú¸¾‹ñ1
