@@ -18,6 +18,7 @@ const gradesSlice = createSlice({
       }
       state.subjects[subject]['Primer Semestre'][index] = grade;
     },
+
     
     updateSecondSemesterGrades(state, action) {
       const { subject, index, grade } = action.payload;
@@ -31,10 +32,17 @@ const gradesSlice = createSlice({
       state.subjects[subject]['Segundo Semestre'][index] = grade;
     },
     
+   
     updateIntensification(state, action) {
       const { subject, grade } = action.payload;
-      // Actualizar el estado de intensificación directamente
-      state.showIntensification[subject] = grade;
+      if (!state.subjects[subject]) {
+        state.subjects[subject] = {
+          'Primer Semestre': [],
+          'Segundo Semestre': [],
+          'Intensificación': [],
+        };
+      }
+      state.showIntensification[subject] = grade; // Actualizar showIntensification
     },
     
     updateFinalGrade(state, action) {
@@ -48,14 +56,38 @@ const gradesSlice = createSlice({
       }
       state.subjects[subject].finalGrade = grade;
     },
+
+    removeIntensificationGrade(state, action) {
+      const { subject } = action.payload;
+      if (state.subjects[subject]?.['Intensificación'].length > 0) {
+        state.subjects[subject]['Intensificación'].pop();
+      }
+    },
+    removeSecondSemesterGrade(state, action) {
+      const { subject } = action.payload;
+      if (state.subjects[subject]?.['Segundo Semestre'].length > 0) {
+        state.subjects[subject]['Segundo Semestre'].pop();
+      }
+    },
+    removeFirstSemesterGrade(state, action) {
+      const { subject } = action.payload;
+      if (state.subjects[subject]?.['Primer Semestre'].length > 0) {
+        state.subjects[subject]['Primer Semestre'].pop();
+      }
+    },
   },
 });
+
+
 
 export const {
   updateFirstSemesterGrades,
   updateSecondSemesterGrades,
   updateIntensification,
   updateFinalGrade,
+  removeFirstSemesterGrade,
+  removeSecondSemesterGrade,
+  removeIntensificationGrade,
 } = gradesSlice.actions;
 
 export default gradesSlice.reducer;
