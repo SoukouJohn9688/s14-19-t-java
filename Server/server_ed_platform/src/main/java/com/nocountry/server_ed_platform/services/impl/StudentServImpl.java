@@ -9,6 +9,7 @@ import com.nocountry.server_ed_platform.repositories.StudentRepo;
 import com.nocountry.server_ed_platform.repositories.SubjectRepo;
 import com.nocountry.server_ed_platform.services.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class StudentServImpl implements StudentService {
 
     private final StudentRepo studentRepo;
     private final SubjectRepo subjectRepo;
-
+    private final ModelMapper modelMapper;
     @Override
     public void AssignSubjectByCurrentYear(Long studentId, String currentYear) throws StudentNotFoundException, SubjectNotFoundException {
         // Por ahora solo agregamos una materia al estudiante en cualquier anio
@@ -113,6 +114,8 @@ public class StudentServImpl implements StudentService {
         subjectRepo.save(subject1.get());
     }
 
+
+
     @Override
     public StudentDTO findByStudentId(Long studentId)throws StudentNotFoundException {
 
@@ -134,4 +137,17 @@ public class StudentServImpl implements StudentService {
                 .build();
 
     }
+
+    @Override
+    public List<StudentDTO> findAll() {
+
+        List<Student> studentsDB = studentRepo.findAll();
+        List<StudentDTO> studentDTOS = new ArrayList<>();
+        for (Student student : studentsDB){
+            studentDTOS.add(modelMapper.map(student, StudentDTO.class));
+        }
+        return studentDTOS;
+    }
+
+
 }

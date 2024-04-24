@@ -23,7 +23,7 @@ public class GradeController {
 
     @Secured({"STUDENT", "PARENT", "TEACHER"})
     @GetMapping("/student/{studentId}/subject/{subjectId}")
-    public ResponseEntity<ResponseGenericDTO<GradesResponseDTO>> findGradesByStudentIdAndSubjectId(@PathVariable Long studentId, @PathVariable Long subjectId) {
+    public ResponseEntity<ResponseGenericDTO<GradesResponseDTO>> findGradesByStudentIdAndSubjectId(@PathVariable("studentId") Long studentId, @PathVariable("subjectId") Long subjectId) {
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(
                 true,
                 "Notas encontradas",

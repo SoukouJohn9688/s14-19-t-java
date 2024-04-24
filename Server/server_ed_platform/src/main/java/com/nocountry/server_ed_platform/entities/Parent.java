@@ -26,7 +26,6 @@ public class Parent {
     private LocalDate birthdate;
     private String address;
     private String cellphone;
-
     @Enumerated(EnumType.STRING)
     private SexEnum sex;
 

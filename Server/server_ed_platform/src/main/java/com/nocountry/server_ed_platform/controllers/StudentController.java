@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/v1/student")
 @RequiredArgsConstructor
@@ -23,7 +25,8 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    @Secured({"STUDENT", "PARENT"})
+
+    @Secured({"STUDENT","TEACHER"})
     @GetMapping("/{studentId}")
     public ResponseEntity<ResponseGenericDTO<StudentDTO>> findByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(
@@ -32,6 +35,21 @@ public class StudentController {
                 studentService.findByStudentId(studentId)
         ));
     }
+
+
+
+    @Secured({"STUDENT","TEACHER"})
+    @GetMapping("/")
+    public ResponseEntity<ResponseGenericDTO<List<StudentDTO>>> findALl()  {
+        return ResponseEntity.ok().body(new ResponseGenericDTO<>(
+                true,
+                "Lista de estudiantes",
+                studentService.findAll()
+        ));
+    }
+
+
+
 
 
 }

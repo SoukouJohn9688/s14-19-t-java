@@ -20,6 +20,7 @@ import com.nocountry.server_ed_platform.services.AttendanceService;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/attendance")
@@ -30,7 +31,7 @@ public class AttendanceController {
 
     private final AttendanceService attendanceService;
 
-    @Secured({"STUDENT", "PARENT"})
+    @Secured({"STUDENT", "PARENT","ADMIN", "TEACHER"})
     @GetMapping("/{studentId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceResponseDTO>> getAttendanceByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(
@@ -40,8 +41,20 @@ public class AttendanceController {
         );
     }
 
+    @Secured({"STUDENT", "PARENT","ADMIN", "TEACHER"})
+    @GetMapping("/")
+    public ResponseEntity<ResponseGenericDTO<List<AttendanceDTO>>> findAll()throws AttendanceNotFoundException {
+        return ResponseEntity.ok().body(
+                new ResponseGenericDTO<>(
+                        true,
+                        "peticion correcta",
+                        attendanceService.findAll()
+                )
+        );
+    }
+
     @Hidden
-    @Secured("TEACHER")
+    @Secured({"STUDENT", "PARENT","ADMIN", "TEACHER"})
     @PostMapping("/save/{studentId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> saveAttendance(
             @PathVariable Long studentId,
@@ -56,9 +69,7 @@ public class AttendanceController {
                 attendanceService.saveAttendance(studentId, attendanceDTO)
         ));
     }
-
-    @Hidden
-    @Secured("TEACHER")
+    @Secured({ "TEACHER","ADMIN"})
     @PutMapping("/update/{attendanceId}")
     public ResponseEntity<ResponseGenericDTO<AttendanceDTO>> updateTypeOfAttendanceById(
             @PathVariable Long attendanceId,
@@ -73,7 +84,7 @@ public class AttendanceController {
         return ResponseEntity.ok().body(responseDTO);
     }
 
-    @Secured({"STUDENT", "PARENT", "TEACHER"})
+    @Secured({"STUDENT", "PARENT","ADMIN", "TEACHER"})
     @GetMapping("/{studentId}/{startDate}/{endDate}")
     public ResponseEntity<ResponseGenericDTO<AttendanceResponseDTO>> getAttendanceByStudentAndDate(
             @PathVariable Long studentId,

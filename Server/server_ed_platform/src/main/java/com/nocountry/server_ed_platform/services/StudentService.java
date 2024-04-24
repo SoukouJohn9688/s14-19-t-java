@@ -12,5 +12,5 @@ public interface StudentService {
     void AssignSubjectByCurrentYear(Long studentId, String currentYear) throws StudentNotFoundException, SubjectNotFoundException;
 
     StudentDTO findByStudentId(Long studentId)throws StudentNotFoundException;
-
+    List<StudentDTO> findAll();
 }

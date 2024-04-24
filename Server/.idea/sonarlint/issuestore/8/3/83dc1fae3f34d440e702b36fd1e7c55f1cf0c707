@@ -1,3 +1,13 @@
 
-}
-java:S3457("AFormat specifiers should be used instead of string concatenation.(ώ’γξJ$30851de4-e00c-4230-bce4-6b19d62bbedc
+	java:S112'"FDefine and throw a dedicated exception instead of using a generic one.(Ò‰¥8’δύήπ1J$014a5106-2c3b-4c6d-beb9-19fc87119d00
+	java:S117V"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ξ—’£όÿÿÿÿ8·ΒΊπ1J$986e2af5-de9c-47f1-af02-c54691965bb5
+q
+java:S6856U".Bind path variable "id" to a method parameter.(¤—‘χ8π¤£Ώπ1J$e4b6f2aa-810d-479b-987c-db7100d52e12
+γ
+java:S1130'"Remove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException' which is a subclass of 'java.lang.Exception'.(Ò‰¥8°δύήπ1J$ace1f6e2-05f6-419b-ab65-f4216455a45e
+„
+java:S3457+"AFormat specifiers should be used instead of string concatenation.(ζέδό8±δύήπ1J$46cb1871-096c-45a4-b280-5c2a7448aa2d
+α
+java:S1130:"Remove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException', as it cannot be thrown from method's body.(¦Ό8³δύήπ1J$b4ebc1ec-700a-4d35-92a2-f93af2a3d0c2
+δ
+java:S1130J" Remove the declaration of thrown exception 'com.nocountry.server_ed_platform.exceptions.AttendanceNotFoundException', as it cannot be thrown from method's body.(Οπ„8µδύήπ1J$7a7f4c85-dac9-4b59-aa0a-ce9d0115f758

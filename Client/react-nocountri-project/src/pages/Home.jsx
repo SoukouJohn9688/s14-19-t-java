@@ -1,5 +1,5 @@
 import CardProfile from "@/components/CardProfile/CardProfile";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CalendarioGeneral from "@/components/CalendarioGeneral/CalendarioGeneral";
 import { CardStudents } from "@/components/CardStudents/CardStudents";
 import { CardTeachers } from "@/components/CardTeachers/CardTeachers";
@@ -7,11 +7,21 @@ import { CardParents } from "@/components/CardParents/CardParents";
 import GradeTable from "@/components/Table/GradeTable";
 import CalendarioAsistencias from "@/components/CalendarioAsistencias/CalendarioAsistencias";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Home = () => {
   const [showGradeTable, setShowGradeTable] = useState(false);
   const [showCalendarAsis, setShowCalendarAsis] = useState(false);
   const userRol = useSelector((state) => state.auth.userRol);
+
+  const fetchData = async () => {
+    const data = await axios.get("http://localhost:8080/api/v1/teacher");
+    console.log(data.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const toggleGradeTable = () => {
     setShowGradeTable(true);
