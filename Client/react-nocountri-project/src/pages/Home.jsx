@@ -13,15 +13,44 @@ const Home = () => {
   const [showGradeTable, setShowGradeTable] = useState(false);
   const [showCalendarAsis, setShowCalendarAsis] = useState(false);
   const userRol = useSelector((state) => state.auth.userRol);
+  const token = useSelector((state) => state.auth.token);
 
-  const fetchData = async () => {
-    const data = await axios.get("http://localhost:8080/api/v1/teacher");
-    console.log(data.data);
-  };
+  const [alumnos, setAlumnos] = useState([]);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const TotalAlumnos = async () => {
+      const response = await axios.get(
+        "http://localhost:8080/api/v1/student/",
+        { accessToken: token, tokenType: "Bearer" }
+      );
+      //const alumnosId = response.data.data(alumno=> alumno.id)
+      console.log(response);
+      //return alumnosId;
+    };
+
+    const ArrayAsociativo = TotalAlumnos();
+
+    const FetchNombreyMateria = async () => {
+      let array = [];
+      ArrayAsociativo.forEach(async (e) => {
+        const materias = await axios.get(
+          `http://localhost:8080/api/v1/subject/${e}`,
+          { accessToken: token, tokenType: "Bearer" }
+        );
+        const alumnos = await axios.get(
+          `http://localhost:8080/api/v1/student/${e}`,
+          { accessToken: token, tokenType: "Bearer" }
+        );
+        array.push({
+          id: e,
+          materia: materias.data.data.subjects,
+          info: alumnos.data.data,
+        });
+      });
+      setAlumnos([...array]);
+    };
+    () => FetchNombreyMateria();
+  }, [token]);
 
   const toggleGradeTable = () => {
     setShowGradeTable(true);
