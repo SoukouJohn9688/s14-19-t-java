@@ -28,7 +28,7 @@ public class StudentController {
 
     @Secured({"STUDENT","TEACHER"})
     @GetMapping("/{studentId}")
-    public ResponseEntity<ResponseGenericDTO<StudentDTO>> findByStudentId(@PathVariable Long studentId) throws StudentNotFoundException {
+    public ResponseEntity<ResponseGenericDTO<StudentDTO>> findByStudentId(@PathVariable("studentId") Long studentId) throws StudentNotFoundException {
         return ResponseEntity.ok().body(new ResponseGenericDTO<>(
                 true,
                 "Estudiante encontrado",
