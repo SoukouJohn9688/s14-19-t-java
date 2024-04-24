@@ -15,7 +15,7 @@ const CalendarioAsistencias = () => {
   // const userRol = useSelector((state) => state.auth.userRol);
   const userRol = useSelector((state) => state.auth.userRol);
   const asistenciasDocente = useSelector((state) => state.attendance.attendance);
-  console.log(asistenciasDocente, "asistenciasDocente")
+  // console.log(asistenciasDocente, "asistenciasDocente")
   const dispatch = useDispatch()
 
   // const asistencia = useSelector(state => state.attendance.attendanceById)
@@ -85,7 +85,7 @@ const CalendarioAsistencias = () => {
   }, []);
 
   const handleEventClick = (clickInfo) => {
-    console.log(clickInfo.event.id)
+    // console.log(clickInfo.event.id)
     // if (clickInfo.event.id) {
     if (userRol === "docente") {
       Swal.fire({
@@ -126,8 +126,8 @@ const CalendarioAsistencias = () => {
   }
 
   return (
-    <div className="flex justify-center pt-8 ">
-      <div className="col-span-2 " >
+    <div className="flex flex-col lg:flex-row lg:justify-center lg:items-start pt-8 ">
+      <div className="lg:col-span-2 w-full" >
         <FullCalendar
           plugins={[
             dayGridPlugin,
@@ -152,26 +152,25 @@ const CalendarioAsistencias = () => {
           eventClassNames="fc-pointer"
         />
       </div>
-      {userRol === 'docente' && (<div className="col-span-1 p-4 mt-12">
-        {/* <h1 className="text-lg font-bold mb-4 ">Referencias arrastables</h1> */}
-        <div id="draggable-el" className="p-2 bg-gray-200 rounded-md w-72 ">
-          {
-            events.map(event => (
+      {userRol === 'docente' && (
+        <div className="lg:col-span-1 w-full lg:w-auto p-4 mt-12">
+          <div id="draggable-el" className="p-2 bg-gray-200 rounded-md">
+            {events.map(event => (
               <div
-                className="fc-event cursor-pointer mb-2 p-1 bg-white shadow-md rounded-sm text-neutral-50  "
+                className="fc-event cursor-pointer mb-2 p-1 bg-white shadow-md rounded-sm text-neutral-50"
                 title={event.title}
                 data-color={event.color}
                 style={{ backgroundColor: event.backgroundColor, cursor: "pointer" }}
                 key={event.id}
               >
-                <div >
+                <div>
                   {event.title}
                 </div>
               </div>
-            ))
-          }
+            ))}
+          </div>
         </div>
-      </div>)}
+      )}
     </div>
 
   );
