@@ -5,4 +5,8 @@
 ˆ	java:S112w"FDefine and throw a dedicated exception instead of using a generic one.(òÍÀ8ñÆÄºğ1J$276c8326-e39e-4426-96f5-e300fefd2bf8
 ”	java:S117ˆ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ú‘£8ñÆÄºğ1J$39e378f0-b753-4295-be0e-d44d7a366b4a
 ”	java:S117ˆ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ú‘£8òÆÄºğ1J$d442e93d-964c-42b7-96f8-141af7fcf3d0
+e
+java:S2583J"CChange this condition so that it does not always evaluate to "true"(‹„ãşıÿÿÿÿ8Ÿ—œŞğ1
 ~	java:S125‰"<This block of commented-out lines of code should be removed.(ÇÕ¿B8ÇÄºğ1J$ee936296-bd11-4fd1-93dd-8fd22852e4db
+~
+java:S1128"aRemove this unused import 'com.nocountry.server_ed_platform.dtos.Response.AttendanceResponseDTO'.(¥ğ8¸—œŞğ1

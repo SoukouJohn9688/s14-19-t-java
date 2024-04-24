@@ -1,3 +1,8 @@
 
-ˆ	java:S100
-"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯¸ßJ$3fd816b2-2baa-42f5-84f5-c5fc4851379e
+ˆ	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯¸ßJ$a5a5aa2b-6fed-4749-913b-feaa9966c249
+«
+java:S1128"hRemove this unused import 'com.nocountry.server_ed_platform.dtos.Response.SubjectsByStudentResponseDTO'.(ùÔÿ³8áµªìğ1J$75e2dd79-3351-4622-a159-2cf2fe75dc5b
+
+java:S1128"MRemove this unused import 'com.nocountry.server_ed_platform.dtos.TeacherDTO'.(Å²Ñø8áµªìğ1J$7e7a569d-5d2b-41f0-95ad-afe8ceb745b2
+ƒ
+java:S1128	"aRemove this unused import 'com.nocountry.server_ed_platform.exceptions.TeacherNotFoundException'.(×Ú´ıÿÿÿÿ8Áú´ìğ1
