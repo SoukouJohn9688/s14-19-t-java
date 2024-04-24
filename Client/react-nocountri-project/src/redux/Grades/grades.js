@@ -79,7 +79,6 @@ const gradesSlice = createSlice({
 });
 
 
-
 export const {
   updateFirstSemesterGrades,
   updateSecondSemesterGrades,
