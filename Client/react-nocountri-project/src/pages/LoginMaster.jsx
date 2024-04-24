@@ -4,9 +4,12 @@ import { Button } from "@/components";
 import React, { useRef, useState } from "react";
 import { AlumnosData } from "@/mock";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/Auth/auth"
 
 const LoginMaster = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [DBAlumnos] = useState(AlumnosData);
   const [titulo, setTitulo] = useState("Inicio de sesión Admin");
   const [alumno, setAlumno] = useState({
@@ -34,7 +37,9 @@ const LoginMaster = () => {
 
     if (user & password) {
       localStorage.setItem("alumno", JSON.stringify(alumno));
-      navigate("/home");
+
+      dispatch(login({ userRol: "admin", userName: alumno.userName }))
+      navigate("/admin/home");
     }
   };
 
