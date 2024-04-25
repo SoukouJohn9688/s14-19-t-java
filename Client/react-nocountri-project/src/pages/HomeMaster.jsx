@@ -5,6 +5,7 @@ import ModalNotificacions from "@/components/AdminComponents/ModalNotificacions/
 import ModalCursos from "@/components/AdminComponents/ModalCursos/ModalCursos";
 import ModalDocentes from "@/components/AdminComponents/ModalDocentes/ModalDocentes";
 import CardProfile from "@/components/CardProfile/CardProfile";
+import CalendarioGeneral from "@/components/CalendarioGeneral/CalendarioGeneral";
 
 const HomeMaster = () => {
   const [showRegister, setShowRegister] = useState(false);
