@@ -7,8 +7,9 @@ import es from '@fullcalendar/core/locales/es';
 import Swal from 'sweetalert2'
 import "./CalendarioAsistencias.css"
 import { useDispatch, useSelector } from "react-redux";
-import { addAttendance, getAttendanceById, postAttendance } from "../../redux/Attendance/attendance"
+import { addAttendance, getStudenInfo, getAttendanceById } from "../../redux/Attendance/attendance"
 import { AlumnosData } from "@/mock";
+import axios from "axios";
 const CalendarioAsistencias = () => {
   const [asist] = useState(AlumnosData)
 
@@ -16,18 +17,37 @@ const CalendarioAsistencias = () => {
   const userRol = useSelector((state) => state.auth.userRol);
   const asistenciasDocente = useSelector((state) => state.attendance.attendance);
   // console.log(asistenciasDocente, "asistenciasDocente")
-  const dispatch = useDispatch()
+  // const studentInfo = useSelector((state) => state.attendance.studentInfo);
+  // const [id] = studentInfo
+  // const studentAttendanceById = useSelector((state) => state.attendance.attendanceById);
+  // console.log(studentAttendanceById, "studentAttendanceById")
+  // console.log(id, "id")
 
+  const dispatch = useDispatch()
+  // const token = localStorage.getItem("token")
+  // console.log(token, "token")
   // const asistencia = useSelector(state => state.attendance.attendanceById)
 
   // console.log(asistencia, "asistencia")
   // useEffect(() => {
-  //   dispatch(getAttendanceById(2))¿
+  //   dispatch(getAttendanceById(2))
 
   // }, [])
   // const selector = useSelector()
 
   const [allEvents, setAllEvents] = useState([]);
+
+  // const fetchData = async () => {
+  //   const response = await axios.get(`http://localhost:8080/api/v1/attendance/${id}`, {
+  //     headers: {
+  //       'Authorization': localStorage.getItem("token") ? `Bearer ${localStorage.getItem("token")}` : "",
+
+  //     }
+  //   })
+  //   console.log("response", response)
+  //   // return response.data.data.map(est => est.id)
+  // }
+
 
   useEffect(() => {
 
@@ -45,10 +65,11 @@ const CalendarioAsistencias = () => {
         start: asistencia.date,
         color: colorMapping[asistencia.type]
       }));
-      setAllEvents(updatedEvents);
+      setAllEvents([...asistenciasDocente, ...updatedEvents]);
     })
-
-
+    // dispatch(getStudenInfo())
+    // dispatch(getAttendanceById(id))
+    // fetchData()
   }, []); // 
 
   // console.log(allEvents, "allEvents");

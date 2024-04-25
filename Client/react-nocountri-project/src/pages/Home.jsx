@@ -24,7 +24,7 @@ const Home = () => {
         { accessToken: token, tokenType: "Bearer" }
       );
       //const alumnosId = response.data.data(alumno=> alumno.id)
-      console.log(response);
+      // console.log(response);
       //return alumnosId;
     };
 

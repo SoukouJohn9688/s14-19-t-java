@@ -15,7 +15,7 @@ const CalendarioGeneral = () => {
 
   //const dispatch = useDispatch();
   //const allEvents = useSelector((state) => state.calendar.events);
-  console.log(allEventos, "all events")
+  // console.log(allEventos, "all events")
 
   useEffect(() => {
     const updatedEvents = eventosColegio.map((evento) => ({
