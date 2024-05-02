@@ -37,18 +37,6 @@ const CalendarioAsistencias = () => {
 
   const [allEvents, setAllEvents] = useState([]);
 
-  // const fetchData = async () => {
-  //   const response = await axios.get(`http://localhost:8080/api/v1/attendance/${id}`, {
-  //     headers: {
-  //       'Authorization': localStorage.getItem("token") ? `Bearer ${localStorage.getItem("token")}` : "",
-
-  //     }
-  //   })
-  //   console.log("response", response)
-  //   // return response.data.data.map(est => est.id)
-  // }
-
-
   useEffect(() => {
 
     const colorMapping = {
