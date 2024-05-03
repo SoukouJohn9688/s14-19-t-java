@@ -7,22 +7,30 @@ import es from '@fullcalendar/core/locales/es';
 import Swal from 'sweetalert2'
 import "./CalendarioAsistencias.css"
 import { useDispatch, useSelector } from "react-redux";
-import { addAttendance, getAttendanceById, postAttendance } from "../../redux/Attendance/attendance"
+import { addAttendance, getStudenInfo, getAttendanceById } from "../../redux/Attendance/attendance"
 import { AlumnosData } from "@/mock";
+import axios from "axios";
 const CalendarioAsistencias = () => {
   const [asist] = useState(AlumnosData)
 
   // const userRol = useSelector((state) => state.auth.userRol);
   const userRol = useSelector((state) => state.auth.userRol);
   const asistenciasDocente = useSelector((state) => state.attendance.attendance);
-  console.log(asistenciasDocente, "asistenciasDocente")
-  const dispatch = useDispatch()
+  // console.log(asistenciasDocente, "asistenciasDocente")
+  // const studentInfo = useSelector((state) => state.attendance.studentInfo);
+  // const [id] = studentInfo
+  // const studentAttendanceById = useSelector((state) => state.attendance.attendanceById);
+  // console.log(studentAttendanceById, "studentAttendanceById")
+  // console.log(id, "id")
 
+  const dispatch = useDispatch()
+  // const token = localStorage.getItem("token")
+  // console.log(token, "token")
   // const asistencia = useSelector(state => state.attendance.attendanceById)
 
   // console.log(asistencia, "asistencia")
   // useEffect(() => {
-  //   dispatch(getAttendanceById(2))¿
+  //   dispatch(getAttendanceById(2))
 
   // }, [])
   // const selector = useSelector()
@@ -45,10 +53,11 @@ const CalendarioAsistencias = () => {
         start: asistencia.date,
         color: colorMapping[asistencia.type]
       }));
-      setAllEvents(updatedEvents);
+      setAllEvents([...asistenciasDocente, ...updatedEvents]);
     })
-
-
+    // dispatch(getStudenInfo())
+    // dispatch(getAttendanceById(id))
+    // fetchData()
   }, []); // 
 
   // console.log(allEvents, "allEvents");
@@ -85,7 +94,7 @@ const CalendarioAsistencias = () => {
   }, []);
 
   const handleEventClick = (clickInfo) => {
-    console.log(clickInfo.event.id)
+    // console.log(clickInfo.event.id)
     // if (clickInfo.event.id) {
     if (userRol === "docente") {
       Swal.fire({
@@ -126,8 +135,8 @@ const CalendarioAsistencias = () => {
   }
 
   return (
-    <div className="flex justify-center pt-8 ">
-      <div className="col-span-2 " >
+    <div className="flex flex-col lg:flex-row lg:justify-center lg:items-start pt-8 ">
+      <div className="lg:col-span-2 w-full" >
         <FullCalendar
           plugins={[
             dayGridPlugin,
@@ -152,26 +161,25 @@ const CalendarioAsistencias = () => {
           eventClassNames="fc-pointer"
         />
       </div>
-      {userRol === 'docente' && (<div className="col-span-1 p-4 mt-12">
-        {/* <h1 className="text-lg font-bold mb-4 ">Referencias arrastables</h1> */}
-        <div id="draggable-el" className="p-2 bg-gray-200 rounded-md w-72 ">
-          {
-            events.map(event => (
+      {userRol === 'docente' && (
+        <div className="lg:col-span-1 w-full lg:w-auto p-4 mt-12">
+          <div id="draggable-el" className="p-2 bg-gray-200 rounded-md">
+            {events.map(event => (
               <div
-                className="fc-event cursor-pointer mb-2 p-1 bg-white shadow-md rounded-sm text-neutral-50  "
+                className="fc-event cursor-pointer mb-2 p-1 bg-white shadow-md rounded-sm text-neutral-50"
                 title={event.title}
                 data-color={event.color}
                 style={{ backgroundColor: event.backgroundColor, cursor: "pointer" }}
                 key={event.id}
               >
-                <div >
+                <div>
                   {event.title}
                 </div>
               </div>
-            ))
-          }
+            ))}
+          </div>
         </div>
-      </div>)}
+      )}
     </div>
 
   );
