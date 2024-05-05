@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { updateFirstSemesterGrades, removeFirstSemesterGrade, removeSecondSemesterGrade, removeIntensificationGrade, updateSecondSemesterGrades, updateIntensification } from '@/redux/Grades/grades';
+import { updateFirstSemesterGrades, removeFirstSemesterGrade, removeSecondSemesterGrade, removeIntensificationGrade, updateFinalGrade, updateSecondSemesterGrades, updateIntensification } from '@/redux/Grades/grades';
 import { useDispatch, useSelector } from 'react-redux';
 
 const GradeTable = () => {
@@ -8,18 +8,32 @@ const GradeTable = () => {
   const grades = useSelector(state => state.grades.subjects);
   const showIntensification = useSelector(state => state.grades.showIntensification);
 
-  // Función para manejar el cambio de calificación
-  const handleGradeChange = (subject, semester, index, value) => {
+  const handleGradeChange = (subject, semester, index, value, inputIndex) => {
     if (value === '' || (parseFloat(value) >= 1 && parseFloat(value) <= 10)) {
       if (semester === 'Primer Semestre') {
         dispatch(updateFirstSemesterGrades({ subject, index, grade: value }));
       } else if (semester === 'Segundo Semestre') {
         dispatch(updateSecondSemesterGrades({ subject, index, grade: value }));
       } else {
-        dispatch(updateIntensification({ subject, index, grade: value }));
+        // Actualizamos la intensificación
+        dispatch(updateIntensification({ subject, index: inputIndex, grade: value }));
+  
+        // Verificamos si alguna de las calificaciones de intensificación es mayor o igual a 7
+        const intensificationGrades = grades[subject]?.['Intensificación'] || [];
+        const isApprovedIntensification = intensificationGrades.some(grade => parseFloat(grade) >= 7);
+  
+        // Verificamos si el valor ingresado es mayor o igual a siete
+        if (parseFloat(value) >= 7) {
+          // Si es mayor o igual a siete, marcamos la intensificación como aprobada
+          dispatch(updateFinalGrade({ subject, grade: 'APROBADO' }));
+        } else {
+          // Si es menor a siete, marcamos la intensificación como no aprobada
+          dispatch(updateFinalGrade({ subject, grade: isApprovedIntensification ? 'APROBADO' : '' }));
+        }
       }
     }
   };
+  
 
   // Función para calcular el promedio de las calificaciones de un semestre
   const calculateSemesterAverage = (gradesArray) => {
@@ -61,14 +75,23 @@ const GradeTable = () => {
     } else if (semester === 'Segundo Semestre') {
       dispatch(updateSecondSemesterGrades({ subject, index: grades[subject]?.[semester]?.length || 0, grade: '' }));
     } else if (semester === 'Intensificación') {
-      dispatch(updateIntensification({ subject, grade: [...(grades[subject]?.[semester] || []), null] }));
+      dispatch(updateIntensification({ subject, grade: [...(grades[subject]?.['Intensificación'] || []), ''] }));
+  
+      // Verificar si la calificación final es mayor o igual a 7
       const finalAverage = calculateFinalAverageForSubject(subject);
-      if (finalAverage >= 7 && !grades[subject]?.['Intensificación'].some(grade => parseFloat(grade) < 7)) {
-        dispatch(updateIntensification({ subject, grade: true }));
+      const intensificationGrades = grades[subject]?.['Intensificación'] || [];
+      const isApprovedFinal = finalAverage >= 7;
+  
+      // Verificar si alguna de las nuevas calificaciones es mayor o igual a 7
+      const hasGradeEqualOrGreaterThan7 = intensificationGrades.some(grade => parseFloat(grade) >= 7);
+  
+      // Actualizar la acreditación de la materia
+      if (isApprovedFinal || hasGradeEqualOrGreaterThan7) {
+        dispatch(updateFinalGrade({ subject, grade: 'APROBADO' }));
       }
     }
-  };  
-  
+  };
+
 // Función para eliminar el último input de una materia específica
 const handleRemoveGradeInput = (subject, semester) => {
   if (semester === 'Primer Semestre') {
@@ -144,7 +167,7 @@ return (
               {calculateFinalAverageForSubject(subject)}
             </td>
             <td className="border border-black px-4 py-2">
-              {showIntensification[subject] ? (
+              {calculateFinalAverageForSubject(subject) < 7 ? (
                 <div style={{ display: 'flex', gap: '5px' }}>
                   {grades[subject]?.['Intensificación'].map((grade, index) => (
                     <div key={index} className="flex items-center gap-2">
@@ -159,20 +182,19 @@ return (
                       />
                     </div>
                   ))}
-                  {!grades[subject]?.['Intensificación'].some(grade => parseFloat(grade) >= 7) &&
-                    calculateFinalAverageForSubject(subject) < 7 && (
-                      <button
-                        className="bg-blue-500 text-white px-2 py-1 rounded"
-                        onClick={() => handleAddGradeInput(subject, 'Intensificación')}
-                      >
-                        +
-                      </button>
-                    )}
+                  <input
+                    type="number"
+                    value={null}
+                    onChange={(e) => handleGradeChange(subject, 'Intensificación', grades[subject]?.['Intensificación']?.length || 0, e.target.value)}
+                    className="w-[60px] border-2 border-blue-500"
+                    min={1}
+                    max={10}
+                  />
                 </div>
               ) : null}
             </td>
             <td className="border border-black px-4 py-2">
-              {calculateFinalAverageForSubject(subject) >= 7 || grades[subject]?.['Intensificación'].some(grade => parseFloat(grade) >= 7) ? 'APROBADO' : null}
+              {grades[subject]?.finalGrade}
             </td>
           </tr>
         ))}
@@ -180,7 +202,6 @@ return (
     </table>
   </div>
 );
-
 };
 
   export default GradeTable;

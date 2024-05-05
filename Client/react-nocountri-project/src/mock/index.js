@@ -8,36 +8,48 @@ export const ColegiosData = [
   },
 
 ];
- export const AsignaturasData = [
+export const AsignaturasData = [
   {
     id: 1,
-    asignatures: "Matemáticas",
-    students: ["Vyky Legier", "Jocelyn Malinowski"],
+    asignature: "Matemáticas",
     curricular: true,
     no_curricular: false,
+    students: [
+      { name: "Vyky Legier", grades: [] },
+      { name: "Jocelyn Malinowski", grades: [] }
+    ]
   },
   {
     id: 2,
-    asignatures: "Lengua",
+    asignature: "Lengua",
     curricular: true,
     no_curricular: false,
-    students: ["Vyky Legier", "Jocelyn Malinowski"],
+    students: [
+      { name: "Vyky Legier", grades: [] },
+      { name: "Jocelyn Malinowski", grades: [] }
+    ]
   },
   {
     id: 3,
-    asignatures: "Ciencias Naturales",
+    asignature: "Ciencias Naturales",
     curricular: true,
     no_curricular: false,
-    students: ["Vyky Legier", "Jocelyn Malinowski"],
+    students: [
+      { name: "Vyky Legier", grades: [] },
+      { name: "Jocelyn Malinowski", grades: [] }
+    ]
   },
   {
     id: 4,
-    asignatures: "Ciencias Sociales",
+    asignature: "Ciencias Sociales",
     curricular: true,
     no_curricular: false,
-    students: ["Vyky Legier", "Jocelyn Malinowski"],
-  },
-]; 
+    students: [
+      { name: "Vyky Legier", grades: [] },
+      { name: "Jocelyn Malinowski", grades: [] }
+    ]
+  }
+];
 
 export const AlumnosData = [
   {

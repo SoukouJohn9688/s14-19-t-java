@@ -47,7 +47,7 @@ const Router = () => {
         element={
           <ProtectedRoute redirectTo="/admin" roleRequired="admin">
             <HomeMaster />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         }
       />
       <Route
@@ -61,9 +61,9 @@ const Router = () => {
       <Route
         path="/home"
         element={
-          <ProtectedRoute redirectTo="/">
+          // <ProtectedRoute redirectTo="/">
             <Home />
-          </ProtectedRoute>
+        //  </ProtectedRoute>
         }
       />
       <Route path="/about" element={<About />} />

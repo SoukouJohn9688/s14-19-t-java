@@ -11,6 +11,7 @@ import axios from "axios";
 import { getToken } from "../redux/Auth/auth";
 
 
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ const Login = () => {
     // console.log(user, password);
 
     
-    const response = await axios.post(
+     const response = await axios.post(
       "http://localhost:8080/api/v1/auth/login",
       {
         email: alumno.userName,
@@ -191,6 +192,7 @@ const Login = () => {
         </p>
       </div>
     </div>
+    
   );
 };
 
