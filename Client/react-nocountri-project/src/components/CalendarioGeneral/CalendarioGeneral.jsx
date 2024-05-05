@@ -4,8 +4,8 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Swal from "sweetalert2";
 import es from "@fullcalendar/core/locales/es";
 import "./CalendarioGeneral.css";
-import {  useSelector } from "react-redux";
-//import { removeEvent } from "../../redux/Calendar/calendar";
+import {  useSelector,useDispatch } from "react-redux";
+import { addEvent } from "../../redux/Calendar/calendar";
 import { eventosColegio } from "@/mock";
 import { useEffect, useState } from "react";
 
@@ -13,17 +13,18 @@ const CalendarioGeneral = () => {
   const [allEventos, setAllEvents] = useState([]);
   const userRole = useSelector((state) => state.auth.userRol); // Replace this with the actual variable or function that checks the user's role
 
-  //const dispatch = useDispatch();
-  //const allEvents = useSelector((state) => state.calendar.events);
-  console.log(allEventos, "all events")
+  const dispatch = useDispatch();
+  const allEvents = useSelector((state) => state.calendar.events);
+  //console.log(allEvents, 'eventos')
+   console.log(allEventos, "all events") 
 
   useEffect(() => {
-    const updatedEvents = eventosColegio.map((evento) => ({
+     const updatedEvents = eventosColegio.map((evento) => ({
       id: evento.id,
       title: evento.title,
       start: evento.date,
-    }));
-    setAllEvents(updatedEvents);
+    })); 
+    setAllEvents([...updatedEvents,...allEvents]);
   }, []);
 
   const handleEventClick = (clickInfo) => {
@@ -91,7 +92,7 @@ const CalendarioGeneral = () => {
             title,
             start: selectInfo.startStr,
           };
-          //dispatch(addEvent(newEvent)); // Dispatch action to add event
+          dispatch(addEvent(newEvent)); // Dispatch action to add event
 
           setAllEvents(prevEvent => [...prevEvent,newEvent])
         } else {

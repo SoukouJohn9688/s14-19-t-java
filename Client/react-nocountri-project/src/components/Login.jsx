@@ -21,7 +21,7 @@ const Login = () => {
     userName: "",
     password: "",
   });
-  
+
 
   const handleChage = (e) => {
     const { name, value } = e.target;
@@ -58,20 +58,19 @@ const Login = () => {
     // const password = user && user.password === Number(alumno.password); // Verificamos si existe el usuario y si la contraseña es correcta
     // console.log(user, password);
 
-    
-     const response = await axios.post(
+
+    const response = await axios.post(
       "http://localhost:8080/api/v1/auth/login",
       {
         email: alumno.userName,
         password: alumno.password
       }
     );
-
     console.log(response.data.accessToken)
     dispatch(getToken(response.data.accessToken))
 
     const userRole = "docente"
-    dispatch(login({userRol:userRole, userName: alumno.userName}))
+    dispatch(login({ userRol: userRole, userName: alumno.userName }))
     navigate("/home");
     // if (user && password) {
     //   localStorage.setItem("alumno", JSON.stringify(alumno));
