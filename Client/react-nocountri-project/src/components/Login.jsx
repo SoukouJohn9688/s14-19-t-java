@@ -53,38 +53,38 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const user = DBAlumnos.find((e) => e.userName === alumno.userName);
-    // const password = user && user.password === Number(alumno.password); // Verificamos si existe el usuario y si la contraseña es correcta
+    const user = DBAlumnos.find((e) => e.userName === alumno.userName);
+    const password = user && user.password === Number(alumno.password); // Verificamos si existe el usuario y si la contraseña es correcta
     // console.log(user, password);
 
     
-     const response = await axios.post(
-      "http://localhost:8080/api/v1/auth/login",
-      {
-        email: alumno.userName,
-        password: alumno.password
-      }
-    );
-
-    console.log(response.data.accessToken)
-    dispatch(getToken(response.data.accessToken))
-
-    const userRole = "docente"
-    dispatch(login({userRol:userRole, userName: alumno.userName}))
-    navigate("/home");
-    // if (user && password) {
-    //   localStorage.setItem("alumno", JSON.stringify(alumno));
-    //   let userRol = "";
-    //   if (titulo === "Inicio de sesión Padres/ Tutor") {
-    //     userRol = "padre";
-    //   } else if (titulo === "Inicio de sesión Estudiante") {
-    //     userRol = "alumno";
-    //   } else if (titulo === "Inicio de sesión Docente") {
-    //     userRol = "docente";
+    //  const response = await axios.post(
+    //   "http://localhost:8080/api/v1/auth/login",
+    //   {
+    //     email: alumno.userName,
+    //     password: alumno.password
     //   }
-    //   dispatch(login({ userRol, userName: alumno.userName })); // Despachamos la acción de login con el rol y el nombre de usuario como payload
-    //   navigate("/home");
-    // }
+    // );
+
+    // console.log(response.data.accessToken)
+    // dispatch(getToken(response.data.accessToken))
+
+    // const userRole = "docente"
+    // dispatch(login({userRol:userRole, userName: alumno.userName}))
+    // navigate("/home");
+    if (user && password) {
+      localStorage.setItem("alumno", JSON.stringify(alumno));
+      let userRol = "";
+      if (titulo === "Inicio de sesión Padres/ Tutor") {
+        userRol = "padre";
+      } else if (titulo === "Inicio de sesión Estudiante") {
+        userRol = "alumno";
+      } else if (titulo === "Inicio de sesión Docente") {
+        userRol = "docente";
+      }
+      dispatch(login({ userRol, userName: alumno.userName })); // Despachamos la acción de login con el rol y el nombre de usuario como payload
+      navigate("/home");
+    }
   };
 
   return (
