@@ -5,30 +5,28 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AlumnosData } from "@/mock";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/Auth/auth";
 import axios from "axios";
-import { getToken } from "../redux/Auth/auth";
+import { saveToken } from "../redux/Auth/auth";
 
 
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userRol = useSelector((state) => state.auth.userRol);
   const [DBAlumnos] = useState(AlumnosData);
   const [titulo, setTitulo] = useState("Inicio de sesión Padres/ Tutor");
-  const [alumno, setAlumno] = useState({
-    userName: "",
-    password: "",
-  });
+  const [password, setPassword] = useState({password: ""});
+  const [alumno, setAlumno] = useState({ userName: '', password: '' });
 
-
-  const handleChage = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setAlumno({
-      ...alumno,
+    setAlumno((prevAlumno) => ({
+      ...prevAlumno,
       [name]: value,
-    });
+    }));
   };
 
   const emailRef = useRef(null);
@@ -54,37 +52,35 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const user = DBAlumnos.find((e) => e.userName === alumno.userName);
-    // const password = user && user.password === Number(alumno.password); // Verificamos si existe el usuario y si la contraseña es correcta
-    // console.log(user, password);
+    const user = DBAlumnos.find((e) => e.userName === alumno.userName);
+    const passwordCorrecta = user && user.password === Number(alumno.password);
+    console.log(user, passwordCorrecta);
 
-
-    const response = await axios.post(
+     /* const response = await axios.post(
       "http://localhost:8080/api/v1/auth/login",
       {
-        email: alumno.userName,
-        password: alumno.password
+        email: userName,
+        password: password
       }
-    );
+    ); 
     console.log(response.data.accessToken)
-    dispatch(getToken(response.data.accessToken))
+    dispatch(saveToken(response.data.accessToken))
+    */
+   
+    if (user && passwordCorrecta) {
+      localStorage.setItem("alumno", JSON.stringify(alumno));
+      let userRole;
+      if (titulo === "Inicio de sesión Padres/ Tutor") {
+        userRole = "PARENT";
+      } else if (titulo === "Inicio de sesión Estudiante") {
+        userRole = "STUDENT";
+      } else if (titulo === "Inicio de sesión Docente") {
+        userRole = "TEACHER";
+      }
 
-    const userRole = "docente"
-    dispatch(login({ userRol: userRole, userName: alumno.userName }))
-    navigate("/home");
-    // if (user && password) {
-    //   localStorage.setItem("alumno", JSON.stringify(alumno));
-    //   let userRol = "";
-    //   if (titulo === "Inicio de sesión Padres/ Tutor") {
-    //     userRol = "padre";
-    //   } else if (titulo === "Inicio de sesión Estudiante") {
-    //     userRol = "alumno";
-    //   } else if (titulo === "Inicio de sesión Docente") {
-    //     userRol = "docente";
-    //   }
-    //   dispatch(login({ userRol, userName: alumno.userName })); // Despachamos la acción de login con el rol y el nombre de usuario como payload
-    //   navigate("/home");
-    // }
+      dispatch(login({ userRol: userRole, userName: alumno.userName }));
+      navigate("/home");
+    }
   };
 
   return (
@@ -106,7 +102,7 @@ const Login = () => {
             placeholder="Username"
             className="border-slate-400 bg-transparent border"
             ref={emailRef}
-            onChange={(e) => handleChage(e)}
+            onChange={handleChange}
             name="userName"
             value={alumno.userName}
           />
@@ -115,7 +111,7 @@ const Login = () => {
             placeholder="Password"
             className="border-slate-400 bg-transparent border"
             ref={contraseñaRef}
-            onChange={(e) => handleChage(e)}
+            onChange={handleChange}
             name="password"
             value={alumno.password}
           />
@@ -191,7 +187,6 @@ const Login = () => {
         </p>
       </div>
     </div>
-    
   );
 };
 

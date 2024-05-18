@@ -68,16 +68,16 @@ const Home = () => {
 
   let mainComponent;
 
-  if (userRol === "alumno") {
+  if (userRol === "STUDENT") {
     mainComponent = (
       <CardStudents
         onShowGradeTable={toggleGradeTable}
         onShowCalendarAsis={toggleCalendarAsis}
       />
     );
-  } else if (userRol === "docente") {
+  } else if (userRol === "TEACHER") {
     mainComponent = <CardTeachers />;
-  } else if (userRol === "padre") {
+  } else if (userRol === "PARENT") {
     mainComponent = (
       <CardParents
         onShowGradeTable={toggleGradeTable}
