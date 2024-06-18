@@ -16,9 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userRol = useSelector((state) => state.auth.userRol);
-  const [DBAlumnos] = useState(AlumnosData);
   const [titulo, setTitulo] = useState("Inicio de sesión Padres/ Tutor");
-  const [password, setPassword] = useState({password: ""});
   const [alumno, setAlumno] = useState({ userName: '', password: '' });
 
   const handleChange = (e) => {
@@ -52,23 +50,21 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = DBAlumnos.find((e) => e.userName === alumno.userName);
-    const passwordCorrecta = user && user.password === Number(alumno.password);
-    console.log(user, passwordCorrecta);
+    const { userName, password } = alumno;
+    console.log(alumno)
+    try {
+      console.log(userName, password)
+      const response = await axios.post(
+        "http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1//api/v1/auth/login",
+        {
+          email: userName,
+          password: password
+        }
+      );
 
-     /* const response = await axios.post(
-      "http://localhost:8080/api/v1/auth/login",
-      {
-        email: userName,
-        password: password
-      }
-    ); 
-    console.log(response.data.accessToken)
-    dispatch(saveToken(response.data.accessToken))
-    */
-   
-    if (user && passwordCorrecta) {
-      localStorage.setItem("alumno", JSON.stringify(alumno));
+      console.log(response.data.accessToken);
+      dispatch(saveToken(response.data.accessToken));
+
       let userRole;
       if (titulo === "Inicio de sesión Padres/ Tutor") {
         userRole = "PARENT";
@@ -80,6 +76,8 @@ const Login = () => {
 
       dispatch(login({ userRol: userRole, userName: alumno.userName }));
       navigate("/home");
+    } catch (error) {
+      console.error("Error logging in:", error);
     }
   };
 
@@ -92,7 +90,7 @@ const Login = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="space-y-8 my-28 sm:mt-20 sm:mb-6 p-8 bg-transparent shadow-lg  rounded-lg w-full max-w-md text-center">
+      <div className="space-y-8 my-28 sm:mt-20 sm:mb-6 p-8 bg-transparent shadow-lg rounded-lg w-full max-w-md text-center">
         <h1 className="font-bold text-2xl place" style={{ color: color }}>
           {titulo}
         </h1>

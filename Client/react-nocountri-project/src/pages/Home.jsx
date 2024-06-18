@@ -20,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     const TotalAlumnos = async () => {
       const response = await axios.get(
-        "http://localhost:8080/api/v1/student/",
+        "http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/",
         { accessToken: token, tokenType: "Bearer" }
       );
       //const alumnosId = response.data.data(alumno=> alumno.id)
@@ -34,11 +34,11 @@ const Home = () => {
       let array = [];
       ArrayAsociativo.forEach(async (e) => {
         const materias = await axios.get(
-          `http://localhost:8080/api/v1/subject/${e}`,
+          `http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/subject/${e}`,
           { accessToken: token, tokenType: "Bearer" }
         );
         const alumnos = await axios.get(
-          `http://localhost:8080/api/v1/student/${e}`,
+          `http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/findByStudentId/${e}`,
           { accessToken: token, tokenType: "Bearer" }
         );
         array.push({

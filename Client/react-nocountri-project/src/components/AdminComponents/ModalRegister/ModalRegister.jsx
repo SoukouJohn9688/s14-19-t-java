@@ -13,6 +13,10 @@ import {
 } from "@/components/ui/select";
 
 const ModalRegister = ({ isOpen, onClose }) => {
+
+//try catch función post para crear usuario 
+
+
   const {
     register,
     handleSubmit,

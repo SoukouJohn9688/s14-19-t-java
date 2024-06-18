@@ -20,6 +20,25 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  /*  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { userName, password } = alumno;
+    console.log(alumno)
+    try {
+      console.log(userName, password)
+      const response = await axios.post(
+        "http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/api/v1/auth/register",
+        {
+          email: userName,
+          password: password,
+          username: userName,
+          rol: rol
+
+        }
+      );
+
+  */
+
   const onSubmit = (data) => {
     // Manejar los datos del formulario aquí (por ejemplo, enviar una solicitud de registro)
     console.log(data);

@@ -13,6 +13,13 @@ import { FaGraduationCap, FaRegCalendarCheck } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 
 export const CardTeachers = () => {
+
+  // GET subjects por teacher (falta hacer)
+
+  //PUT asistencias por alumno  http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/attendance/update/{attendanceId}
+  // POST asistencias por alumno http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/teacher/assign/{StudentId}/subject/{SubjectId}
+  // POST notas (falta endpoint)
+  
   const [expandedAsignatura, setExpandedAsignatura] = useState(null);
   const [showGradeTable, setShowGradeTable] = useState(false);
   const [showCalendarAsis, setShowCalendarAsis] = useState(false);
