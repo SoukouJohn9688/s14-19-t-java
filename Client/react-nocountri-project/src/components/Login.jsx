@@ -3,32 +3,27 @@ import backgroundImage from "../assets/background_login.png";
 import { Button } from "./ui/Button";
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { AlumnosData } from "@/mock";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/Auth/auth";
 import axios from "axios";
-import { getToken } from "../redux/Auth/auth";
+import { saveToken } from "../redux/Auth/auth";
 
 
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [DBAlumnos] = useState(AlumnosData);
+  const userRol = useSelector((state) => state.auth.userRol);
   const [titulo, setTitulo] = useState("Inicio de sesión Padres/ Tutor");
-  const [alumno, setAlumno] = useState({
-    userName: "",
-    password: "",
-  });
+  const [alumno, setAlumno] = useState({ userName: '', password: '' });
 
-
-  const handleChage = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setAlumno({
-      ...alumno,
+    setAlumno((prevAlumno) => ({
+      ...prevAlumno,
       [name]: value,
-    });
+    }));
   };
 
   const emailRef = useRef(null);
@@ -54,53 +49,34 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = DBAlumnos.find((e) => e.userName === alumno.userName);
-    const password = user && user.password === Number(alumno.password); // Verificamos si existe el usuario y si la contraseña es correcta
-    // console.log(user, password);
+    const { userName, password } = alumno;
 
+    try {
+      const response = await axios.post(
+        "http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/auth/login",
+        {
+          email: alumno.userName,
+          password: alumno.password
+        }
+      );
 
-    //  const response = await axios.post(
-    //   "http://localhost:8080/api/v1/auth/login",
-    //   {
-    //     email: alumno.userName,
-    //     password: alumno.password
-    //   }
-    // );
-    // console.log(response.data.accessToken)
-    // dispatch(getToken(response.data.accessToken))
+      console.log(response.data.accessToken);
+      dispatch(saveToken(response.data.accessToken));
 
-    // const userRole = "docente"
-    // dispatch(login({userRol:userRole, userName: alumno.userName}))
-    // navigate("/home");
-    if (user && password) {
-      localStorage.setItem("alumno", JSON.stringify(alumno));
-      let userRol = "";
+      let userRole;
       if (titulo === "Inicio de sesión Padres/ Tutor") {
-        userRol = "padre";
+        userRole = "PARENT";
       } else if (titulo === "Inicio de sesión Estudiante") {
-        userRol = "alumno";
+        userRole = "STUDENT";
       } else if (titulo === "Inicio de sesión Docente") {
-        userRol = "docente";
+        userRole = "TEACHER";
       }
-      dispatch(login({ userRol, userName: alumno.userName })); // Despachamos la acción de login con el rol y el nombre de usuario como payload
+
+      dispatch(login({ userRol: userRole, userName: alumno.userName }));
       navigate("/home");
+    } catch (error) {
+      console.error("Error logging in:", error);
     }
-    const userRole = "docente"
-    dispatch(login({ userRol: userRole, userName: alumno.userName }))
-    navigate("/home");
-    // if (user && password) {
-    //   localStorage.setItem("alumno", JSON.stringify(alumno));
-    //   let userRol = "";
-    //   if (titulo === "Inicio de sesión Padres/ Tutor") {
-    //     userRol = "padre";
-    //   } else if (titulo === "Inicio de sesión Estudiante") {
-    //     userRol = "alumno";
-    //   } else if (titulo === "Inicio de sesión Docente") {
-    //     userRol = "docente";
-    //   }
-    //   dispatch(login({ userRol, userName: alumno.userName })); // Despachamos la acción de login con el rol y el nombre de usuario como payload
-    //   navigate("/home");
-    // }
   };
 
   return (
@@ -112,7 +88,7 @@ const Login = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="space-y-8 my-28 sm:mt-20 sm:mb-6 p-8 bg-transparent shadow-lg  rounded-lg w-full max-w-md text-center">
+      <div className="space-y-8 my-28 sm:mt-20 sm:mb-6 p-8 bg-transparent shadow-lg rounded-lg w-full max-w-md text-center">
         <h1 className="font-bold text-2xl place" style={{ color: color }}>
           {titulo}
         </h1>
@@ -122,7 +98,7 @@ const Login = () => {
             placeholder="Username"
             className="border-slate-400 bg-transparent border"
             ref={emailRef}
-            onChange={(e) => handleChage(e)}
+            onChange={handleChange}
             name="userName"
             value={alumno.userName}
           />
@@ -131,7 +107,7 @@ const Login = () => {
             placeholder="Password"
             className="border-slate-400 bg-transparent border"
             ref={contraseñaRef}
-            onChange={(e) => handleChage(e)}
+            onChange={handleChange}
             name="password"
             value={alumno.password}
           />
@@ -207,7 +183,6 @@ const Login = () => {
         </p>
       </div>
     </div>
-    
   );
 };
 
