@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Dialog, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, Button, Input } from "@/components";
-import { useForm } from "react-hook-form"; 
+import { useForm } from "react-hook-form";
+import axios from "axios"; 
 
 import {
   Select,
@@ -13,33 +14,59 @@ import {
 } from "@/components/ui/select";
 
 const ModalRegister = ({ isOpen, onClose }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
-  const [subjects, setSubjects] = useState('');
-  const [rol, setRol] = useState(null);
+  const { register, handleSubmit, setValue, setError, formState: { errors } } = useForm();
 
-  useEffect(() => {
-    console.log("Rol actualizado:", rol);
-  }, [rol]);
+  const onSubmit = async (data) => {
+    const { username, email, contraseña, repetirContraseña, rol } = data;
 
-  const handleSubjectsDocentes = (e) => {
-    const inputValue = e.target.value;
-    const formattedValue = inputValue.toLowerCase().trim();
-    setSubjects(formattedValue);
-  };
-
-  const handleSelect = (nuevoRol) => {
-    setRol(nuevoRol);
-  };
-
-  const onSubmit = (data) => {
-    // Manejar los datos del formulario aquí (por ejemplo, enviar una solicitud de registro)
     console.log(data);
+
+    if (contraseña !== repetirContraseña) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    if (!rol) {
+      setError("rol", {
+        type: "manual",
+        message: "Por favor selecciona un rol",
+      });
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/auth/register",
+        {
+          email: email,
+          password: contraseña,
+          username: username,
+          rol: rol,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      console.log(response.data);
+      alert("Registro exitoso");
+    } catch (error) {
+        console.log("Data being sent:", {
+          email: email,
+          password: contraseña,
+          username: username,
+          rol: rol,
+        });
+      console.error("Error:", error.response ? error.response.data : error.message);
+      alert("Hubo un error en el registro");
+    }
   };
+
+  
+
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -53,9 +80,9 @@ const ModalRegister = ({ isOpen, onClose }) => {
           <Input
             placeholder="Nombre y apellido"
             className="bg-transparent border border-slate-400"
-            {...register("nombre", { required: true })}
+            {...register("username", { required: "Este campo es obligatorio" })}
           />
-          {errors.nombre && <span>Este campo es obligatorio</span>}
+          {errors.username && <span>Este campo es obligatorio</span>}
           <Input
             placeholder="Email"
             className="bg-transparent border border-slate-400"
@@ -76,91 +103,19 @@ const ModalRegister = ({ isOpen, onClose }) => {
             {...register("repetirContraseña", { required: true })}
           />
           {errors.repetirContraseña && <span>Este campo es obligatorio</span>}
-          <Select onValueChange={(e) => handleSelect(e)}>
+          <Select onValueChange={(value) => setValue("rol", value)}>
             <SelectTrigger className="w-[280px]">
               <SelectValue placeholder="Selecciona tu rol" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Rol</SelectLabel>
-                <SelectItem value="docente">Docente</SelectItem>
-                <SelectItem value="alumno">Alumno</SelectItem>
-                <SelectItem value="padre">Padre, madre o tutor</SelectItem>
+                <SelectItem value="TEACHER">Docente</SelectItem>
+                <SelectItem value="STUDENT">Alumno</SelectItem>
+                <SelectItem value="PARENT">Padre, madre o tutor</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
-
-          {rol === "docente" && (
-            <>
-              <Input
-                type="number"
-                placeholder="DNI del docente"
-                className="bg-transparent border border-slate-400"
-                {...register("dniDocente", { required: true })}
-              />
-              <Input
-                placeholder= "Materias que dicta"
-                className="bg-transparent border border-slate-400"
-                value={subjects}
-                onChange ={handleSubjectsDocentes}
-              />
-            </>
-          )}
-
-          {rol === "alumno" && (
-            <>
-              <Input
-                type="number"
-                placeholder="DNI del alumno"
-                className="bg-transparent border border-slate-400"
-                {...register("dniAlumno", { required: true })}
-              />
-              <Select>
-                <SelectTrigger className="w-[280px]">
-                  <SelectValue placeholder="Selecciona el año que cursa" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Curso</SelectLabel>
-                    <SelectItem value="1">1°</SelectItem>
-                    <SelectItem value="2">2°</SelectItem>
-                    <SelectItem value="3">3°</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <Select>
-                <SelectTrigger className="w-[280px]">
-                  <SelectValue placeholder="Selecciona la división" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>División</SelectLabel>
-                    <SelectItem value="A">A</SelectItem>
-                    <SelectItem value="B">B</SelectItem>
-                    <SelectItem value="C">C</SelectItem>
-                    <SelectItem value="D">D</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </>
-          )}
-
-          {rol === "padre" && (
-            <>
-              <Input
-                type="number"
-                placeholder="DNI del padre, madre o tutor"
-                className="bg-transparent border border-slate-400"
-                {...register("dniPadres", { required: true })}
-              />
-              <Input
-                type="number"
-                placeholder="DNI del alumno"
-                className="bg-transparent border border-slate-400"
-                {...register("dniAlumno", { required: true })}
-              />
-            </>
-          )}
 
           <div className="flex flex-row gap-4">
             <Button

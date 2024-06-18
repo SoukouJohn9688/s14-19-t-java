@@ -5,6 +5,9 @@ import { FaGraduationCap, FaRegCalendarCheck } from "react-icons/fa";
 import AlumnosImg from "../../assets/Alumnos.jpg";
 
 export const CardStudents = ({ onShowGradeTable, onShowCalendarAsis }) => {
+
+  // GET para notas // GET http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/grade/student/{studentId}/subject/{subjectId}
+  // GET para asistencias http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/attendance/{studentId}
   return (
     <div className="bg-white rounded-lg shadow-md p-8 border-[1px]">
       <h2 className="font-bold text-3xl text-sky-600 mb-4">

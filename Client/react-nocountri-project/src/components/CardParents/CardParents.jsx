@@ -2,6 +2,11 @@ import padres from "../../assets/Padres.jpg";
 import StudentRecord from "./StudentRecord";
 
 export const CardParents = ({ onShowGradeTable, onShowCalendarAsis }) => {
+
+
+  // GET http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/parent/{parentId}/children
+
+  // Map con todos los hijos
   return (
     <div className="p-2 rounded-lg shadow-xl bg-white border-[1px]">
       <div className="flex flex-col items-center gap-2 lg:flex-row lg:justify-start">

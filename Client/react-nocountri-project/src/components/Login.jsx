@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/Auth/auth";
 import axios from "axios";
 import { saveToken } from "../redux/Auth/auth";
+import { useForm } from "react-hook-form";
 
 
 
@@ -16,7 +17,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const userRol = useSelector((state) => state.auth.userRol);
   const [titulo, setTitulo] = useState("Inicio de sesión Padres/ Tutor");
-  const [alumno, setAlumno] = useState({ userName: '', password: '' });
+  const [alumno, setAlumno] = useState({ email: '', password: '' });
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,17 +48,16 @@ const Login = () => {
     setTitulo(nuevoTitulo);
     setColor(colores[nuevoTitulo]);
   };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { userName, password } = alumno;
+  
+  const onSubmit = async (data) => {
+    const { email, password } = data;
 
     try {
       const response = await axios.post(
-        "http://substantial-allsun-proyect-test-1e5fae8f.koyeb.app/api/v1/auth/login",
+        "https://server-ed-platform-1-0.onrender.com/api/v1/auth/login",
         {
-          email: alumno.userName,
-          password: alumno.password
+          email: email,
+          password: password,
         }
       );
 
@@ -72,9 +73,9 @@ const Login = () => {
         userRole = "TEACHER";
       }
 
-      dispatch(login({ userRol: userRole, userName: alumno.userName }));
+      dispatch(login({ userRol: userRole, email: email }));
       navigate("/home");
-    } catch (error) {
+    }catch (error) {
       console.error("Error logging in:", error);
     }
   };
@@ -93,24 +94,20 @@ const Login = () => {
           {titulo}
         </h1>
 
-        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-          <Input
-            placeholder="Username"
+        <form className="flex flex-col space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <Input
+            placeholder="Email"
             className="border-slate-400 bg-transparent border"
-            ref={emailRef}
-            onChange={handleChange}
-            name="userName"
-            value={alumno.userName}
+            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
           />
+          {errors.email && <span>Por favor ingresa un email válido</span>}
           <Input
             type="password"
-            placeholder="Password"
+            placeholder="Contraseña"
             className="border-slate-400 bg-transparent border"
-            ref={contraseñaRef}
-            onChange={handleChange}
-            name="password"
-            value={alumno.password}
+            {...register("password", { required: true })}
           />
+          {errors.password && <span>Por favor ingresa tu contraseña</span>}
           <a className="mt-4 text-blue-500 text-left" href="/">
             Olvidaste tu contraseña?
           </a>

@@ -1,6 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import backgroundImage from "../assets/background_login.png";
 import { Button, Input, Checkbox } from "@/components";
 import {
@@ -14,25 +15,53 @@ import {
 } from "@/components/ui/select";
 
 const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, setValue, setError, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
-    // Manejar los datos del formulario aquí (por ejemplo, enviar una solicitud de registro)
+  const onSubmit = async (data) => {
+    const { username, email, contraseña, repetirContraseña, rol } = data;
+
     console.log(data);
-  };
 
-  const [rol, setRol] = useState(null);
+    if (contraseña !== repetirContraseña) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
 
-  useEffect(() => {
-    console.log("Rol actualizado:", rol);
-  }, [rol]);
+    if (!rol) {
+      setError("rol", {
+        type: "manual",
+        message: "Por favor selecciona un rol",
+      });
+      return;
+    }
 
-  const handleSelect = (nuevoRol) => {
-    setRol(nuevoRol);
+    try {
+      const response = await axios.post(
+        "https://server-ed-platform-1-0.onrender.com/api/v1/auth/register",
+        {
+          email: email,
+          password: contraseña,
+          username: username,
+          rol: rol,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      console.log(response.data);
+      alert("Registro exitoso");
+    } catch (error) {
+        console.log("Data being sent:", {
+          email: email,
+          password: contraseña,
+          username: username,
+          rol: rol,
+        });
+      console.error("Error:", error.response ? error.response.data : error.message);
+      alert("Hubo un error en el registro");
+    }
   };
 
   return (
@@ -44,7 +73,7 @@ const Register = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="space-y-8 my-28 sm:mt-20 sm:mb-6 p-8 bg-transparent shadow-lg  rounded-lg w-full max-w-md text-center">
+      <div className="space-y-8 my-28 sm:mt-20 sm:mb-6 p-8 bg-transparent shadow-lg rounded-lg w-full max-w-md text-center">
         <h1 className="text-3xl font-bold text-gray-700">
           Registrar un usuario
         </h1>
@@ -52,84 +81,48 @@ const Register = () => {
           <Input
             placeholder="Nombre y apellido"
             className="bg-transparent border border-slate-400"
-            {...register("nombre", { required: true })}
+            {...register("username", { required: "Este campo es obligatorio" })}
           />
-          {errors.nombre && <span>Este campo es obligatorio</span>}
+          {errors.username && <span>{errors.username.message}</span>}
           <Input
             placeholder="Email"
             className="bg-transparent border border-slate-400"
-            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+            {...register("email", { required: "Por favor ingresa un email válido", pattern: /^\S+@\S+$/i })}
           />
-          {errors.email && <span>Por favor ingresa un email válido</span>}
+          {errors.email && <span>{errors.email.message}</span>}
           <Input
             type="password"
             placeholder="Contraseña"
             className="bg-transparent border border-slate-400"
-            {...register("contraseña", { required: true })}
+            {...register("contraseña", { required: "Este campo es obligatorio" })}
           />
-          {errors.contraseña && <span>Este campo es obligatorio</span>}
+          {errors.contraseña && <span>{errors.contraseña.message}</span>}
           <Input
             type="password"
             placeholder="Repetir contraseña"
             className="bg-transparent border border-slate-400"
-            {...register("repetirContraseña", { required: true })}
+            {...register("repetirContraseña", { required: "Este campo es obligatorio" })}
           />
-          {errors.repetirContraseña && <span>Este campo es obligatorio</span>}
-          <Select onValueChange={(e) => handleSelect(e)}>
+          {errors.repetirContraseña && <span>{errors.repetirContraseña.message}</span>}
+          <Select onValueChange={(value) => setValue("rol", value)}>
             <SelectTrigger className="w-[280px]">
               <SelectValue placeholder="Selecciona tu rol" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Rol</SelectLabel>
-                <SelectItem value="docente">Docente</SelectItem>
-                <SelectItem value="alumno">Alumno</SelectItem>
-                <SelectItem value="padre">Padre, madre o tutor</SelectItem>
+                <SelectItem value="TEACHER">Docente</SelectItem>
+                <SelectItem value="STUDENT">Alumno</SelectItem>
+                <SelectItem value="PARENT">Padre, madre o tutor</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
-
-          {rol === "docente" && (
-            <>
-              <Input
-                type="number"
-                placeholder="DNI del docente"
-                className="bg-transparent border border-slate-400"
-                {...register("dniDocente", { required: true })}
-              />
-              {errors.dniDocente && <span>Este campo es obligatorio</span>}
-            </>
-          )}
-
-          {rol === "alumno" && (
-            <Input
-              type="number"
-              placeholder="DNI del alumno"
-              className="bg-transparent border border-slate-400"
-              {...register("dniAlumno", { required: true })}
-            />
-          )}
-
-          {rol === "padre" && (
-            <>
-              <Input
-                type="number"
-                placeholder="DNI del padre, madre o tutor"
-                className="bg-transparent border border-slate-400"
-                {...register("dniPadres", { required: true })}
-              />
-              <Input
-                type="number"
-                placeholder="DNI del alumno"
-                className="bg-transparent border border-slate-400"
-                {...register("dniAlumno", { required: true })}
-              />
-            </>
-          )}
+          <input type="hidden" {...register("rol", { required: "Por favor selecciona un rol" })} />
+          {errors.rol && <span>{errors.rol.message}</span>}
           <label className="flex items-center justify-center">
             <Checkbox
               className="mr-1"
-              {...register("terminos", { required: true })}
+              {...register("terminos", { required: "Debes aceptar los términos y condiciones" })}
             />
             <span className="text-xs">
               Acepto términos, condiciones y políticas de privacidad de&nbsp;
@@ -139,11 +132,12 @@ const Register = () => {
               .
             </span>
           </label>
+          {errors.terminos && <span>{errors.terminos.message}</span>}
 
           <div className="flex flex-row gap-4">
             <Button
               type="button"
-              className="w-[70%] mx-auto mt-4 shadow-lg flex flex-row justify-center text-gray-700 bg-[rgba(245, 236, 239, 1)] hover:bg-[#d1cdce]  border-solid border-2 border-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="w-[70%] mx-auto mt-4 shadow-lg flex flex-row justify-center text-gray-700 bg-[rgba(245, 236, 239, 1)] hover:bg-[#d1cdce] border-solid border-2 border-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Cancelar
             </Button>

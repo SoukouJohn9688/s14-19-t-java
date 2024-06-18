@@ -53,9 +53,7 @@ const Router = () => {
       <Route
         path="/register"
         element={
-          <ProtectedRoute redirectTo="/">
             <Register />
-          </ProtectedRoute>
         }
       />
       <Route
